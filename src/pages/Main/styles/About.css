@@ -1,0 +1,6 @@
+.about-header{
+    min-height: 60vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/aboutUs.svg);
+    background-position:center center ;
+    position: relative;
+}

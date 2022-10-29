@@ -1,0 +1,7 @@
+.jobs-poster{
+    min-height: 70vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/jobs.svg);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
