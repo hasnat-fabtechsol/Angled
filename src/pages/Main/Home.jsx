@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../auth/auth-context';
 import './styles/Home.css'
 function Home(props) {
+    const auth = useContext(AuthContext);
 return (
 <div>       
     <div class="position-relative d-flex justify-content-start align-items-center home-poster">
         <div class="text-center ms-lg-5 ms-sm-3 ms-2">
             <h1 class="font50px text-white mb-4">BROWSE JOBS BY <br />SPECIALITY </h1>
             <Link to="/jobs"> <button class="web-btn bg-wood clr-white mx-3">Apply Now</button></Link>
-            <Link style={{textDecoration:'none'}} to="/signup"> <button
+            {!auth.isLoggedIn&&  <Link style={{textDecoration:'none'}} to="/signup"> <button
                 class="web-btn clr-white bg-transparent border-wt" style={{background:'#A98C4D'}}>Register</button>
-            </Link>
+            </Link>}
+          
 
 
         </div>

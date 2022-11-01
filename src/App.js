@@ -1,28 +1,21 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LogIn from './pages/Main/LogIn';
-import SignUp from './pages/Main/SignUp';
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Layout from './components/Layout'
-import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
-import ForgetPassPin from './pages/ForgetPassword/ForgetPassPin';
-import ResetPassword from './pages/ForgetPassword//ResetPassword';
-import AboutUs from './pages/Main/AboutUs';
-import Home from './pages/Main/Home'
-import Jobs from './pages/Main/Jobs';
-import ContactUs from './pages/Main/ContactUs';
-import { useContext, useEffect } from 'react';
+import {ForgetPassword,ForgetPassPin,ResetPassword} from './pages/ForgetPassword';
+import {Home,AboutUs,Jobs,ContactUs,LogIn,SignUp} from './pages/Main'
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from './auth/auth-context';
+import { DashboardLayout } from './components/client_dashboard';
+import { AdminDashboardLayout } from './components/admin_dashboard';
+import { Dashboard, Reports } from './pages/client';
+import { AdminDashboard, Invoices, NewJob } from './pages/admin';
+import isHospital from './hooks/IsHospital'
 function App() {
 
   const auth = useContext(AuthContext);
 
-  useEffect(() => {
-// auth.logout()
-    auth.login('hfhdsfhsddgfshfjkhh')
-  
 
-  },[])
-
+    
   return (
     <BrowserRouter>
       <Routes>
@@ -37,6 +30,19 @@ function App() {
         <Route path="forget-password" element={<ForgetPassword />} />
         <Route path="forget-pass-pin" element={<ForgetPassPin />} />
         <Route path="reset-password" element={<ResetPassword />} />
+        </Route>
+        <Route path="/" element={<DashboardLayout/>}>
+          <Route index path='/client/dashboard' element={<Dashboard />} />
+          <Route path='client/reports' element={<Reports />} />
+ 
+      
+        </Route>
+
+        <Route path="/" element={<AdminDashboardLayout/>}>
+          <Route index path='/admin/dashboard' element={<AdminDashboard />} />
+          <Route path='/admin/new-job' element={<NewJob />} />
+          <Route path='/admin/invoices' element={<Invoices />} />
+      
         </Route>
       </Routes>
     </BrowserRouter>

@@ -2,8 +2,8 @@ import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
-import Paginate from '../../components/Paginate';
-import Table from '../../components/Table';
+import Paginate from '../../components/FrontEndPaginate';
+import Table from '../../components/CustomTable/Table';
 import useApi from '../../hooks/useApi';
 import './styles/Jobs.css'
 const headers=['Faculty Name','Location','Unit','Shift','Speciality','Profession','Action']

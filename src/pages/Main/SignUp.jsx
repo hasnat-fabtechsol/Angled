@@ -3,7 +3,7 @@ import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
-import AdminButton from '../../components/AdminButton';
+import {AdminButton} from '../../components/mui';
 import useApi from '../../hooks/useApi';
 // import './Styles/css/style.css'
 

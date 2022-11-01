@@ -1,39 +1,18 @@
-import React, { cloneElement, useEffect, useState } from 'react';
-import {Box, Pagination} from '@mui/material'
-let PageSize=0
-function Paginate({data,postsPerPage=10,style,children}) {
+import React from "react";
+import { Box, Pagination } from "@mui/material";
 
-    
-    const [currentPage, setCurrentPage] = useState(1);
-    const handleChange = (event, value) => {
-      setCurrentPage(value);
-      
-    };
-    const indexOfLastData = currentPage * postsPerPage;
-    const indexOfFirstData = indexOfLastData - postsPerPage;
-    const currentData = data.slice(indexOfFirstData, indexOfLastData);
-
-
-   
-    PageSize=Math.ceil(data.length/postsPerPage)
-  
-
-    return (
-        <Box   >
-     
- 
-     {cloneElement(children, { data:currentData })}
-<Box sx={style} mt={2}>
-
-<Pagination
-    color="primary"
+const Paginate = ({ count,limit=10, onChange, defaultNumber }) => {
+  return (
+    <Box display="flex" justifyContent="flex-end" mt={2}>
+      <Pagination
+        count={Math.ceil(count /limit)}
+        color="primary"
         variant="outlined"
         shape="rounded"
-         count={PageSize} onChange={handleChange}  />
-</Box>
-
-       </Box>
-    );
-}
-
+        defaultPage={defaultNumber}
+        onChange={ (event, value) => onChange(event, value)}
+      />
+    </Box>
+  );
+};
 export default Paginate;

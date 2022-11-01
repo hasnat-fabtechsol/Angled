@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
 import AuthContext from '../../auth/auth-context';
+import IsHospital from '../../hooks/IsHospital';
 import useApi from '../../hooks/useApi';
 // import './Styles/Login.css'
 
@@ -25,7 +26,8 @@ function LogIn(props) {
 console.log("sending data...................................")
 const result= await request({username:email,password:password})
       if (!result.data) return null
-   auth.login(result.data.token)
+      const userType=await IsHospital(result.data.token)
+   auth.login(result.data.token,userType)
   navigate('/')
     }
 

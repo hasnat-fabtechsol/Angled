@@ -20,12 +20,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 
 import { NavLink } from 'react-router-dom';
+import AuthContext from '../../auth/auth-context';
 
 const drawerWidth = 240;
 
 function SideNav(props) {
   const { window } = props;
-
+  const auth = React.useContext(AuthContext);
  
   
 
@@ -33,6 +34,8 @@ function SideNav(props) {
     { label: "Dashboard", icon: <DashboardIcon />, link: "/client/dashboard" },,
     { label: "Reports", icon: <ReceiptIcon />, link: "/client/reports" },
   ];
+
+
 
   const drawer = (
     <div  >
@@ -51,13 +54,11 @@ function SideNav(props) {
       <Divider />
       <List>
         <ListItem disablePadding >
-          <ListItemButton>
+          <ListItemButton >
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
-            <a href="#">
-            <ListItemText primary="Logout" />
-            </a>
+            <ListItemText primary={auth.isLoggedIn?"Login":"Logout"}  />
           </ListItemButton>
         </ListItem>
       </List>

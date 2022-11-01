@@ -39,14 +39,24 @@ return (
         </ul>
 
 
-        <div className="row">
-          {auth.isLoggedIn?<div className="col-lg-6 mb-3 mb-lg-0 text-white ">
+        <div className="row w-30 me-3">
+          
+          {auth.isLoggedIn?
+          <><div className="col-lg-6 mb-3 mb-lg-0 text-white ">
 
 
 
- <button onClick={()=>auth.logout()} class="web-btn clr-white bg-transparent border-wt">Log out</button>
+ <button onClick={()=>auth.logout()} class="web-btn clr-white bg-transparent border-wt ">Log out</button>
+ 
 
-</div>:<>
+</div>
+<div className="col-lg-6 mb-3 mb-lg-0 text-white  text-white">
+
+
+<Link  to={auth.userType==true?"/admin/dashboard":"/client/dashboard"}> <button  class="web-btn bg-wood clr-white ms-0"
+  style={{ background: '#A98C4D' }}>{auth.userType==true?"Admin":"Client"} Dashboard</button> </Link>
+</div>
+</>:<>
   
 <div className="col-lg-6 mb-3 mb-lg-0 text-white ">
 

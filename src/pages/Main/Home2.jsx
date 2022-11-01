@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../../auth/auth-context';
+import IsHospital from '../../hooks/IsHospital';
 import './styles/Home2.css'
 
 function Home2(props) {
+
+    const auth = useContext(AuthContext);
+
+    async function handleSubmit(){
+        
+
+
+ 
+  const result=await IsHospital()
+  console.log("result "+result)
+    }
     return (
         <div>
          <div className="d-flex justify-content-start align-items-center home-poster">
@@ -9,8 +22,8 @@ function Home2(props) {
             <div className='text-center ms-2 ms-lg-5 ms-sm-3'>
 
             <h1 className='text-white'>Browse Jobs By Speciality</h1>
-            <button className="btn btn-warning m-2">Apply Now</button>
-            <button className="btn btn-light">Register</button>
+            <button className="btn btn-warning m-2" onClick={handleSubmit}>Apply Now</button>
+            <button className="btn btn-light" >Register</button>
             </div>
          </div>
 
