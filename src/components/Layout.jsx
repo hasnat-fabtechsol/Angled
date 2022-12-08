@@ -12,7 +12,7 @@ return (
 
 <>
   <nav className="navbar navbar-expand-lg navbar-dark bg-transparent  fixed-top  custom-navbar navbar-flow ">
-    <div className="container-fluid mx-5 ">
+    <div className="container-fluid mx-sm-5 ">
       <Link className="navbar-brand" to="/" >
       <img src={require("../assests/logo.png")} className="img-fluid" style={{ borderRadius: '8px', width: '13rem' }} />
       </Link>
@@ -23,7 +23,6 @@ return (
       <div className="collapse navbar-collapse" id="navbarColor01">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item" >
-            
              <NavLink className="nav-link " end='/'  to="/">Home</NavLink>
           </li>
           <li className="nav-item">
@@ -35,6 +34,9 @@ return (
           </li>
           <li className="nav-item">
             <NavLink className="nav-link"  to="/contact-us">Contact Us</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link"  to="/contact-us">Our Blogs</NavLink>
           </li>
 
 
@@ -82,30 +84,62 @@ return (
   </nav>
   <Outlet context={{formEnable,setFormEnable}} />
 
-  <footer class=" linear-gradient-lr text-white p-md-4 p-2">
+  
+  <footer class=" text-white p-md-4 p-2">
     <div class=" container">
-      <div class=""><img src={require('../assests/logo.png')}  className="img-fluid" style={{ borderRadius: '8px', width: '13rem' }} alt="Nav"/></div>
+      <div className='row'>
+        <div className='col d-flex justify-content-between'>
+          <div><img src={require("../assests/logo.png")} className="img-fluid"/></div>
+          <div><button className='foot_button_color px-4 py-2' type='button'>Sign Up</button></div>
+        </div>
+      </div>
+    <hr className='text-dark'></hr>
+      {/* <div class=""><img src={require('../assests/logo.png')}  className="img-fluid" style={{ borderRadius: '8px', width: '13rem' }} alt="Nav"/></div> */}
       <div class="row">
-        <div class="col-md-6 col-12 mb-3">In publishing and graphic design, Lorem ipsum is a placeholder text commonly
-          used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</div>
-        <div class="col-md-6 col-12 d-flex justify-content-around gap-2 flex-wrap">
-          <div class="mb-2">
-            <h5 class="mb-4">Heading</h5>
-            <p>Heading</p>
-            <p>Heading</p>
-            <p>Heading</p>
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 ps-lg-5">
+          <p class="text-upper_case mt-2 text-dark">
+            Fabtechsol is a web and mobile app development Company that believes 
+              in making tomorrow’s world a better place. We focus on.
+          </p>
+          <div>
+            <img src={require("../assests/twetter.png")} className="img-fluid img_size"/>
+            <img src={require("../assests/facebook.png")} className="img-fluid mx-3 img_size"/>
+            <img src={require("../assests/linkedin.png")} className="img-fluid me-3 img_size"/>
+            <img src={require("../assests/instagram.png")} className="img-fluid img_size"/>
+
+            <div className='text-dark text-upper_case mt-3'>© 2022 all rights reserved</div>
           </div>
-          <div class="mb-2">
-            <h5 class="mb-4">Heading</h5>
-            <p>Heading</p>
-            <p>Heading</p>
-            <p>Heading</p>
+        </div>
+        <div class="col-12 col-lg-8  mt-4 mt-sm-4 mt-md-0 mt-lg-0 mt-xl-0">
+        <div className='row justify-sm-content-center'>
+          <div className='col-6 col-sm-3 style-none'>
+            <h5 class="mb-4 text-dark">About Us</h5>
+            <a href="#"><p>About Us</p></a>
+            <a href="#"><p>Blog Post</p></a>
+            {/* <a href="#"><p>Heading</p></a> */}
           </div>
-          <div class="mb-2">
-            <h5 class="mb-4">Heading</h5>
-            <p>Heading</p>
-            <p>Heading</p>
-            <p>Heading</p>
+          <div className='col-6 col-sm-3 style-none'>
+            <h5 class="mb-4 text-dark">Services</h5>
+            <a href="#"><p>Job Search</p></a>
+            <a href="#"><p>Our clients</p></a>
+            {/* <a href="#"><p>Heading</p></a> */}
+          </div>
+          <div class="col-sm-6  my-auto gx-0 style-none">
+            <form>
+              <div class="d-flex">
+                <input class="form-control email_color" type="email" name="" placeholder="Email" required/>
+                <button class=" email_color pe-2" type="submit" value="Submit"><img src={require("../assests/send.png")} className="img-fluid"/></button>
+              </div>
+            </form>
+            <div class="d-flex mt-4">
+              <img src={require("../assests/phone_icon.png")} style={{ height:'40px', width:'40px'}} className="img-fluid"/>
+              <div style={{ fontSize: '12px'}} class="ms-2 text-dark">
+                <label for="">+92 318 232 232 3</label>
+                <p>Contacts@storeks.com</p>
+              </div>
+            </div>
+          </div>
+          
           </div>
         </div>
       </div>

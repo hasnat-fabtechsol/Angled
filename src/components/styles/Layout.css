@@ -1,11 +1,38 @@
 .custom-navbar {
-    
-
-
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+  /* background-color: black; */
+  /* background-color: rgba(255,255,255,.30); */
+    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+    background-image: linear-gradient(to right,#1A75BB,#00000029,#A8CF45);
     box-shadow: 0px 3px 6px #00000029;
     opacity: 1;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+}
+.style-none a{
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+  }
+  .email_color{
+    /* background-color: #111D32; */
+    border-style: none;
+    color: black;
+  }
+  .text-upper_case{
+    font-size: 12px;
+  }
+  .img_size{
+    height: 35px;
+    width: 35px;
+  }
+.foot_button_color{
+    border-style: none;
+    background-color: #1A75BB;
+    border-radius: 5px;
+    color: white;
+
+}
+.nav-color{
+  color: #a8cf45;
 }
 

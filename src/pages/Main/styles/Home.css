@@ -1,3 +1,6 @@
+.test{
+  border: 2px solid red;
+}
 .home-poster{
     min-height: 90vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
@@ -12,6 +15,115 @@
     background-position:center;
     position: relative;
 }
+.shadow_style:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.icon_height{
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    background-color: #3A75BB;
+    color: white;
+}
+.dot_style{
+    font-size: 17px;
+}
+.fs_10{
+    font-size: 10px;
+    position: relative;
+    bottom: 3px;
+}
+.bag_style{
+    font-size: 20px;
+}
+.white_space{
+    white-space: nowrap;
+}
+.background_img{
+    background-image: url(../../../assests/Home//home_image.png);
+    height:130px;
+    /* background-size: 100%; */
+    background-position:center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    /* padding: 50px 0 50px; */
+}
+.background_border{
+    border: 2px solid white;
+    background-color: #004A90;
+    margin-top: 27px;
+    border-radius: 5px;
+}
+.background_border p{
+font-size: 14px;
+}
+.bg_bag_plus{
+        background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 3px;
+}
+.dubl_color{
+    background-image: linear-gradient(to right,#1A75BB,#A8CF45);
+}
+.border_radu{
+    border-radius: 5px;
+}
+
+
+/* gallary_style */
+
+.image_style{
+    height: 30px;
+    width: 30px;
+}
+
+  /* .cord_style{
+    height: 150px;
+  } */
+  
+  .cards {
+    max-width: 1400px;
+    /* margin: 0 auto; */
+    display: grid;
+    grid-gap: 2rem;
+  }
+  /* Screen larger than 600px? 2 column */
+  @media (min-width: 320px) {
+    .cards { grid-template-columns: repeat(1, 1fr); }
+  }
+  /* Screen larger than 600px? 2 column */
+  @media (min-width: 480px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* Screen larger than 600px? 2 column */
+  @media (min-width: 767px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  /* Screen larger than 600px? 2 column */
+  @media (min-width: 991px) {
+    .cards { grid-template-columns: repeat(4, 1fr); }
+  }
+  /* Screen larger than 600px? 2 column */
+  @media (min-width: 1199px) {
+    .cards { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 991px) {
+        .fs_md_12{
+          font-size: 12px;
+        }
+   }
+  @media (max-width: 767px) {
+    .background_border p{
+        font-size: 10px;
+        }
+        .fs_md_12{
+          font-size: 12px;
+        }
+        .fs_md_12{
+          font-size: 14px;
+        }
+   }
 
 @media (max-width: 400px) {
    .font50px{

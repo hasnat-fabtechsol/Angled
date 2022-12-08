@@ -10,6 +10,7 @@ import colors from '../../config/colors';
 import IsHospital from '../../hooks/IsHospital';
 import useApi from '../../hooks/useApi';
 import './styles/Home.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
 function Home(props) {
     const auth = useContext(AuthContext);
     const {formEnable,setFormEnable}=useOutletContext()
@@ -63,9 +64,9 @@ commonly used to demonstrate the visual form of a document or a </h1>
         </div>
     </div>
     </div>
-
-    <div className="container bg-white mt-4 pt-4 ps-5">
-    <Container maxWidth="lg" className='g-3'  style={{height:700,backgroundColor:'yellow'}}>
+{/* mycode */}
+    <div className="container bg-white mt-4 pt-4">
+    {/* <Container maxWidth="lg" className='g-3'  style={{height:700,backgroundColor:'yellow'}}>
     <Typography
 component="h1"
 variant="h5"
@@ -73,8 +74,8 @@ sx={{ color: colors.primary, fontWeight: "bold" }}
 >
 All Jobs Available
 </Typography>
-    <Typography
->
+    <Typography>
+
 All Jobs Available with respect to Speciality
 </Typography>
 
@@ -123,8 +124,136 @@ Speciality1
  
 
 </div>
-</Container>
-        <div className="flex-center position-relative gap-3 mb-3 rounded form-poster"
+</Container> */}
+<div class="container mb-5">
+  <div class="row px-sm-5">
+    <h2 className='text-primary'>All Jobs Available</h2>
+    <p>All Jobs Available with respect to specialty</p>
+    <div class="cards text-primary">
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 1</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 2</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 3</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 4</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 5</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 6</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 7</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 8</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 9</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 10</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 11</h6>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="d-flex py-4 px-2">
+          <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
+          <h6 class="my-auto ms-2">Job speciality 12</h6>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center px-sm-5">
+      <h2 className='text-primary'>Join the Angled INC Family</h2>
+      <p>Sign Up in less then 30 seconds to continue.</p>
+      <div className=" mb-5">
+            <div className="m-auto"
+                style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))', gap: '2rem'}}>
+                <div className="bg-white rounded shadow_style p-3">
+                  <div class="icon_height justify-content-center text-center ">
+                    <div class="py-3"><i class="bi bi-bag-plus-fill bag_style"></i></div>
+                  </div>
+                    <h6 className="my-4">Top Facilities</h6>
+                    <div class="row">
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Exclusive Contracts</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Nationwide</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Great Locations</label></div>
+                    </div>
+                </div>
+                <div className="bg-white rounded shadow_style p-3">
+                  <div class="icon_height justify-content-center text-center ">
+                    <div class="py-3"><i class="bi bi-bag-plus-fill bag_style"></i></div>
+                  </div>
+                    <h6 className="my-4">Top Facilities</h6>
+                    <div class="row">
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Exclusive Contracts</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Nationwide</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Great Locations</label></div>
+                    </div>
+                </div>
+                <div className="bg-white rounded shadow_style p-3">
+                  <div class="icon_height justify-content-center text-center ">
+                    <div class="py-3"><i class="bi bi-bag-plus-fill bag_style"></i></div>
+                  </div>
+                    <h6 className="my-4">Top Facilities</h6>
+                    <div class="row">
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Exclusive Contracts</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Nationwide</label></div>
+                      <div class="col-6 white_space"> <i class="bi bi-dot dot_style"></i><label class="fs_10">Great Locations</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+
+
+
+        {/* <div className="flex-center position-relative gap-3 mb-3 rounded form-poster"
             >
             <div className=" flex-center flex-wrap gap-4">
                 <div className=" pointer bg-white shadow rounded text-center p-md-3 p-2"><img
@@ -138,8 +267,8 @@ Speciality1
             </div>
             <div className="position-absolute" style={{top: '100%', left: '50%', transform: 'translate(-50%, -100%)'}}>
                 <img src={require('../../assests/Home/HomeBottom.png')} alt="home2Bottom" /></div>
-        </div>
-        <div className="text-center mb-5">
+        </div> */}
+        {/* <div className="text-center mb-5">
             <h2 className="f700 mb-5" style={{lineHeight: '3rem'}}>We'll always match you up with opportunities <br />
                 that are the right fit</h2>
             <div className="m-auto"
@@ -177,29 +306,155 @@ Speciality1
                     <p className="font14px">Tell us your staffing needs.</p>
                 </div>
             </div>
-        </div>
-        <div className="mb-3">
-            <div className="row">
-                <div className="col-sm-5 col-12 mb-3"><img src={require('../../assests/Home/mission-pic.png')} alt="missionStatement"
-                        style={{width: '100%'}} /></div>
-                <div className="col-sm-7 col-12">
-                    <h2 className="f700">Mission Statement</h2>
-                    <p className>Our mission at HHI is to help companies meet their staffing needs. We will provide
-                        superior health care. HHI will work with organizations of all sizes, providing them with
-                        productive and efficient temporary personnel. HHI markets personnel to business, industry,
-                        government and healthcare facilities as well as to individuals at home. HHI complies with The
-                        Joint Commission Accreditation of Health Care Organizations standards. Ensuring consistent
-                        operating policies and procedures is critical to the clients we serve. Below is a summary of the
-                        type of healthcare personnel we hire: Clinical: Registered Nurses, Licensed Practical Nurses,
-                        Certified Home Health Aides, Physical Therapist, Nursing Assistants, Respiratory Therapists and
-                        a variety of Allied Health Professionals. Keeping both employee and client happy is our goal. We
-                        must be aware of the needs of our clients so that they are fully satisfied with every assignment
-                        for which we are responsible. Our growth will be evidence that we do this well. We will retained
-                        clients who have the skills and the experience from the very inception of our business.</p>
+        </div> */}
+        <div className="container mb-3">
+            <div className="row px-sm-5">
+                
+                <div className="col-md-7 col-12 fs_md_12">
+                    <h2>About Us</h2>
+                    <p className>In publishing and graphic design, Lorem ipsum is a placeholder text commonly 
+                    used to demonstrate the visual form of a document or a typeface without relying on 
+                    meaningful content. In publishing and graphic design, Lorem ipsum is a placeholder text 
+                    commonly used to demonstrate the visual form of a document or a typeface without relying 
+                    on meaningful content.<br></br><br></br>
+                    In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to 
+                    demonstrate the visual form of a document or a typeface without relying on meaningful 
+                    content.</p>
+                    <button className='btn btn-primary' type='button'>Get Started </button>
+                </div>
+                <div className="col-md-5 col-12 mb-3"><img src={require('../../assests/Home/mission-pic.png')} alt="missionStatement"
+                        style={{width: '100%'}} />
                 </div>
             </div>
         </div>
-        <div className="text-center clr-purple p-4"><img src={require('../../assests/Home/cpr.png')} alt="crpExpert"
+      <div className='container'>
+        <div class="row">
+          <div className='background_img'>
+            <div className='background_border py-3 d-flex'>
+              <div class="bg_bag_plus my-auto mx-2"><i class="bi bi-bag-plus-fill bag_style p-2 text-white"></i></div>
+              <p className='mb-0 mx-2 text-white'>Angled INC Staffing is great!! They make you feel like family. I would<br></br> recommend them to anyone.”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+        <div className='container-fluid'>
+        <div class="row my-5 dubl_color">
+          <div class="col">
+            <div class="row  py-5">
+              <div className='col-sm-6 text-center text-sm-start text-md-end  mt-2'>
+                <img src={require('../../assests/Home/humberto.png')} alt="" className='img-fluid'/>
+              </div>
+              <div className='col-sm-6 ps-md-5 d-flex justify-content-center justify-content-sm-start'>
+                <div>
+              <div className='py-3 d-flex'>
+                <div class="bg-white my-auto mx-2 p-2 border_radu"><img src={require('../../assests/Home/search_job.png')} style={{width: '20px', height:'20px'}}/></div>
+                <p className='mb-0 mx-2 text-white'>Search Jobs <br /><span style={{fontSize: '10px'}}>Match availability to open positions</span></p>
+              </div>
+              <div className='py-3 d-flex'>
+                <div class="bg-white my-auto mx-2 p-2 border_radu"><img src={require('../../assests/Home/schedual.png')} style={{width: '20px', height:'20px'}}/></div>
+                <p className='mb-0 mx-2 text-white'>Manage Your Schedule <br /><span style={{fontSize: '10px'}}>View calendar of scheduled shifts</span></p>
+              </div>
+              <div className='py-3 d-flex'>
+                <div class="bg-white my-auto mx-2 p-2 border_radu"><img src={require('../../assests/Home/time_cord.png')} style={{width: '20px', height:'20px'}}/></div>
+                <p className='mb-0 mx-2 text-white'>Submit Timecards <br /><span style={{fontSize: '10px'}}>Conveniently document and submit timecards</span></p>
+              </div>
+              <div className='py-3 d-flex'>
+                <div class="bg-white my-auto mx-2 p-2 border_radu"><img src={require('../../assests/Home/GetNotified.png')} style={{width: '20px', height:'20px'}}/></div>
+                <p className='mb-0 mx-2 text-white'>Get Notified <br /><span style={{fontSize: '10px'}}>receive notifications on saved job searches</span></p>
+              </div>
+              </div>
+                {/* <div className='d-flex'>
+                  <div className='bg-white p-3 border_radu'>
+                    <img src={require('../../assests/Home/search_job.png')} alt=""style={{width: '20px', height:'20px'}}/>
+                  </div>
+                    <div className='mt-3'>
+                      <p class="mb-0">Search Jobs</p>
+                      <p>Match availability to open positions</p>
+                    </div>
+                </div> */}
+              </div>
+              <div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+        {/* footer_section */}
+    {/* <footer class="bg-dark text-white px-4 py-3">
+
+      <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+          <p class="text-uppercase mt-2"><small> Fabtechsol is a web and mobile app development Company that believes 
+            in making tomorrow’s world a better place. We focus on.</small></p>
+           <div>
+           <a href="#"><img src={require('../../assests/Home/Get Notified.png')}/></a>
+           <a href="#"><img src={require('../../assests/Home/Get Notified.png')}/></a>
+           <a href="#"><img src={require('../../assests/Home/Get Notified.png')}/></a>
+           <a href="#"><img src={require('../../assests/Home/Get Notified.png')}/></a>
+           </div>
+         </div>
+      
+      
+         <div class="col-12 col-lg-8  mt-4 mt-sm-4 mt-md-0 mt-lg-0 mt-xl-0" >
+         <div class="row">
+           <div class="col-6 col-md-3 style-none">
+             <h5><b>Solutions</b></h5>
+             <a href="" class="text-body"><p>Age Verification Popup</p></a>
+             <a href="" class="text-body"><p>Age Verification API</p></a>
+             <a href="" class="text-body"><p>Age Gate Popup</p></a>
+             <a href="" class="text-body"><p>Retail ID Scanner</p></a>
+             <a href="" class="text-body"><p>Payment Processing</p></a>
+          </div>
+          <div class="col-6 col-md-3 style-none">
+              <h5><b>Payment Processing</b></h5>
+               <a href="" class="text-body"><p>About Us</p></a>
+               <a href="" class="text-body"><p>Privacy Policy</p></a>
+               <a href="" class="text-body"><p>Branding</p></a>
+               <a href="" class="text-body"><p>Terms of Service</p></a>
+               <a href="" class="text-body"><p>Do Not Sell My Personal Information</p></a>
+          </div>
+          <div class="col-6 col-md-3 style-none">
+              <h5><b>Resources</b></h5>
+               <a href="" class="text-body"><p>Features</p></a>
+               <a href="" class="text-body"><p>Pricing</p></a>
+               <a href="" class="text-body"><p>FAQ</p></a>
+               <a href="" class="text-body"><p>Blog</p></a>
+          </div>
+          <div class="col-6 col-md-3 my-auto gx-0 style-none">
+            <form>
+              <div class="d-flex">
+                <input class="form-control email_color" type="email" name="" placeholder="Email" required/>
+                <button class=" email_color pe-2" type="submit" value="Submit"><img src={require('../../assests/Home/Get Notified.png')}/></button>
+              </div>
+            </form>
+      
+            <div class="d-flex mt-2">
+            <img src={require('../../assests/Home/Get Notified.png')}/>
+              <div style="font-size:12px ;" class="ms-2">
+                <label for="">+92 318 232 232 3</label>
+                <p>Contacts@storeks.com</p>
+              </div>
+            </div>
+          </div>
+         </div>
+         </div>
+        <hr></hr>
+      </div>
+      </div>
+      
+      <div class="text-center mb-2">
+        All Rights Reserved 
+      </div>
+    </footer> */}
+    {/* footer_section_end */}
+        
+        {/* <div className="text-center clr-purple p-4"><img src={require('../../assests/Home/cpr.png')} alt="crpExpert"
                 style={{width: '17rem'}} />
             <p>AN AMERICAN HEART ASSOCIATION TRAINING WEB SITE.</p>
             <p>ONLINE COURSES OFFERED:</p>
@@ -209,8 +464,8 @@ Speciality1
             <p>OFFER CONSULTING SERVICES HELPING YOU EVERY STEP OF THE WAY TO SUCCESS: PLAN, BUDGET., INVEST AND MANAGE.
             </p>
             <p>TRY US OUT!</p>
-        </div>
-    </div>
+        </div> */}
+    
 </div>
 );
 }
