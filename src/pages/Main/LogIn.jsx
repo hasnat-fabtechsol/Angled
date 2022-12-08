@@ -25,10 +25,10 @@ function LogIn(props) {
 
 console.log("sending data...................................")
 const result= await request({username:email,password:password})
-      if (!result.data) return null
-      const userType=await IsHospital(result.data.token)
-   auth.login(result.data.token,userType)
-  navigate('/')
+      if (!result.data) return
+      // const userType=await IsHospital(result.data.token)
+   auth.login(result.data.token,null)
+  navigate('/home')
     }
 
 

@@ -6,14 +6,20 @@
   box-sizing: border-box;
 }
 :root {
+  
+  --primary: #1A75BB;
   --wood: #a98c4d;
   --lightNavy: #6c63ff;
   --sky: #32abe2;
   --orangeJuice: #fe4a01;
   --purple: #201e90;
+  --green: #A8CF45;
   --grey: #707070;
   --white: #ffffff;
   --black: #000000;
+}
+.clr-blue {
+  color: var(--primary) !important;
 }
 .clr-wood {
   color: var(--wood) !important;
@@ -39,11 +45,17 @@
 .clr-black {
   color: #000000 !important;
 }
+.bg-blue{
+  background-color: var(--primary) !important;
+}
 .bg-transparent{
   background-color: transparent !important;
 }
 .bg-wood {
   background-color: var(--wood) !important;
+}
+.bg-green {
+  background-color: var(--green) !important;
 }
 .bg-lightNavy {
   background-color: var(--lightNavy) !important;
@@ -158,6 +170,9 @@ button {
 .font14px {
   font-size: 0.875rem !important;
 }
+.font25px {
+  font-size: 1rem !important;
+}
 .font50px {
   font-size: 3.125rem !important;
 }
@@ -207,10 +222,23 @@ button {
 }
 
 
+.btn-nav {
+  border: none;
+  border-radius: 2rem;
+  padding: 0.4rem 1.1rem;
+  white-space: nowrap;
+  min-width: 7rem;
+}
 .web-btn {
   border: none;
-  border-radius: 0.2rem;
+  border-radius: 0.5rem;
   padding: 0.4rem 1.1rem;
+  white-space: nowrap;
+  min-width: 7rem;
+}
+.poster-btn {
+  border: none;
+  border-radius: 0.5rem;
   white-space: nowrap;
   min-width: 7rem;
 }
@@ -220,7 +248,15 @@ button {
 
 
 
+.navbar-nav .nav-link.active{
+  color: var(--green) !important;
+  text-decoration: underline !important;
+}
 
+/* a.active{
+  color: var(--green) !important;
+  text-decoration: underline !important;
+} */
 .active svg {
   color: #b09150 !important;
 }

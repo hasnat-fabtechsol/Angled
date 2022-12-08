@@ -10,7 +10,7 @@ const apiClient= create({
     baseURL:baseURL
   });
 
-  // export default axios.create({
+  //  const apiClient= axios.create({
   //   baseURL:baseURL
   // });
 

@@ -1,53 +1,129 @@
+import { Box, Button, Container, Grid, TextField, Toolbar, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import apiClient from '../../api/apiClient';
 import AuthContext from '../../auth/auth-context';
+import { AdminButton, SelectOption } from '../../components/mui';
+import colors from '../../config/colors';
+import IsHospital from '../../hooks/IsHospital';
+import useApi from '../../hooks/useApi';
 import './styles/Home.css'
 function Home(props) {
     const auth = useContext(AuthContext);
+    const {formEnable,setFormEnable}=useOutletContext()
+
+
+    
 return (
 <div>       
-    <div class="position-relative d-flex justify-content-start align-items-center home-poster">
+    <div className='home-poster'>
+    <Toolbar />
+    <Toolbar />
+ 
+    <div className="d-lg-flex justify-content-between  mb-5 align-items-center  px-5">
+    
         <div class="text-center ms-lg-5 ms-sm-3 ms-2">
             <h1 class="font50px text-white mb-4">BROWSE JOBS BY <br />SPECIALITY </h1>
-            <Link to="/jobs"> <button class="web-btn bg-wood clr-white mx-3">Apply Now</button></Link>
-            {!auth.isLoggedIn&&  <Link style={{textDecoration:'none'}} to="/signup"> <button
-                class="web-btn clr-white bg-transparent border-wt" style={{background:'#A98C4D'}}>Register</button>
-            </Link>}
+            <h1 class="font25px text-white mb-4">In publishing and graphic design, Lorem ipsum is a placeholder text <br/>
+commonly used to demonstrate the visual form of a document or a </h1>
+           
+    
+
+           <Stack spacing={2} direction="row" sx={{justifyContent:'center'}}>
+          <SelectOption
+            name="speciality"
+            label="Job Speciality"
+            size="small"
+            selectCss={{ width: "200px" }}
+            style={{border:'2px solid white',borderRadius:2}}
+            labelStyle={{color:'white'}}
+            data={[{"id":2,"name":"Developer"},{"id":1,"name":"Designer"}]}
+        
+
+          />
+           <Link class="web-btn bg-green clr-white py-2" style={{textDecoration:'none'}} to="/jobs"><span>Lets Go</span></Link>
+         
+        </Stack>
+
+
+
+       
+           
           
 
 
         </div>
-    </div>
-    <div className="flex-center flex-column mb-5">
-      <div className="p-4 d-flex justify-content-center align-items-center flex-wrap gap-2 w-70"
-        style={{margin: 'auto', background: 'rgb(245, 246, 248)', borderRadius: '1rem', boxShadow: 'rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px', transform: 'translateY(-3rem)'}}>
-        <input className="minWidth15r" type='text' placeholder="Search Keyword" />
-        <input className="minWidth15r" type='text' placeholder="Search Specimen" />
-        <button className="btn btn-primary">Find
-          Job</button></div>
-          </div>
-    <div className="container bg-white mt-4 pt-4 ps-5">
-        <div className="d-flex flex-column align-items-center mt-4" style={{minHeight: '120vh'}}>
-            <div className="text-center"
-                style={{width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))', gap: '1rem', justifyContent: 'center'}}>
-                <div className=" rounded shadow ps-4 pe-2 py-5">
-                    <p className="mb-5">Vision Service</p><img src={require('../../assests/Home/cards/card1.png')} alt="vision service"
-                        style={{width: '89%'}} />
-                </div>
-                <div className=" rounded shadow ps-4 pe-2 py-5">
-                    <p className="mb-5">Rehabilitation Therapy</p><img src={require('../../assests/Home/cards/card2.png')}
-                        alt="vision service" style={{width: '79%'}} />
-                </div>
-                <div className=" rounded shadow ps-4 pe-2 py-5">
-                    <p className="mb-5">Rehabilitation Therapy</p><img src={require('../../assests/Home/cards/card3.png')} alt="vision service"
-                        style={{width: '69%'}} />
-                </div>
-                <div className=" rounded shadow ps-4 pe-2 py-5">
-                    <p className="mb-5">Pharmacy</p><img src={require('../../assests/Home/cards/card4.png')} alt="vision service"
-                        style={{width: '79%'}} />
-                </div>
-            </div><u className="my-5 pointer">View more</u>
+        <div className="text-center ms-lg-5 ms-sm-3 ms-2">
+           
+       {!formEnable?
+       <LogIn formEnable={formEnable} setFormEnable={setFormEnable} auth={auth} />:
+     <SignUp formEnable={formEnable} setFormEnable={setFormEnable} auth={auth} /> }
         </div>
+    </div>
+    </div>
+
+    <div className="container bg-white mt-4 pt-4 ps-5">
+    <Container maxWidth="lg" className='g-3'  style={{height:700,backgroundColor:'yellow'}}>
+    <Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+All Jobs Available
+</Typography>
+    <Typography
+>
+All Jobs Available with respect to Speciality
+</Typography>
+
+<div className='row'>
+
+<div className='col-3 d-flex align-items-center text-start bg-dark' style={{borderRadius: 13,border: "1px solid #1A75BB"}}>
+    <img src={require("../../assests/Home/speciality.png")}/>
+    <Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+Speciality1
+</Typography>
+  </div>
+<div className='col-3 d-flex align-items-center text-start bg-dark' style={{borderRadius: 13,border: "1px solid #1A75BB"}}>
+    <img src={require("../../assests/Home/speciality.png")}/>
+    <Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+Speciality1
+</Typography>
+  </div>
+<div className='col-3 d-flex align-items-center text-start bg-dark' style={{borderRadius: 13,border: "1px solid #1A75BB"}}>
+    <img src={require("../../assests/Home/speciality.png")}/>
+    <Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+Speciality1
+</Typography>
+  </div>
+<div className='col-3 d-flex align-items-center text-start bg-dark' style={{borderRadius: 13,border: "1px solid #1A75BB"}}>
+    <img src={require("../../assests/Home/speciality.png")}/>
+    <Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+Speciality1
+</Typography>
+  </div>
+ 
+
+</div>
+</Container>
         <div className="flex-center position-relative gap-3 mb-3 rounded form-poster"
             >
             <div className=" flex-center flex-wrap gap-4">
@@ -140,3 +216,339 @@ return (
 }
 
 export default Home;
+
+
+
+function LogIn({formEnable,setFormEnable}) {
+
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const {request}=useApi((data)=>apiClient.post('/login/',data))
+  const[error, setError]=useState()
+
+  const auth= useContext(AuthContext);
+
+const navigate=useNavigate()
+
+ async function  handleSubmit(e){
+  e.preventDefault()
+
+console.log("sending data...................................")
+const result= await request({username:email,password:password})
+console.log(result);
+    if (result.status!=200) return setError(true)
+    const userType=await IsHospital(result.data.token)
+ auth.login(result.data.token,userType)
+navigate('/')
+  }
+
+
+  function navigateToForget(){
+navigate('/forget-password')
+  }
+  function resetErrors(){
+    setError(false)
+    console.log("hello")
+  }
+  
+  return ( 
+    <Container maxWidth="xs" className="d-flex align-items-center my-auto" style={{height:700}}>
+  {!auth.isLoggedIn&&  <Container component="main"    style={{backgroundColor:'white',justifyContent:'center',paddingBottom:60,borderRadius:10}}>
+
+
+<Box
+sx={{
+marginTop: 8,
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+}}
+>
+
+<Box className="text-start w-100">
+
+<Typography
+component="h1"
+variant="h5"
+sx={{ color: colors.primary, fontWeight: "bold" }}
+>
+Login Now
+</Typography>
+{ error&&<div className={'bg-danger p-1'}> 
+              <span>Invalid Email or Password</span>
+              </div>}
+</Box>
+<Box
+component="form"
+noValidate
+  onSubmit={handleSubmit}
+sx={{ mt: 3 }}
+>
+
+<Grid container spacing={2}>
+
+<Grid item xs={12}>
+  <TextField
+   onFocus={resetErrors}
+    required
+    fullWidth
+    label="name"
+    name="username"
+    autoComplete="username"
+    value={email}
+    onChange={(e)=>setEmail(e.target.value)}
+  />
+</Grid>
+<Grid item xs={12}>
+  <TextField
+  onFocus={resetErrors}
+    required
+    fullWidth
+    name="password"
+    label="Password"
+    type="password"
+    autoComplete="new-password"
+    value={password}
+    onChange={(e)=>setPassword(e.target.value)}
+  />
+</Grid>
+
+</Grid>
+
+<AdminButton
+name="Login"
+type="submit"
+size="large"
+fullWidth={true}
+style={{
+  backgroundColor: colors.primary,
+  "&:hover": { backgroundColor: "#002370" },
+  whiteSpace: "nowrap",
+  mt: 3,
+  mb: 2,
+}}
+/>
+<Grid container justifyContent="space-around">
+<Grid item>
+  <Button onClick={()=>setFormEnable(!formEnable)}  >
+    Create a New Account
+  </Button>
+</Grid>
+</Grid>
+
+</Box>
+</Box>
+</Container>}
+</Container>
+
+  );
+  }
+  function SignUp({formEnable,setFormEnable}) {
+
+
+   
+    const[firstName, setFirstName]=useState()
+    const[lastName, setLastName]=useState()
+    const[email, setEmail]=useState()
+    const[password, setPassword]=useState()
+    const[confirmPassword, setConfirmPassword]=useState()
+    const[phone, setPhone]=useState()
+    const[success, setSuccess]=useState()
+    const[error, setError]=useState()
+    const {request}=useApi((data)=>apiClient.post('/register/',data))
+    const auth=useContext(AuthContext)
+    async function  handleSubmit(e){
+     
+  
+      e.preventDefault()
+      resetErrors()
+      if(password!==confirmPassword)
+      return
+      console.log("sending data...................................")
+      const result= await request( {
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        email: email,
+        password: password,
+      })
+         console.log('hello')
+            if (result.status!=200) return setError(true);
+            setSuccess(true)
+            console.log("Account created succesfully")
+emptyForm()
+         console.log(result.data)
+          }
+      
+      
+          function resetErrors(){
+            setError(false)
+            setSuccess(false)
+            console.log("hello")
+          }
+          function emptyForm(){
+            setFirstName("")
+            setLastName("")
+            setEmail("")
+            setPhone("")
+            setPassword("")
+            setConfirmPassword("")
+          }
+      return (
+        <Container  maxWidth="xs" className="d-flex align-items-center my-auto" style={{height:700}}>
+       {!auth.isLoggedIn&&<Container component="main" maxWidth="xs"   style={{backgroundColor:'white',justifyContent:'center',paddingBottom:30,borderRadius:10}}>
+
+
+
+        <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+        >
+        
+        <Box className="text-start w-100">
+        
+        <Typography
+              component="h1"
+              variant="h5"
+              sx={{ color: colors.primary, fontWeight: "bold" }}
+            >
+              Register Now
+            </Typography>
+            { error?<div className={'bg-danger p-1'}> 
+              <span>Invalid Email or Password</span>
+              </div>:
+              success&&<div className={'bg-success p-1'}> 
+              <span>Account Created Successfully Login Now</span>
+              </div>}
+        </Box>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
+          
+             <Grid container spacing={2}>
+           
+                <Grid item xs={12}>
+                  <TextField
+                   onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    id="fname"
+                    label="Firstname"
+                    name="firstname"
+                    autoComplete="firstname"
+                    value={firstName}
+                    onChange={(e)=>setFirstName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                  onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    name="lastname"
+                    type="text"
+                    label="Lastname"
+                    id="lname"
+                    autoComplete="lastname"
+                    value={lastName}
+                    onChange={(e)=>setLastName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                  onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    id="phone"
+                    label="Phone"
+                    name="phone"
+                    autoComplete="phone"
+                    value={phone}
+                    onChange={(e)=>setPhone(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                  onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    name="email"
+                    label="Email"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                  onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                  onFocus={resetErrors}
+                    required
+                    fullWidth
+                    size='small'
+                    name="confirm-password"
+                    label="Confirm Password"
+                    type="password"
+                    id="confirm-password"
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                  />
+                </Grid>
+               
+              </Grid>
+        
+              <AdminButton
+                name="Register"
+                type="submit"
+                size="medium"
+                fullWidth={true}
+                style={{
+                  backgroundColor: colors.primary,
+                  "&:hover": { backgroundColor: "#002370" },
+                  whiteSpace: "nowrap",
+                  mt: 3,
+                  mb: 2,
+                }}
+              />
+              <Grid container justifyContent="space-around">
+                <Grid item>
+                  <Link onClick={()=>setFormEnable(!formEnable)} variant="body2">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid>
+        
+              </Box>
+              </Box>
+              </Container>}
+              </Container>
+  
+           );
+  }

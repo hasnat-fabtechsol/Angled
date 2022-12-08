@@ -13,20 +13,21 @@ const headers=['Faculty Name','Location','Unit','Shift','Speciality','Profession
 
 function Jobs(props) {
 
-const {data,loading,request}=useApi(()=>apiClient.get(`/posts`))
+// const {data,loading,request}=useApi(()=>apiClient.get(`/posts`))
+
+const data=[]
+
+// useEffect(()=>{
+// getData()
+
+// },[])
+
+// async function getData(){
 
 
-useEffect(()=>{
-getData()
+// const result= await request()
 
-},[])
-
-async function getData(){
-
-
-const result= await request()
-
-}
+// }
 
 
 return (

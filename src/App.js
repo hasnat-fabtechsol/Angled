@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Layout from './components/Layout'
 import {ForgetPassword,ForgetPassPin,ResetPassword} from './pages/ForgetPassword';
 import {Home,AboutUs,Jobs,ContactUs,LogIn,SignUp} from './pages/Main'
@@ -19,8 +19,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={auth.isLoggedIn?<Home />:<LogIn/>} />
+        <Route path='/' element={<Layout/>}>
+
+          <Route index element={<Home />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignUp />} />
@@ -50,3 +51,5 @@ function App() {
 }
 
 export default App;
+
+

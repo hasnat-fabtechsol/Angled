@@ -134,6 +134,7 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('userType', type);
   };
 
+
   useEffect(() => {
     if (tokenData) {
       console.log(tokenData);

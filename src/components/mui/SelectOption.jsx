@@ -10,10 +10,11 @@ const SelectOption = ({
   style,
   size,
   selectCss,
+  labelStyle,
 }) => {
   return (
-    <FormControl size={size} sx={style}>
-      <InputLabel id={name}>{label}</InputLabel>
+    <FormControl size={size} sx={style} >
+      <InputLabel sx={labelStyle} id={name}>{label}</InputLabel>
       <Select
         labelId={name}
         id={name}
@@ -23,6 +24,10 @@ const SelectOption = ({
         onChange={onChange}
         sx={selectCss}
         required
+        // MenuProps={{
+        //   disableScrollLock: true,
+        // }}
+
       >
         {data.map((info, index) => {
           const values = Object.values(info);
