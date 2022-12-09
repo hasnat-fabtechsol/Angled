@@ -36,7 +36,7 @@ return (
             <NavLink className="nav-link"  to="/contact-us">Contact Us</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link"  to="/contact-us">Our Blogs</NavLink>
+            <NavLink className="nav-link"  to="/blogs">Our Blogs</NavLink>
           </li>
 
 

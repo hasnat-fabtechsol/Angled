@@ -10,11 +10,11 @@ import colors from '../../config/colors';
 import IsHospital from '../../hooks/IsHospital';
 import useApi from '../../hooks/useApi';
 import './styles/Home.css'
-import "bootstrap-icons/font/bootstrap-icons.css";
 function Home(props) {
     const auth = useContext(AuthContext);
     const {formEnable,setFormEnable}=useOutletContext()
 
+const [speciality,setSpeciality]=useState('Choose Speciality')
 
     
 return (
@@ -33,17 +33,17 @@ commonly used to demonstrate the visual form of a document or a </h1>
     
 
            <Stack spacing={2} direction="row" sx={{justifyContent:'center'}}>
-          <SelectOption
-            name="speciality"
-            label="Job Speciality"
-            size="small"
-            selectCss={{ width: "200px" }}
-            style={{border:'2px solid white',borderRadius:2}}
-            labelStyle={{color:'white'}}
-            data={[{"id":2,"name":"Developer"},{"id":1,"name":"Designer"}]}
-        
+           <div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    {speciality}
+  </a>
 
-          />
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><button class="dropdown-item" onClick={()=>setSpeciality('Doctore')}>Doctor</button></li>
+    <li><button class="dropdown-item" onClick={()=>setSpeciality('Nurse')}>Nurse</button></li>
+    <li><button class="dropdown-item" onClick={()=>setSpeciality('Dentist')}>Dentist</button></li>
+  </ul>
+</div>
            <Link class="web-btn bg-green clr-white py-2" style={{textDecoration:'none'}} to="/jobs"><span>Lets Go</span></Link>
          
         </Stack>
@@ -130,7 +130,7 @@ Speciality1
     <h2 className='text-primary'>All Jobs Available</h2>
     <p>All Jobs Available with respect to specialty</p>
     <div class="cards text-primary">
-      <div class="card ">
+      <div class="card " >
         <div class="d-flex py-4 px-2">
           <img className='image_style' src={require("../../assests/Home/speciality.png")}/>
           <h6 class="my-auto ms-2">Job speciality 1</h6>

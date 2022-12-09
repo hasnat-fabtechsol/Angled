@@ -1,0 +1,50 @@
+.back_img{
+	background-image: url(../../../assests/ContactUs/contectUs_background.png);
+	 background-position: center;
+	   background-repeat: no-repeat;
+	   height: 255px;
+	   background-size:cover;
+	   border-radius: 10px;
+	   color: white;
+       border-radius: 15px;
+}
+.Contact_btn{
+    border-style: none;
+    background-color: #A8CF45;
+    border-radius: 5px;
+}
+.play_img{
+    height: 40px;
+    width: 40px;
+}
+.OurPartner_style{
+    width: 90px;
+  }
+  #map{
+    border-radius: 10px;
+    width:80%;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .fs_18{
+    font-size: 18px;
+  }
+  .imag_size{
+    height: 20px;
+    width: 24px;
+  }
+  .Place_imag_size{
+    height: 25px;
+    width: 17px;
+  }
+
+@media (max-width: 991px) {
+    #map{
+        width:100%;;
+      }
+}
+@media (max-width: 767px) {
+    #map{
+        width:100%;;
+      }
+}

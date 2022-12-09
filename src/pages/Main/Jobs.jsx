@@ -31,35 +31,153 @@ const data=[]
 
 
 return (
-<div>
-  <section className="container">
-    <div className="mt-5 mb-3 rounded position-relative d-flex justify-content-start align-items-center jobs-poster">
-      <div className="text-center ms-lg-5 ms-sm-3 ms-2">
-        <h1 className="font50px text-white mb-4">BROWSE JOBS BY <br /> SPECIALITY</h1>
-     <Link  style={{textDecoration:'none'}}  to='#'><button className="web-btn bg-orangeJuice clr-white me-4">Apply Now</button></Link>
-              <Link style={{textDecoration:'none'}} to='/signup'> <button className="web-btn clr-white bg-transparent border-wt">Register</button></Link> 
+
+  <div>
+  <div className="container">
+    <div className="row my-5">
+      <div className="col-md-6">
+        <h5 className="text-primary text-md-start text-center mb-5 mb-md-0">Job Specialty 1</h5>
+      </div>
+      <div className="col-md-6">
+        <div className="d-flex justify-content-center justify-content-md-end">
+          <select className="form-select borde_colr w-50">
+            <option>Job Specialty </option>
+            <option>Job Specialty 2</option>
+            <option>Job Specialty 3</option>
+            <option>Job Specialty 4</option>
+          </select>
+          <button type="button" className="letsgo text-white ms-3 px-3">Let's Go <img src="./arrow_back.png" alt="" className="ms-2" style={{height: '10px'}} /></button>
+        </div>
       </div>
     </div>
-    <div className="flex-center flex-column mb-5">
-      <div className="p-4 d-flex justify-content-center align-items-center flex-wrap gap-2 w-70"
-        style={{margin: 'auto', background: 'rgb(245, 246, 248)', borderRadius: '1rem', boxShadow: 'rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px', transform: 'translateY(-3rem)'}}>
-        <input className="minWidth15r" type='text' placeholder="Search Keyword" />
-        <input className="minWidth15r" type='text' placeholder="Search Specimen" />
-        <input className="minWidth15r" type="text" placeholder="All Location" />
-        <button className="btn btn-primary">Find
-          Job</button></div>
-     
-      <div className="table overflow-auto">
-
-
-        <Paginate data={data} postsPerPage={3}>
-          <Table headers={headers} hideId={true} btn={btn} />
-        </Paginate>
-
+    <div className="row">
+      <div className="col ">
+        <div className=" table-responsive ">
+          <table className=" table table-hover">
+            <thead className="bg-primary text-white">
+              <tr className id="table-color">
+                <th className=" white_space">
+                  <p className="mb-0 white_space">Facility Name</p>
+                </th>
+                <th className=" white_space">
+                  <p className="mb-0">Location</p>
+                </th>
+                <th className=" white_space">
+                  <p className="mb-0">Unit</p>
+                </th>
+                <th className=" white_space">
+                  <p className="mb-0">Shift</p>
+                </th>
+                <th className=" white_space">
+                  <p className="mb-0">Specialty</p>
+                </th> 
+                <th className=" white_space">
+                  <p className="mb-0">Profession</p>
+                </th>
+                <th className=" white_space">
+                  <p className="mb-0">Submit</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody><tr className=" py-2" id="table-color">
+                <td className="white_space">
+                  <p>Fletcher Bradford</p>
+                </td>
+                <td className="white_space">
+                  <p>Giacomo Peterson</p>
+                </td>
+                <td className="white_space">
+                  <p>1</p>
+                </td>
+                <td className="white_space">
+                  <p>Day</p>
+                </td>
+                <td className="white_space">
+                  <p>Joseph Larsen</p>
+                </td>
+                <td className="white_space">
+                  <p>Doctor</p>
+                </td>
+                <td>
+                  <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
+                </td>
+              </tr>
+              <tr className=" py-2" id="table-color">
+                <td className="white_space">
+                  <p>Fletcher Bradford</p>
+                </td>
+                <td className="white_space">
+                  <p>Giacomo Peterson</p>
+                </td>
+                <td className="white_space">
+                  <p>1</p>
+                </td>
+                <td className="white_space">
+                  <p>Day</p>
+                </td>
+                <td className="white_space">
+                  <p>Joseph Larsen</p>
+                </td>
+                <td className="white_space">
+                  <p>Doctor</p>
+                </td>
+                <td>
+                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
+                </td>
+              </tr>
+              <tr className=" py-2" id="table-color">
+                <td className="white_space">
+                  <p>Fletcher Bradford</p>
+                </td>
+                <td className="white_space">
+                  <p>Giacomo Peterson</p>
+                </td>
+                <td className="white_space">
+                  <p>1</p>
+                </td>
+                <td className="white_space">
+                  <p>Day</p>
+                </td>
+                <td className="white_space">
+                  <p>Joseph Larsen</p>
+                </td>
+                <td className="white_space">
+                  <p>Doctor</p>
+                </td>
+                <td>
+                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
+                </td>
+              </tr>
+              <tr className=" py-2" id="table-color">
+                <td className="white_space">
+                  <p>Fletcher Bradford</p>
+                </td>
+                <td className="white_space">
+                  <p>Giacomo Peterson</p>
+                </td>
+                <td className="white_space">
+                  <p>1</p>
+                </td>
+                <td className="white_space">
+                  <p>Day</p>
+                </td>
+                <td className="white_space">
+                  <p>Joseph Larsen</p>
+                </td>
+                <td className="white_space">
+                  <p>Doctor</p>
+                </td>
+                <td>
+                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
+                </td>
+              </tr>
+            </tbody></table>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
+
 );
 }
 

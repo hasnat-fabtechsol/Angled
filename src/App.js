@@ -10,6 +10,8 @@ import { AdminDashboardLayout } from './components/admin_dashboard';
 import { Dashboard, Reports } from './pages/client';
 import { AdminDashboard, Invoices, NewJob } from './pages/admin';
 import isHospital from './hooks/IsHospital'
+import ApplyNow from './pages/Main/ApplyNow';
+import Blogs from './pages/Main/Blogs';
 function App() {
 
   const auth = useContext(AuthContext);
@@ -27,6 +29,9 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="jobs" element={<Jobs />} />
           <Route path="contact-us" element={<ContactUs />} />
+          <Route path="blogs" element={<Blogs />} />
+
+          <Route path="jobs/apply-now" element={<ApplyNow />} />
         
         <Route path="forget-password" element={<ForgetPassword />} />
         <Route path="forget-pass-pin" element={<ForgetPassPin />} />
