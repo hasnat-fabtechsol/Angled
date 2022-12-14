@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Box, Stack, TextField } from "@mui/material";
 import { AdminButton, PopupFeedback, SelectOption } from "../../components/mui";
+import useApi from "../../hooks/useApi";
+import apiClient from "../../api/apiClient";
+import { useEffect } from "react";
 
 export default function NewJob() {
   let empyFields = {
@@ -14,15 +17,31 @@ export default function NewJob() {
   };
   const [newPosition, setNewPosition] = useState(empyFields);
 
-  const [positionType, setPositionType] = useState([{"id":2,"name":"Part Time"},{"id":1,"name":"Full Time"}]);
-  const [shift, setShift] = useState([{"id":2,"name":"Night Shift"},{"id":1,"name":"Day Shift"}]);
+  const [positionType, setPositionType] = useState([]);
+  const [shift, setShift] = useState([]);
 
 
+const {request}=useApi((data)=>apiClient.post('/jobs/',data))
 
 
   const [disabledButton, setDisabledButton] = useState(false);
+  useEffect(() => {
+    fetchPositionType();
+    fetchShift();
+  }, []);
+
+  const fetchPositionType = async () => {
+    const { data } = await apiClient.get('position_types/');
+    setPositionType(data.results);
+  };
+
+  const fetchShift = async () => {
+    const { data } = await apiClient.get('job_shifts/');
+    setShift(data.results);
+  };
+
   const handleChange = (event) => {
-    disabledButton && setDisabledButton(false);
+    // disabledButton && setDisabledButton(false);
     const { name, value } = event.target;
     setNewPosition({ ...newPosition, [name]: value });
   };
@@ -31,8 +50,15 @@ export default function NewJob() {
   const [getPositionName, setGetPositionName] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    !disabledButton && setDisabledButton(true);
-    console.log(newPosition)
+    // !disabledButton && setDisabledButton(true);
+    // console.log(newPosition)
+    const result= await request(newPosition)
+    if (!result.data) return
+      setDisabledButton(false);
+      setOpen(true);
+      setNewPosition(empyFields);
+      setGetPositionName(result.data.position);
+    
     setGetPositionName(newPosition.position)
       setOpen(true);
       setNewPosition(empyFields);

@@ -1,12 +1,22 @@
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import React from 'react';
-import { Outlet, Link } from "react-router-dom";
+import { useContext } from 'react';
+import { useEffect } from 'react';
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import AuthContext from '../../auth/auth-context';
 import Header from './Header';
 
 
 
 
 const DashboardLayout = () => {
+  const auth = useContext(AuthContext);
+  const navigate=useNavigate()
+  useEffect(()=>{
+   if(!auth.isLoggedIn)
+          navigate('/')
+          
+  },[])
 return (
 
 

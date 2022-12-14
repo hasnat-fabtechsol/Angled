@@ -4,146 +4,239 @@ import React, {  useState } from 'react';
 import {TableMui,SelectOption} from '../../components/mui';
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Paginate from '../../components/FrontEndPaginate';
+import Paginate from '../../components/Paginate';
+import useApi from '../../hooks/useApi';
+import apiClient from '../../api/apiClient';
+import { useEffect } from 'react';
 
-const TableWrapper=({title,children})=>{
-    return (
-        <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
-        <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-        {title}
-        </Typography>
-{children}
-        </Box>
-    )
-}
-const NewJobs=({data})=>{
-    const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
-    const [position,setPosition]=useState()
-    const handleClearFilter = () => {
-        setPosition("");
-        setClearFilterNewJob(false);
-      };
+let limit=10
+const NewJobs=()=>{
+  const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
+  const [position,setPosition]=useState()
+  const [positions,setPositions]=useState([])
+  const [jobs,setJobs]=useState()
+  const [count,setCount]=useState(0)
+  
 
-    return (
-      
-        <Box>
-        <Box
-        sx={{
-          backgroundColor: "#dbdde1",
-          padding: "20px",
-          borderRadius: "5px",
-        }}
-      >
-        <Stack spacing={2} direction="row">
-          <SelectOption
-            name="new_jobs"
-            label="Position Type"
-            size="small"
-            selectCss={{ width: "200px" }}
-            data={[{"id":2,"name":"Part Time"},{"id":1,"name":"Full Time"}]}
-            value={position}
-            onChange={(e)=>{
-                setClearFilterNewJob(true)
-                setPosition(e.target.value)}}
+  const apiJobs=useApi((endpoint)=>apiClient.get(endpoint))
+  const apiPositions=useApi((endpoint)=>apiClient.get(endpoint))
+const [offset,setOffset]=useState(0)
 
-          />
-          {clearFilterNewJob && (
-            <IconButton onClick={handleClearFilter}>
-              <CloseIcon />
-            </IconButton>
-          )}
-        </Stack>
-      </Box>
-        <Box>
-          <TableMui
-            styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
-            th={{
-                position: "Facility Name",
-                location: "Location",
-                unit: "Unit",
-                shift: "Shift",
-                speciality: "Speciality",
-                profession: "Profession",
-                id: "Submittals",
-            }}
-            td={data}
-            link={"/client/active-job/"}
-            btnName="Detail"
-            btnSize="small"
-            btnStyle={{
-              backgroundColor: "#b09150",
-              "&:hover": { backgroundColor: "#c9a55a" },
-            }}
-          />
-         
-        </Box>
-      </Box>
-    )
-}
+  let offsetEndpoint = `&limit=${limit}&offset=`;
+  let newJobEndpoint = `posts/?`;
+  let positionFilterEndpoint = "jobs/?new=true&position_type=";
+  useEffect(()=>{
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
+    fetchPositions()
+  },[])
+  const fetchNewJobs = async (endpoint) => {
 
-
-
-const CurrentlyWorking=({data})=>{
-    const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
-    const [position,setPosition]=useState()
-    const handleClearFilter = () => {
-        setPosition("");
-        setClearFilterNewJob(false);
-      };
-    return (
+   const response= await apiJobs.request(endpoint)
+            
+if(response.status!=200){
+ 
+    
+   return console.log("error while retrieve"+response.data)
+   }
+   console.log(response.data)
+if(!count)
+setCount(response.data.count)
+setJobs(response.data.results)
 
  
-        <Box>
-          <TableMui
-            styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
-            th={{
-                position: "Facility Name",
-                location: "Location",
-                unit: "Unit",
-                shift: "Shift",
-                speciality: "Speciality",
-                profession: "Profession",
-                id: "Submittals",
-            }}
-            td={data}
-            link={"/client/active-job/"}
-            btnName="Detail"
-            btnSize="small"
-            btnStyle={{
-              backgroundColor: "#b09150",
-              "&:hover": { backgroundColor: "#c9a55a" },
-            }}
-          />
-         
-        </Box>
+  }
+  const fetchPositions = async () => {
+
+    const response= await apiPositions.request('position_types/')
+             
+    if(response.status!=200){
+  
      
-    )
+    return console.log("error while  retrieve"+response.data)
+    }
+    setPositions(response.data.results)
+ 
+  
+   }
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPosition(value);
+  
+      fetchNewJobs(positionFilterEndpoint+value+offsetEndpoint+offset)
+      setClearFilterNewJob(true);
+  
+  };
+
+  const handlePageChange = (event,value) => {
+    
+   value=((value - 1) * limit)
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+value)
+    setOffset(value)
+      
+  
+  };
+  const handleClearFilter = () => {
+      setPosition("");
+      setClearFilterNewJob(false);
+      fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
+    };
+
+  return (
+    <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
+    <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+   New Jobs
+    </Typography>
+
+   
+      <Box>
+      <Box
+      sx={{
+        backgroundColor: "#dbdde1",
+        padding: "20px",
+        borderRadius: "5px",
+      }}
+    >
+      <Stack spacing={2} direction="row">
+        <SelectOption
+          name="new_jobs"
+          label="Position Type"
+          size="small"
+          selectCss={{ width: "200px" }}
+          data={positions}
+          value={position}
+          onChange={handleChange}
+
+        />
+        {clearFilterNewJob && (
+          <IconButton onClick={handleClearFilter}>
+            <CloseIcon />
+          </IconButton>
+        )}
+      </Stack>
+    </Box>
+      <Box>
+        <TableMui
+          styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          th={{
+              position: "Facility Name",
+              location: "Location",
+              unit: "Unit",
+              shift: "Shift",
+              speciality: "Speciality",
+              profession: "Profession",
+              id: "Submittals",
+          }}
+          td={apiJobs.data.results}
+          link={"/client/active-job/"}
+          btnName="Detail"
+          btnSize="small"
+          btnStyle={{
+            backgroundColor: "#b09150",
+            "&:hover": { backgroundColor: "#c9a55a" },
+          }}
+        />
+       
+      </Box>
+    </Box>
+    <Paginate  count={count} limit={limit} onChange={handlePageChange}/>
+</Box>
+  )
+}
+
+
+const CurrentlyWorking=()=>{
+const [count,setCount]=useState(0)
+
+
+const {data,request}=useApi((endpoint)=>apiClient.get(endpoint))
+const [offset,setOffset]=useState(0)
+
+let Endpoint = `employments/?limit=${limit}&offset=`;
+useEffect(()=>{
+  fetchData(Endpoint+offset)
+},[])
+const fetchData = async (endpoint) => {
+
+ const response= await request(endpoint)
+          
+if(response.status!=200){
+
+  
+ return console.log("error while retrieve"+response.data)
+ }
+ console.log(response.data)
+if(!count)
+setCount(response.data.count)
+
+
+}
+
+
+
+const handlePageChange = (event,value) => {
+  
+  value=((value - 1) * limit)
+  fetchData(Endpoint+value)
+  setOffset(value)
+    
+
+
+}
+
+  return (
+
+    <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
+    <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+   Currently Working
+    </Typography>
+
+      <Box>
+        <TableMui
+          styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          th={{
+            candidate: "Candidate",
+            starting_date: "Starting Date",
+            social_security_number: "Social Security Number",
+            driver_license: "Driver License",
+            professional_license_verification:
+              "Professional License Verification",
+            bill_rate: "Bill Rate",
+            compliance_per_agency: "Compliance Per Agency",
+            submitals_per_agency: "Submittal Per Agency",
+            job_post_id: "Detail",
+          }}
+          td={data.results}
+          link={"/client/active-job/"}
+          btnName="Detail"
+          btnSize="small"
+          btnStyle={{
+            backgroundColor: "#b09150",
+            "&:hover": { backgroundColor: "#c9a55a" },
+          }}
+        />
+       
+      </Box>
+      <Paginate count={count} limit={limit} onChange={handlePageChange}/>
+      </Box>
+   
+  )
 }
 function AdminDashboard(props) {
-    const newJobs=[{"id":3,"position":"abc","position_type":"Full Time","location":"sjahakshds","unit":"1","shift":"N","speciality":"nursing","profession":"doc"},{"id":2,"position":"Fletcher Bradford","position_type":"Part Time","location":"Colt","unit":"Giacomo Peterson","shift":"D","speciality":"Joseph Larsen","profession":"Amena Pugh"}]
-   
-    const workingData=[{"id":4,"position":"Bruno Zimmerman","position_type":1,"location":"Shelly Hickman","unit":"Levi Decker","shift":"Day","speciality":"Savannah Barrett","profession":"Callum Cardenas"},{"id":1,"position":"Nevada Gill","position_type":2,"location":"Melvin","unit":"Lois Clemons","shift":"Day","speciality":"Laith Romero","profession":"Brielle Camacho"}]
- 
+
+
+
+
+  
     return (
         <div>
           
 
-          <TableWrapper title={"New Jobs"}>
-
-          <Paginate data={newJobs} postsPerPage={1} style={{display:'flex',justifyContent:'flex-end'}} >
-            
+        
 <NewJobs/>
-          </Paginate>
-          </TableWrapper>
 
       
-<TableWrapper title={"Currently Working"}>
 
-<Paginate data={workingData} postsPerPage={1} style={{display:'flex',justifyContent:'flex-end'}} >
-  
 <CurrentlyWorking />
-</Paginate>
-</TableWrapper>
 
 
 

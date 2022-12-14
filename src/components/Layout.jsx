@@ -7,6 +7,7 @@ import './styles/Layout.css'
 const Layout = () => {
   const auth = useContext(AuthContext);
   const [formEnable, setFormEnable] = useState(false);
+  console.log(typeof(auth.userType));
 
 return (
 
@@ -57,8 +58,8 @@ return (
 <div className="col-lg-6 mb-3 mb-lg-0 text-white  text-white">
 
 
-<Link  to={auth.userType==true?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
-  style={{ background: '#A98C4D' }}>{auth.userType==true?"Admin":"Client"} Dashboard</button> </Link>
+<Link  to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
+  style={{ background: '#A98C4D' }}>{auth.userType?"Admin":"Client"} Dashboard</button> </Link>
 </div>
 </>:<>
   

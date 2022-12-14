@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from './components/Layout'
 import {ForgetPassword,ForgetPassPin,ResetPassword} from './pages/ForgetPassword';
 import {Home,AboutUs,Jobs,ContactUs,LogIn,SignUp} from './pages/Main'
@@ -12,11 +12,12 @@ import { AdminDashboard, Invoices, NewJob } from './pages/admin';
 import isHospital from './hooks/IsHospital'
 import ApplyNow from './pages/Main/ApplyNow';
 import Blogs from './pages/Main/Blogs';
+import ProtectedRoute from './components/ProtectedRoute';
+import Resume from './pages/client/Resume';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
 function App() {
 
-  const auth = useContext(AuthContext);
-
-
+ 
     
   return (
     <BrowserRouter>
@@ -25,8 +26,6 @@ function App() {
 
           <Route index element={<Home />} />
         <Route path="about-us" element={<AboutUs />} />
-        <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
           <Route path="jobs" element={<Jobs />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="blogs" element={<Blogs />} />
@@ -36,19 +35,36 @@ function App() {
         <Route path="forget-password" element={<ForgetPassword />} />
         <Route path="forget-pass-pin" element={<ForgetPassPin />} />
         <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-        <Route path="/" element={<DashboardLayout/>}>
+        <Route path="/" element={
+        <ProtectedRoute>
+        <DashboardLayout/>
+         </ProtectedRoute>}>
           <Route index path='/client/dashboard' element={<Dashboard />} />
-          <Route path='client/reports' element={<Reports />} />
+          <Route path='/client/reports' element={<Reports />} />
+          <Route path='/client/resume' element={
+          
+        <AdminProtectedRoute>
+          <Resume/>
+        </AdminProtectedRoute>
+         } />
+          <Route path="client/*" element={<Navigate to="/client/dashboard" replace />} />
  
       
         </Route>
 
-        <Route path="/" element={<AdminDashboardLayout/>}>
-          <Route index path='/admin/dashboard' element={<AdminDashboard />} />
+        <Route path="/" element={
+         <ProtectedRoute>
+          <AdminProtectedRoute>
+
+        <AdminDashboardLayout/>
+          </AdminProtectedRoute>
+         </ProtectedRoute>}>
+          <Route index path='/admin/dashboard' element={<AdminDashboard /> }/>
           <Route path='/admin/new-job' element={<NewJob />} />
           <Route path='/admin/invoices' element={<Invoices />} />
-      
+          <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>

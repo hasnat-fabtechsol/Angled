@@ -1,75 +1,153 @@
 import React from 'react';
 
-import { Paper, Typography } from '@mui/material';
+import { IconButton, Paper, Stack, Typography } from '@mui/material';
 import { Box} from '@mui/system';
 import {  useState } from 'react';
-import {TableMui} from '../../components/mui';
-import Paginate from '../../components/FrontEndPaginate';
-
-const TableWrapper=({title,children})=>{
-    return (
-        <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
-        <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-        {title}
-        </Typography>
-{children}
-        </Box>
-    )
-}
+import {SelectOption, TableMui} from '../../components/mui';
+import Paginate from '../../components/Paginate';
+import useApi from '../../hooks/useApi';
+import apiClient from '../../api/apiClient';
+import CloseIcon from "@mui/icons-material/Close";     
+import { useEffect } from 'react';
 
 
 
-const CurrentlyWorking=({data})=>{
-    const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
-    const [position,setPosition]=useState()
-    const handleClearFilter = () => {
-        setPosition("");
-        setClearFilterNewJob(false);
-      };
-    return (
-
- 
-        <Box>
-          <TableMui
-            styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
-            th={{
-                position: "Facility Name",
-                location: "Location",
-                unit: "Unit",
-                shift: "Shift",
-                speciality: "Speciality",
-                profession: "Profession",
-                id: "Submittals",
-            }}
-            td={data}
-            link={"/client/active-job/"}
-            btnName="Detail"
-            btnSize="small"
-            btnStyle={{
-              backgroundColor: "#b09150",
-              "&:hover": { backgroundColor: "#c9a55a" },
-            }}
-          />
-         
-        </Box>
-     
-    )
-}
+let limit=10
 
 
 function Invoices(props) {
 
-    const workingData=[{"id":4,"position":"Bruno Zimmerman","position_type":1,"location":"Shelly Hickman","unit":"Levi Decker","shift":"Day","speciality":"Savannah Barrett","profession":"Callum Cardenas"},{"id":1,"position":"Nevada Gill","position_type":2,"location":"Melvin","unit":"Lois Clemons","shift":"Day","speciality":"Laith Romero","profession":"Brielle Camacho"}]
- 
-    return (
-        <TableWrapper title={"Invoices"}>
+  const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
+  const [position,setPosition]=useState()
+  const [positions,setPositions]=useState([])
+  const [data,setData]=useState()
+  const [count,setCount]=useState(0)
+  
 
-        <Paginate data={workingData} postsPerPage={1} style={{display:'flex',justifyContent:'flex-end'}} >
-          
-        <CurrentlyWorking />
-        </Paginate>
-        </TableWrapper>
-    );
+  const apiJobs=useApi((endpoint)=>apiClient.get(endpoint))
+  const apiPositions=useApi((endpoint)=>apiClient.get(endpoint))
+const [offset,setOffset]=useState(0)
+
+  let offsetEndpoint = `&limit=${limit}&offset=`;
+  let newJobEndpoint = `posts/?`;
+  let positionFilterEndpoint = "adm/invoice/?position_type=";
+  useEffect(()=>{
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
+    fetchPositions()
+  },[])
+  const fetchNewJobs = async (endpoint) => {
+
+   const response= await apiJobs.request(endpoint)
+            
+if(response.status!=200){
+ 
+    
+   return console.log("error while retrieve"+response.data)
+   }
+   console.log(response.data)
+if(!count)
+setCount(response.data.count)
+setData(response.data.results)
+
+ 
+  }
+  const fetchPositions = async () => {
+
+    const response= await apiPositions.request('position_types/')
+             
+    if(response.status!=200){
+  
+     
+    return console.log("error while  retrieve"+response.data)
+    }
+    setPositions(response.data.results)
+ 
+  
+   }
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPosition(value);
+  
+      fetchNewJobs(positionFilterEndpoint+value+offsetEndpoint+offset)
+      setClearFilterNewJob(true);
+  
+  };
+
+  const handlePageChange = (event,value) => {
+    
+   value=((value - 1) * limit)
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+value)
+    setOffset(value)
+      
+  
+  };
+  const handleClearFilter = () => {
+      setPosition("");
+      setClearFilterNewJob(false);
+      fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
+    };
+
+  return (
+    <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
+    <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+   New Jobs
+    </Typography>
+
+   
+      <Box>
+      <Box
+      sx={{
+        backgroundColor: "#dbdde1",
+        padding: "20px",
+        borderRadius: "5px",
+      }}
+    >
+      <Stack spacing={2} direction="row">
+        <SelectOption
+          name="new_jobs"
+          label="Position Type"
+          size="small"
+          selectCss={{ width: "200px" }}
+          data={positions}
+          value={position}
+          onChange={handleChange}
+
+        />
+        {clearFilterNewJob && (
+          <IconButton onClick={handleClearFilter}>
+            <CloseIcon />
+          </IconButton>
+        )}
+      </Stack>
+    </Box>
+      <Box>
+        <TableMui
+          styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          th={{
+              position: "Facility Name",
+              location: "Location",
+              unit: "Unit",
+              shift: "Shift",
+              speciality: "Speciality",
+              profession: "Profession",
+              
+          }}
+          td={apiJobs.data.results}
+          link={"/client/active-job/"}
+          btnName="Detail"
+          btnSize="small"
+          btnStyle={{
+            backgroundColor: "#b09150",
+            "&:hover": { backgroundColor: "#c9a55a" },
+          }}
+        />
+       
+      </Box>
+    </Box>
+    <Paginate  count={count} limit={limit} onChange={handlePageChange}/>
+</Box>
+  )
+
 }
 
 export default Invoices;

@@ -96,7 +96,7 @@ const AuthContext = React.createContext({
 
 const retrieveStoredData = () => {
   const storedToken = localStorage.getItem('token');
-  const storedType = localStorage.getItem('userType');
+  const storedType = (localStorage.getItem('userType') === 'true')
 
 
 

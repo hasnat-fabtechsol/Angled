@@ -19,7 +19,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/auth-context';
 
 const drawerWidth = 240;
@@ -27,12 +27,13 @@ const drawerWidth = 240;
 function SideNav(props) {
   const { window } = props;
   const auth = React.useContext(AuthContext);
- 
+  const navigate=useNavigate()
   
 
   const listItemData = [
     { label: "Dashboard", icon: <DashboardIcon />, link: "/client/dashboard" },,
     { label: "Reports", icon: <ReceiptIcon />, link: "/client/reports" },
+    { label: "Resume", icon: <ReceiptIcon />, link: "/client/resume" },
   ];
 
 
@@ -43,6 +44,7 @@ function SideNav(props) {
       <Divider />
       <List>
         {listItemData.map((value, i) => (
+          value.label=="Resume"&&!auth.userType?null:
           <ListItem key={i} component={NavLink} to={value.link}  disablePadding sx={{ color: 'inherit' }} >
             <ListItemButton>
               <ListItemIcon >{value.icon}</ListItemIcon>
@@ -53,12 +55,16 @@ function SideNav(props) {
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding >
+        <ListItem disablePadding  onClick={()=>{
+          
+          auth.logout()
+          navigate('/')
+          }}>
           <ListItemButton >
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
-            <ListItemText primary={auth.isLoggedIn?"Login":"Logout"}  />
+            <ListItemText primary={"Logout"}  />
           </ListItemButton>
         </ListItem>
       </List>

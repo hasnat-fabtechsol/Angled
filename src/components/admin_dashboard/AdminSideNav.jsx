@@ -19,7 +19,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/auth-context';
 
 const drawerWidth = 240;
@@ -28,7 +28,7 @@ function AdminSideNav(props) {
   const { window } = props;
   const auth = useContext(AuthContext);
 
-
+  const navigate=useNavigate()
 
   
 
@@ -54,14 +54,18 @@ function AdminSideNav(props) {
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding >
+        <ListItem disablePadding  onClick={()=>{
+          
+          auth.logout()
+          navigate('/')
+          }}>
           <ListItemButton >
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
         
 
-            <ListItemText primary={auth.isLoggedIn?"Login":"Logout"}  />
+            <ListItemText primary={"Logout"}  />
          
          
           </ListItemButton>

@@ -490,10 +490,9 @@ const navigate=useNavigate()
 
 console.log("sending data...................................")
 const result= await request({username:email,password:password})
-console.log(result);
     if (result.status!=200) return setError(true)
     const userType=await IsHospital(result.data.token)
- auth.login(result.data.token,userType)
+ auth.login(result.data.token,userType?userType:false)
 navigate('/')
   }
 
