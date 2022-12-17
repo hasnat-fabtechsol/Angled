@@ -4,74 +4,86 @@ import { Pagination, Paper, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import {  useState } from 'react';
 import { TableMui, SelectOption } from "../../components/mui";
-import Paginate from '../../components/FrontEndPaginate';
+import Paginate from '../../components/Paginate';
+import { useEffect } from 'react';
+import useApi from '../../hooks/useApi';
+import apiClient from '../../api/apiClient';
+let limit=10
+export default function(){
 
-const TableWrapper=({title,children})=>{
+
+  const [count,setCount]=useState(0)
+  
+  
+  const {data,request}=useApi((endpoint)=>apiClient.get(endpoint))
+  const [offset,setOffset]=useState(0)
+  
+  let Endpoint = `employments/?limit=${limit}&offset=`;
+  useEffect(()=>{
+    fetchData(Endpoint+offset)
+  },[])
+  const fetchData = async (endpoint) => {
+  
+   const response= await request(endpoint)
+            
+  if(response.status!=200){
+  
+    
+   return console.log("error while retrieve"+response.data)
+   }
+   console.log(response.data)
+  if(!count)
+  setCount(data.count)
+  
+  
+  }
+  
+  
+  
+  const handlePageChange = (event,value) => {
+    
+    value=((value - 1) * limit)
+    fetchData(Endpoint+value)
+    setOffset(value)
+      
+  
+  
+  }
+  
+  
     return (
-        <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
-        <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-        {title}
-        </Typography>
-{children}
-        </Box>
+  
+      
+      <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
+      <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+    Active Submissle
+      </Typography>
+  
+       <Box>
+         <TableMui
+           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+           th={{
+            candidate: "Candidate Name",
+            starting_date: "Starting Date",
+            submitals_per_agency: "Submittal",
+            compliance_per_agency: "Compliance",
+           }}
+           td={data.results}
+           link={"/client/active-job/"}
+           btnName="Detail"
+           btnSize="small"
+           btnStyle={{
+             backgroundColor: "#b09150",
+             "&:hover": { backgroundColor: "#c9a55a" },
+           }}
+         />
+        
+       </Box>
+       <Paginate count={count} limit={limit} onChange={handlePageChange}/>
+   
+    </Box>
     )
-}
+  }
 
-
-
-const CurrentlyWorking=({data})=>{
-    const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
-    const [position,setPosition]=useState()
-    const handleClearFilter = () => {
-        setPosition("");
-        setClearFilterNewJob(false);
-      };
-    return (
-
- 
-        <Box>
-          <TableMui
-            styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
-            th={{
-                position: "Facility Name",
-                location: "Location",
-                unit: "Unit",
-                shift: "Shift",
-                speciality: "Speciality",
-                profession: "Profession",
-                id: "Submittals",
-            }}
-            td={data}
-            link={"/client/active-job/"}
-            btnName="Detail"
-            btnSize="small"
-            btnStyle={{
-              backgroundColor: "#b09150",
-              "&:hover": { backgroundColor: "#c9a55a" },
-            }}
-          />
-         
-        </Box>
-     
-    )
-}
-
-
-function Reports(props) {
-
-    const workingData=[{"id":4,"position":"Bruno Zimmerman","position_type":1,"location":"Shelly Hickman","unit":"Levi Decker","shift":"Day","speciality":"Savannah Barrett","profession":"Callum Cardenas"},{"id":1,"position":"Nevada Gill","position_type":2,"location":"Melvin","unit":"Lois Clemons","shift":"Day","speciality":"Laith Romero","profession":"Brielle Camacho"}]
- 
-    return (
-        <TableWrapper title={"Reports"}>
-
-        <Paginate data={workingData} postsPerPage={1} style={{display:'flex',justifyContent:'flex-end'}} >
-          
-        <CurrentlyWorking />
-        </Paginate>
-        </TableWrapper>
-    );
-}
-
-export default Reports;
 
 

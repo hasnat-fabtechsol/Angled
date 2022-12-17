@@ -127,7 +127,7 @@ setJobs(response.data.results)
               id: "Submittals",
           }}
           td={apiJobs.data.results}
-          link={"/client/active-job/"}
+          link={"/admin/new-job/"}
           btnName="Detail"
           btnSize="small"
           btnStyle={{

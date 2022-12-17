@@ -163,8 +163,8 @@ setJobs(response.data.results)
               id: "Submittals",
           }}
           td={apiJobs.data.results}
-          link={"/client/active-job/"}
-          btnName="Detail"
+          link={"/client/add-new/"}
+          btnName="Apply"
           btnSize="small"
           btnStyle={{
             backgroundColor: "#b09150",

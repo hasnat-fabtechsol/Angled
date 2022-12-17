@@ -15,6 +15,9 @@ import Blogs from './pages/Main/Blogs';
 import ProtectedRoute from './components/ProtectedRoute';
 import Resume from './pages/client/Resume';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
+import JobDetail from './pages/admin/JobDetail';
+import AddNew from './pages/client/AddNew';
+
 function App() {
 
  
@@ -42,13 +45,10 @@ function App() {
         <DashboardLayout/>
          </ProtectedRoute>}>
           <Route index path='/client/dashboard' element={<Dashboard />} />
+          <Route index path='/client/add-new/:id' element={<AddNew/>} />
           <Route path='/client/reports' element={<Reports />} />
-          <Route path='/client/resume' element={
-          
-        <AdminProtectedRoute>
-          <Resume/>
-        </AdminProtectedRoute>
-         } />
+          <Route path='/client/resume'
+           element={<AdminProtectedRoute><Resume/> </AdminProtectedRoute> } />
           <Route path="client/*" element={<Navigate to="/client/dashboard" replace />} />
  
       
@@ -64,6 +64,7 @@ function App() {
           <Route index path='/admin/dashboard' element={<AdminDashboard /> }/>
           <Route path='/admin/new-job' element={<NewJob />} />
           <Route path='/admin/invoices' element={<Invoices />} />
+          <Route path='/admin/new-job/:id' element={<JobDetail />} />
           <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
       </Routes>

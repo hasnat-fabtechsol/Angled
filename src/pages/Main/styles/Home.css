@@ -2,11 +2,32 @@
   border: 2px solid red;
 }
 .home-poster{
-    min-height: 90vh;
+    min-height:112vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
     background-size: cover;
     background-position:center;
     position: relative;
+}
+.cpr{
+  min-height: 112vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
+.facebook{
+  min-height: 112vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
+.z_index{
+  position: absolute;
+  top: 0;
+}
+.bi-arrow-right-circle{
+  font-size: 20px;
 }
 .form-poster{
     min-height: 90vh;
@@ -87,8 +108,21 @@ font-size: 14px;
     display: grid;
     grid-gap: 2rem;
   }
-  .card:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .carousel-control-next{
+    justify-content: end !important;
+    right: 20px !important;
+  }
+  .carousel-control-prev{
+    justify-content: start !important;
+    left: 20px !important;
+  
+  }
+  .carousel-control-prev{
+    width: 0px !important;
+    /* height: 10px !important; */
+  }
+  .carousel-control-next{
+    width: 0px !important;
   }
   /* Screen larger than 600px? 2 column */
   @media (min-width: 320px) {
@@ -134,3 +168,26 @@ font-size: 14px;
 
    }
   }
+  @media (max-width: 991px) {
+    .home-poster{
+      min-height:200vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
+      background-size: cover;
+      background-position:center;
+      position: relative;
+  }
+  .cpr{
+    min-height: 200vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+      background-size: cover;
+      background-position:center;
+      position: relative;
+  }
+  .facebook{
+    min-height: 200vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+      background-size: cover;
+      background-position:center;
+      position: relative;
+  }
+   }

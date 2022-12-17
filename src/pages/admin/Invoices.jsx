@@ -30,7 +30,7 @@ const [offset,setOffset]=useState(0)
 
   let offsetEndpoint = `&limit=${limit}&offset=`;
   let newJobEndpoint = `posts/?`;
-  let positionFilterEndpoint = "adm/invoice/?position_type=";
+  let positionFilterEndpoint = "posts/?position_type=";
   useEffect(()=>{
     fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
     fetchPositions()
