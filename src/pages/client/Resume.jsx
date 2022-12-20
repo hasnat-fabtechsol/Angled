@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 
-import { Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import {  useState } from 'react';
-import { TableMui, SelectOption, AdminButton } from "../../components/mui";
 import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import apiClient from '../../api/apiClient';
 import { baseURL } from '../../api/apiClient';
 let limit=10
 export default function(){
-  const [jobs,setJobs]=useState()
   const [count,setCount]=useState(0)
   
 
-  const apiJobs=useApi((endpoint)=>apiClient.get(endpoint))
+  const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
 
   let offsetEndpoint = `&limit=${limit}&offset=`;
@@ -25,17 +23,12 @@ const [offset,setOffset]=useState(0)
   },[])
   const fetchNewJobs = async (endpoint) => {
 
-   const response= await apiJobs.request(endpoint)
+   const response= await request(endpoint)
             
-if(response.status!=200){
- 
-    
-   return console.log("error while retrieve"+response.data)
-   }
-   console.log(response.data)
+   if(error)
+   return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
-setJobs(response.data.results)
 
  
   }
@@ -72,7 +65,7 @@ setJobs(response.data.results)
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {jobs?.map((data, index) => {
+                                        {data?.map((data, index) => {
                                             let splitted = data.created_at?.split("T");
                                             return (
                                                 <TableRow

@@ -1,33 +1,54 @@
 import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
-import Paginate from '../../components/FrontEndPaginate';
-import Table from '../../components/CustomTable/Table';
+import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import './styles/Jobs.css'
 const headers=['Faculty Name','Location','Unit','Shift','Speciality','Profession','Action']
+const fields=['position','location','unit','shift','speciality','profession']
 
 
-
+let limit=10
 
 function Jobs(props) {
 
-// const {data,loading,request}=useApi(()=>apiClient.get(`/posts`))
 
-const data=[]
-
-// useEffect(()=>{
-// getData()
-
-// },[])
-
-// async function getData(){
+const [count,setCount]=useState(0)
 
 
-// const result= await request()
+const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
+const [offset,setOffset]=useState(0)
 
-// }
+let Endpoint = `posts/?limit=${limit}&offset=`;
+useEffect(()=>{
+  fetchData(Endpoint+offset)
+  console.log("called")
+},[])
+const fetchData = async (endpoint) => {
+
+ const response= await request(endpoint)
+          
+if(error)
+return console.log("error while retrieve")
+if(!count)
+setCount(response.data.count)
+
+
+}
+
+
+
+const handlePageChange = (event,value) => {
+  
+  value=((value - 1) * limit)
+  fetchData(Endpoint+value)
+  setOffset(value)
+    
+
+
+}
 
 
 return (
@@ -56,122 +77,35 @@ return (
           <table className=" table table-hover">
             <thead className="bg-primary text-white">
               <tr className id="table-color">
+                {headers.map(item=>(
                 <th className=" white_space">
-                  <p className="mb-0 white_space">Facility Name</p>
+                  <p className="mb-0 white_space">{item}</p>
                 </th>
-                <th className=" white_space">
-                  <p className="mb-0">Location</p>
-                </th>
-                <th className=" white_space">
-                  <p className="mb-0">Unit</p>
-                </th>
-                <th className=" white_space">
-                  <p className="mb-0">Shift</p>
-                </th>
-                <th className=" white_space">
-                  <p className="mb-0">Specialty</p>
-                </th> 
-                <th className=" white_space">
-                  <p className="mb-0">Profession</p>
-                </th>
-                <th className=" white_space">
-                  <p className="mb-0">Submit</p>
-                </th>
+                ))}
+                
               </tr>
             </thead>
-            <tbody><tr className=" py-2" id="table-color">
-                <td className="white_space">
-                  <p>Fletcher Bradford</p>
-                </td>
-                <td className="white_space">
-                  <p>Giacomo Peterson</p>
-                </td>
-                <td className="white_space">
-                  <p>1</p>
-                </td>
-                <td className="white_space">
-                  <p>Day</p>
-                </td>
-                <td className="white_space">
-                  <p>Joseph Larsen</p>
-                </td>
-                <td className="white_space">
-                  <p>Doctor</p>
-                </td>
-                <td>
-                  <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
-                </td>
-              </tr>
-              <tr className=" py-2" id="table-color">
-                <td className="white_space">
-                  <p>Fletcher Bradford</p>
-                </td>
-                <td className="white_space">
-                  <p>Giacomo Peterson</p>
-                </td>
-                <td className="white_space">
-                  <p>1</p>
-                </td>
-                <td className="white_space">
-                  <p>Day</p>
-                </td>
-                <td className="white_space">
-                  <p>Joseph Larsen</p>
-                </td>
-                <td className="white_space">
-                  <p>Doctor</p>
-                </td>
-                <td>
-                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
-                </td>
-              </tr>
-              <tr className=" py-2" id="table-color">
-                <td className="white_space">
-                  <p>Fletcher Bradford</p>
-                </td>
-                <td className="white_space">
-                  <p>Giacomo Peterson</p>
-                </td>
-                <td className="white_space">
-                  <p>1</p>
-                </td>
-                <td className="white_space">
-                  <p>Day</p>
-                </td>
-                <td className="white_space">
-                  <p>Joseph Larsen</p>
-                </td>
-                <td className="white_space">
-                  <p>Doctor</p>
-                </td>
-                <td>
-                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
-                </td>
-              </tr>
-              <tr className=" py-2" id="table-color">
-                <td className="white_space">
-                  <p>Fletcher Bradford</p>
-                </td>
-                <td className="white_space">
-                  <p>Giacomo Peterson</p>
-                </td>
-                <td className="white_space">
-                  <p>1</p>
-                </td>
-                <td className="white_space">
-                  <p>Day</p>
-                </td>
-                <td className="white_space">
-                  <p>Joseph Larsen</p>
-                </td>
-                <td className="white_space">
-                  <p>Doctor</p>
-                </td>
-                <td>
-                    <Link to="/jobs/apply-now"><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
-                </td>
-              </tr>
+            <tbody>
+              {data.map(item=>(
+
+<tr className=" py-2" id="table-color">
+  {fields.map(field=>(
+    <td className="white_space">
+  <p>{item[field]}</p>
+</td>
+  ))}
+
+
+<td>
+  <Link to={"/jobs/apply-now/"+item.id}><button className="white_space btn btn-primary px-4"><small>Apply Now</small></button></Link>
+</td>
+</tr>
+              ))}
+        
+           
             </tbody></table>
+
+            <Paginate count={count} limit={limit} onChange={handlePageChange}/>
         </div>
       </div>
     </div>
@@ -182,16 +116,6 @@ return (
 }
 
 
-
-const btn=(item)=>{
-return (
-<>
-
-  <button className="btn btn-primary m-2" style={{backgroundColor:'#32abe2'}}
-    onClick={()=>console.log(item)}>Apply</button>
-</>
-);
-}
 
 
 export default Jobs;

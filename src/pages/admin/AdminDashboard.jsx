@@ -14,7 +14,6 @@ const NewJobs=()=>{
   const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
   const [position,setPosition]=useState()
   const [positions,setPositions]=useState([])
-  const [jobs,setJobs]=useState()
   const [count,setCount]=useState(0)
   
 
@@ -33,15 +32,11 @@ const [offset,setOffset]=useState(0)
 
    const response= await apiJobs.request(endpoint)
             
-if(response.status!=200){
- 
-    
-   return console.log("error while retrieve"+response.data)
-   }
+   if(apiJobs.error)
+   return console.log("error while retrieve")
    console.log(response.data)
 if(!count)
 setCount(response.data.count)
-setJobs(response.data.results)
 
  
   }
@@ -49,11 +44,8 @@ setJobs(response.data.results)
 
     const response= await apiPositions.request('position_types/')
              
-    if(response.status!=200){
-  
-     
+    if(apiPositions.error)
     return console.log("error while  retrieve"+response.data)
-    }
     setPositions(response.data.results)
  
   
@@ -126,7 +118,7 @@ setJobs(response.data.results)
               profession: "Profession",
               id: "Submittals",
           }}
-          td={apiJobs.data.results}
+          td={apiJobs.data}
           link={"/admin/new-job/"}
           btnName="Detail"
           btnSize="small"
@@ -148,10 +140,10 @@ const CurrentlyWorking=()=>{
 const [count,setCount]=useState(0)
 
 
-const {data,request}=useApi((endpoint)=>apiClient.get(endpoint))
+const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
 
-let Endpoint = `employments/?limit=${limit}&offset=`;
+let Endpoint = `jobs/?active=true&limit=${limit}&offset=`;
 useEffect(()=>{
   fetchData(Endpoint+offset)
 },[])
@@ -159,12 +151,8 @@ const fetchData = async (endpoint) => {
 
  const response= await request(endpoint)
           
-if(response.status!=200){
-
-  
- return console.log("error while retrieve"+response.data)
- }
- console.log(response.data)
+ if(error)
+ return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
 
@@ -194,19 +182,17 @@ const handlePageChange = (event,value) => {
         <TableMui
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
           th={{
-            candidate: "Candidate",
-            starting_date: "Starting Date",
-            social_security_number: "Social Security Number",
-            driver_license: "Driver License",
-            professional_license_verification:
-              "Professional License Verification",
-            bill_rate: "Bill Rate",
-            compliance_per_agency: "Compliance Per Agency",
-            submitals_per_agency: "Submittal Per Agency",
-            job_post_id: "Detail",
+            position: "Facility Name",
+                location: "Location",
+                unit: "Unit",
+                submitted_by: "Submitted by",
+                shift: "Shift",
+                speciality: "Speciality",
+                profession: "Profession",
+                id: "Submittals",
           }}
-          td={data.results}
-          link={"/client/active-job/"}
+          td={data}
+          link={"/admin/active-job/"}
           btnName="Detail"
           btnSize="small"
           btnStyle={{

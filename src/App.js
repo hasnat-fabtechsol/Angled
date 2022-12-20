@@ -16,7 +16,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Resume from './pages/client/Resume';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
 import JobDetail from './pages/admin/JobDetail';
+import ActiveJobDetail from './pages/admin/ActiveJobDetail';
 import AddNew from './pages/client/AddNew';
+import AssignJob from './pages/admin/AssignJob';
+import ActiveSubmittalDetail from './pages/client/ActiveSubmittalDetail';
+import CurrentlyWorkingDetail from './pages/client/CurrentlyWorkingDetail';
 
 function App() {
 
@@ -33,7 +37,7 @@ function App() {
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="blogs" element={<Blogs />} />
 
-          <Route path="jobs/apply-now" element={<ApplyNow />} />
+          <Route path="jobs/apply-now/:id" element={<ApplyNow />} />
         
         <Route path="forget-password" element={<ForgetPassword />} />
         <Route path="forget-pass-pin" element={<ForgetPassPin />} />
@@ -47,6 +51,8 @@ function App() {
           <Route index path='/client/dashboard' element={<Dashboard />} />
           <Route index path='/client/add-new/:id' element={<AddNew/>} />
           <Route path='/client/reports' element={<Reports />} />
+          <Route path='/client/active-job/:id' element={<ActiveSubmittalDetail />} />
+          <Route path='/client/currently-working/:id' element={<CurrentlyWorkingDetail />} />
           <Route path='/client/resume'
            element={<AdminProtectedRoute><Resume/> </AdminProtectedRoute> } />
           <Route path="client/*" element={<Navigate to="/client/dashboard" replace />} />
@@ -65,6 +71,8 @@ function App() {
           <Route path='/admin/new-job' element={<NewJob />} />
           <Route path='/admin/invoices' element={<Invoices />} />
           <Route path='/admin/new-job/:id' element={<JobDetail />} />
+          <Route path='/admin/active-job/:id' element={<ActiveJobDetail />} />
+          <Route path='/admin/new-job/assign/:id' element={<AssignJob />} />
           <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
       </Routes>

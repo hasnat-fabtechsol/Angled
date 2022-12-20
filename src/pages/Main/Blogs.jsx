@@ -1,9 +1,12 @@
+import { Toolbar } from '@mui/material'
 import React from 'react'
 import './styles/blogs.css'
 
 export default function Blogs() {
   return (
     <div>
+       <Toolbar/>
+  <Toolbar/>
     <div className="container-fluid">
       <div className="row back_img my-3 mx-0 mx-sm-4">
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">

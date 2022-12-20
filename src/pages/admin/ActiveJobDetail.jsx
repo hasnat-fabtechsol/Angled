@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { Box, Toolbar, Typography, CssBaseline, Paper } from "@mui/material";
+import { Box, Toolbar, Typography,Paper } from "@mui/material";
+import { trimDate } from "../../components/trimDate";
 import apiClient from "../../api/apiClient";
-import { PopupFeedback, TableMui } from "../../components/mui";
-import { trimDates } from "../../components/trimDate";
+import { PopupFeedback ,TableMui} from "../../components/mui";
 
 export default function () {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
@@ -13,11 +12,13 @@ export default function () {
   const { id } = useParams();
 
   const fetchJobDetail = async () => {
-    const {
-      data: { results },
-    } = await apiClient.get(`jobs/${id}/applications/`);
-    const updatedData = trimDates(results, "applied_at");
-    setActiveJobDetail(updatedData);
+    const { data } = await apiClient.get(`/jobs/${id}/employements/`);
+    const afterTrimming = trimDate(data, "starting_date");
+    if (!afterTrimming) {
+      setOpen(true);
+      setActiveJobData(false);
+    }
+    afterTrimming && setActiveJobDetail([afterTrimming]);
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function () {
   }, []);
 
   return (
- <>
+  <>
         {activeJobData ? (
           <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
             <Typography variant="h5" sx={{ marginBottom: "10px" }}>
@@ -35,16 +36,12 @@ export default function () {
               styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
               th={{
                 sr: "No.",
-                applied_at: "Date",
-                candidate_name: "Candidate",
+                starting_date: "Date",
+                candidate: "Candidate",
                 email: "Email Address",
-                // skills: "Skills",
                 location: "Location",
-                id: "Action",
               }}
               td={activeJobDetail}
-              link={"/admin/new-job/assign/"}
-              btnName="Assign"
             />
           </Box>
         ) : (

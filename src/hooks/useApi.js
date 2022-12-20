@@ -8,9 +8,8 @@ const useApi = (apiFunc) => {
     setLoading(true);
     const response = await apiFunc(...args);
     setLoading(false);
-
     setError(response.status!=200);
-    setData(response.data);
+    setData(response.data.results);
     return response;
   };
 

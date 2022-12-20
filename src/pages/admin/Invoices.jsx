@@ -20,7 +20,6 @@ function Invoices(props) {
   const [clearFilterNewJob, setClearFilterNewJob] = useState(false);
   const [position,setPosition]=useState()
   const [positions,setPositions]=useState([])
-  const [data,setData]=useState()
   const [count,setCount]=useState(0)
   
 
@@ -39,15 +38,10 @@ const [offset,setOffset]=useState(0)
 
    const response= await apiJobs.request(endpoint)
             
-if(response.status!=200){
- 
-    
-   return console.log("error while retrieve"+response.data)
-   }
-   console.log(response.data)
+if(response.status!=200)
+ return console.log("error while retrieve"+response.data)
 if(!count)
 setCount(response.data.count)
-setData(response.data.results)
 
  
   }
@@ -55,11 +49,8 @@ setData(response.data.results)
 
     const response= await apiPositions.request('position_types/')
              
-    if(response.status!=200){
-  
-     
+    if(response.status!=200)
     return console.log("error while  retrieve"+response.data)
-    }
     setPositions(response.data.results)
  
   
@@ -132,7 +123,7 @@ setData(response.data.results)
               profession: "Profession",
               
           }}
-          td={apiJobs.data.results}
+          td={apiJobs.data}
           link={"/client/active-job/"}
           btnName="Detail"
           btnSize="small"

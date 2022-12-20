@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { Box, Toolbar, Typography, CssBaseline, Paper } from "@mui/material";
+import { Box, Typography, CssBaseline, Paper } from "@mui/material";
 import apiClient from "../../api/apiClient";
+import { trimDate } from "../../components/trimDate";
 import { PopupFeedback, TableMui } from "../../components/mui";
-import { trimDates } from "../../components/trimDate";
 
-export default function () {
+export default function() {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
   const [open, setOpen] = useState(false);
   const [activeJobData, setActiveJobData] = useState(true);
@@ -14,10 +13,14 @@ export default function () {
 
   const fetchJobDetail = async () => {
     const {
-      data: { results },
-    } = await apiClient.get(`jobs/${id}/applications/`);
-    const updatedData = trimDates(results, "applied_at");
-    setActiveJobDetail(updatedData);
+      data,
+    } = await apiClient.get(`jobs/${id}/employements/`);
+    const afterTrimming = trimDate(data, "starting_date");
+    if (!afterTrimming) {
+      setOpen(true);
+      setActiveJobData(false);
+    }
+    afterTrimming && setActiveJobDetail([afterTrimming]);
   };
 
   useEffect(() => {
@@ -34,17 +37,19 @@ export default function () {
             <TableMui
               styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
               th={{
-                sr: "No.",
-                applied_at: "Date",
-                candidate_name: "Candidate",
-                email: "Email Address",
-                // skills: "Skills",
-                location: "Location",
-                id: "Action",
+                "starting_date": "Starting Date",
+                "candidate": "Candidate",
+                "email": "Email",
+                "phone": "Phone",
+                "location": "Location",
+                "social_security_number": "Social Security Number",
+                "driver_license": "Driver License",
+                "professional_license_verification": "Professional License Verification",
+                "bill_rate": "Bill Rate",
+                "compliance_per_agency": "Compliance Per Agency",
+                "submitals_per_agency": "Submittals Per Agency"
               }}
               td={activeJobDetail}
-              link={"/admin/new-job/assign/"}
-              btnName="Assign"
             />
           </Box>
         ) : (
@@ -59,6 +64,6 @@ export default function () {
           content={`Details haven't recieved yet!`}
           isOpen={open}
         />
-      </>
+    </>
   );
 }

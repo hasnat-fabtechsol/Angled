@@ -15,7 +15,7 @@ export default function(){
   const [count,setCount]=useState(0)
   
   
-  const {data,request}=useApi((endpoint)=>apiClient.get(endpoint))
+  const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
   const [offset,setOffset]=useState(0)
   
   let Endpoint = `employments/?limit=${limit}&offset=`;
@@ -26,14 +26,11 @@ export default function(){
   
    const response= await request(endpoint)
             
-  if(response.status!=200){
-  
-    
-   return console.log("error while retrieve"+response.data)
-   }
+   if(error)
+   return console.log("error while retrieve")
    console.log(response.data)
   if(!count)
-  setCount(data.count)
+  setCount(response.data.count)
   
   
   }
@@ -68,7 +65,7 @@ export default function(){
             submitals_per_agency: "Submittal",
             compliance_per_agency: "Compliance",
            }}
-           td={data.results}
+           td={data}
            link={"/client/active-job/"}
            btnName="Detail"
            btnSize="small"

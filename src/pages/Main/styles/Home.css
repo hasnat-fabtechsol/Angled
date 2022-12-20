@@ -29,6 +29,9 @@
 .bi-arrow-right-circle{
   font-size: 20px;
 }
+.bi-arrow-left-circle{
+  font-size: 20px;
+}
 .form-poster{
     min-height: 90vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home/background.png);
