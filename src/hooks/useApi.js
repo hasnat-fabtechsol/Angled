@@ -10,7 +10,6 @@ const useApi = (apiFunc) => {
     setLoading(false);
     setError(response.status!=200);
     setData(response.data.results);
-    console.log(response.data.results);
     return response;
   };
 

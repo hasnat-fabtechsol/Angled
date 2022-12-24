@@ -24,6 +24,9 @@ import CurrentlyWorkingDetail from './pages/client/CurrentlyWorkingDetail';
 import CreateInvoice from './pages/admin/CreateInvoice';
 import BlogsDashboard from './pages/admin/BlogsDashboard';
 import BlogDetail from './pages/Main/BlogDetail';
+import Blog from './pages/admin/Blog';
+import BlogEdit from './pages/Main/Editor';
+import InvoiceDetail from './pages/admin/InvoiceDetail';
 
 function App() {
 
@@ -32,10 +35,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="test" element={<BlogEdit />} />
         <Route path='/' element={<Layout/>}>
 
           <Route index element={<Home />} />
         <Route path="about-us" element={<AboutUs />} />
+        
           <Route path="jobs" element={<Jobs />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="blogs" element={<Blogs />} />
@@ -74,10 +79,13 @@ function App() {
           <Route index path='/admin/dashboard' element={<AdminDashboard /> }/>
           <Route path='/admin/new-job' element={<NewJob />} />
           <Route path='/admin/blogs' element={<BlogsDashboard />} />
+          <Route path='/admin/blog/add-new' element={<Blog />} />
+          <Route path='/admin/blog/edit/:id' element={<Blog />} />
           <Route path='/admin/blog/detail/:id' element={<BlogDetail />} />
           <Route path='/admin/invoices' element={<Invoices />} />
           <Route path='/admin/new-job/:id' element={<JobDetail />} />
           <Route path='/admin/active-job/:id' element={<ActiveJobDetail />} />
+          <Route path='/admin/invoice/:id' element={<InvoiceDetail />} />
           <Route path='/admin/active-job/invoice/:id' element={<CreateInvoice />} />
           <Route path='/admin/new-job/assign/:id' element={<AssignJob />} />
           <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />

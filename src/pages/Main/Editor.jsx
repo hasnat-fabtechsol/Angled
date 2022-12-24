@@ -1,5 +1,5 @@
 import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertFromRaw,convertToRaw ,EditorState} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -27,10 +27,32 @@ const [editorState,setEditorState]=useState(EditorState.createEmpty())
     <Editor
     //   toolbarHidden
   
-  wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-  
-
+    wrapperClassName="wrapper-class"
+  editorClassName="editor-class"
+  toolbarClassName="toolbar-class"
+  toolbar={{
+    inline: { inDropdown: true },
+    list: { inDropdown: true },
+    textAlign: { inDropdown: true },
+    link: { inDropdown: true },
+    history: { inDropdown: true },
+    image: {
+      className: undefined,
+      component: undefined,
+      popupClassName: undefined,
+      urlEnabled: true,
+      uploadEnabled: true,
+      alignmentEnabled: true,
+      uploadCallback: undefined,
+      previewImage: false,
+      inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+      alt: { present: false, mandatory: false },
+      defaultSize: {
+        height: '400',
+        width: '400',
+      },
+    }
+  }}
     editorState={editorState}
     onEditorStateChange={setEditorState}
   />

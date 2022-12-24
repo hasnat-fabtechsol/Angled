@@ -1,4 +1,4 @@
-import {  Paper, Typography } from '@mui/material';
+import {  Paper, Typography,Button } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, {  useState } from 'react';
 import {AdminButton, TableMui} from '../../components/mui';
@@ -56,6 +56,12 @@ const BlogsDashboard=()=>{
     navigate('/admin/blog/detail/'+item.id,{state:item});
       
     }
+  const blogEdit=(item)=>{
+   
+
+    navigate('/admin/blog/edit/'+item.id,{state:item});
+      
+    }
     const handleDelete= async (id)=>{
         
      const response= await apiClient.delete(`blog/${id}/`)
@@ -75,12 +81,10 @@ const BlogsDashboard=()=>{
                               name="Detail"
                             
                             />
-      <Link to={"/admin/blogs/edit/"+item.id}>
-      <AdminButton
+      <AdminButton onClick={()=>blogEdit(item)}
                               name="Edit"
                             
                             />
-                            </Link>
      
       <AdminButton className="btn btn-danger" style={{backgroundColor:'red'}} onClick={()=>handleDelete(item.id)}
                               name="Delete"
@@ -93,6 +97,10 @@ const BlogsDashboard=()=>{
       return (
     
         <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
+         <AdminButton onClick={()=>navigate('/admin/blog/add-new/')}
+                              name="Add New"
+                            
+                            />
         <Typography variant="h5" sx={{ marginBottom: "10px" }}>
       Blogs
         </Typography>
