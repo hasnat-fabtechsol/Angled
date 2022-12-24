@@ -1,8 +1,45 @@
 import { Toolbar } from '@mui/material'
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import apiClient from '../../api/apiClient'
+import { trimDates } from '../../components/trimDate'
+import useApi from '../../hooks/useApi'
 import './styles/blogs.css'
-
+let limit=10
 export default function Blogs() {
+
+  const [count,setCount]=useState(0)
+  const [blogs,setBlogs]=useState([])
+  
+  const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
+  const [offset,setOffset]=useState(0)
+  const navigate = useNavigate();
+  let Endpoint = `blogs/?limit=${limit}&offset=`;
+  useEffect(()=>{
+    fetchData(Endpoint+offset)
+  },[])
+  const fetchData = async (endpoint) => {
+  
+   const response= await request(endpoint)
+   if(error)
+   return console.log("error while retrieve")
+  if(!count)
+  setCount(response.data.count)
+  const afterTrimming = trimDates(response.data.results, "created_at");
+ 
+  afterTrimming && setBlogs(afterTrimming);
+  console.log(afterTrimming);
+  
+  }
+
+  const blogDetail=(item)=>{
+   
+
+  navigate('/blog/detail/'+item.id,{state:item});
+    
+  }
   return (
     <div>
        <Toolbar/>
@@ -18,13 +55,42 @@ export default function Blogs() {
     </div>
     <div className="container">
       <div className="row">
-        <div className="col-lg-4 col-md-6 mb-4">
+        {blogs.map(item=>(
+ <div className="col-lg-4 col-md-6 mb-4"  onClick={()=>blogDetail(item)}>
+ <div className="card">
+   <img className="card-img-top" src={item.image} alt="Card image" style={{width: '100%'}} />
+   <div className="card-body">
+     <div className="d-flex">
+       <div className="blog_profile_img">
+         <img src={require("../../assests/Blogs/blog_img.png")}  className="img-fluid rounded-circle h-100 w-100" alt="" />
+       </div>
+       <div className="my-auto mx-2">
+         <h6 className="mb-0">{item.author}</h6>
+       </div>
+       <div className="my-auto">
+         <p className="mb-0">{item.created_at}</p>
+       </div>
+     </div>
+     <h5 className="card-title">{item.title}</h5>
+     <div id="section">
+       <div className="article">
+         <p className="mb-0 fs_12">{item.description}</p>
+       </div>
+       <button type="button" className="btn btn-link moreless-button" onClick={()=>blogDetail(item)}>Read more</button>
+     </div>
+   </div>
+ </div>
+        
+       
+        </div>
+        ))}
+        {/* <div className="col-lg-4 col-md-6 mb-4">
           <div className="card">
             <img className="card-img-top" src={require("../../assests/Blogs/blog_img.png")} alt="Card image" style={{width: '100%'}} />
             <div className="card-body">
               <div className="d-flex">
                 <div className="blog_profile_img">
-                  <img src={require("../../assests/Blogs/blog_img.png")}  className="img-fluid rounded-circle h-100 w-100" alt="" />
+                  <img src={require("../../assests/Blogs/blog_img.png")} className="img-fluid rounded-circle h-100 w-100" alt="" />
                 </div>
                 <div className="my-auto mx-2">
                   <h6 className="mb-0">Ashley Tran</h6>
@@ -77,37 +143,7 @@ export default function Blogs() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4">
-          <div className="card">
-            <img className="card-img-top" src={require("../../assests/Blogs/blog_img.png")} alt="Card image" style={{width: '100%'}} />
-            <div className="card-body">
-              <div className="d-flex">
-                <div className="blog_profile_img">
-                  <img src={require("../../assests/Blogs/blog_img.png")} className="img-fluid rounded-circle h-100 w-100" alt="" />
-                </div>
-                <div className="my-auto mx-2">
-                  <h6 className="mb-0">Ashley Tran</h6>
-                </div>
-                <div className="my-auto">
-                  <p className="mb-0">September 14, 2022</p>
-                </div>
-              </div>
-              <h5 className="card-title">5 Ways to Become a Successful Travel Nurse</h5>
-              <div id="section">
-                <div className="article">
-                  <p className="mb-0 fs_12">Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                  <p className=" fs_12 moretext" style={{display: 'none'}}>Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                </div>
-                <button type="button" className="btn btn-link moreless-button">Read more</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> */}
       </div>
     </div>
     {/* same_javascrept_in_about_us_and_this_page */}

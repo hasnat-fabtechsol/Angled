@@ -36,6 +36,7 @@ function AdminSideNav(props) {
     { label: "Dashboard", icon: <DashboardIcon />, link: "/admin/dashboard" },,
     { label: "New Job", icon: <AddBoxIcon />, link: "/admin/new-job" },
     { label: "Invoices", icon: <ReceiptIcon />, link: "/admin/invoices" },
+    { label: "Blogs", icon: <ReceiptIcon />, link: "/admin/blogs" },
   ];
 
   const drawer = (

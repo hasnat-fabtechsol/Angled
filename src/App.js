@@ -21,6 +21,9 @@ import AddNew from './pages/client/AddNew';
 import AssignJob from './pages/admin/AssignJob';
 import ActiveSubmittalDetail from './pages/client/ActiveSubmittalDetail';
 import CurrentlyWorkingDetail from './pages/client/CurrentlyWorkingDetail';
+import CreateInvoice from './pages/admin/CreateInvoice';
+import BlogsDashboard from './pages/admin/BlogsDashboard';
+import BlogDetail from './pages/Main/BlogDetail';
 
 function App() {
 
@@ -36,6 +39,7 @@ function App() {
           <Route path="jobs" element={<Jobs />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="blogs" element={<Blogs />} />
+          <Route path="blog/detail/:id" element={<BlogDetail />} />
 
           <Route path="jobs/apply-now/:id" element={<ApplyNow />} />
         
@@ -69,9 +73,12 @@ function App() {
          </ProtectedRoute>}>
           <Route index path='/admin/dashboard' element={<AdminDashboard /> }/>
           <Route path='/admin/new-job' element={<NewJob />} />
+          <Route path='/admin/blogs' element={<BlogsDashboard />} />
+          <Route path='/admin/blog/detail/:id' element={<BlogDetail />} />
           <Route path='/admin/invoices' element={<Invoices />} />
           <Route path='/admin/new-job/:id' element={<JobDetail />} />
           <Route path='/admin/active-job/:id' element={<ActiveJobDetail />} />
+          <Route path='/admin/active-job/invoice/:id' element={<CreateInvoice />} />
           <Route path='/admin/new-job/assign/:id' element={<AssignJob />} />
           <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
@@ -81,5 +88,4 @@ function App() {
 }
 
 export default App;
-
 

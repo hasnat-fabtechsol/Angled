@@ -17,6 +17,7 @@ export default function TableMui({
   btnName,
   btnSize,
   btnStyle,
+  customBtn
 }) {
   return (
     <TableContainer>
@@ -31,6 +32,9 @@ export default function TableMui({
                 </TableCell>
               );
             })}
+             {customBtn&&<TableCell  align="center" sx={styleTableTh}>
+                 Action
+                </TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,6 +63,9 @@ export default function TableMui({
                   </TableCell>
                 );
               })}
+                 {customBtn&&<TableCell  align="center">
+                   {customBtn(row)}
+                  </TableCell>}
             </TableRow>
           ))}
         </TableBody>

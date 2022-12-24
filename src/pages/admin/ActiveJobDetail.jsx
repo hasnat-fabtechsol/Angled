@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Box, Toolbar, Typography,Paper } from "@mui/material";
 import { trimDate } from "../../components/trimDate";
 import apiClient from "../../api/apiClient";
-import { PopupFeedback ,TableMui} from "../../components/mui";
+import { AdminButton, PopupFeedback ,TableMui} from "../../components/mui";
 
 export default function () {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
@@ -41,6 +41,7 @@ export default function () {
                 email: "Email Address",
                 location: "Location",
               }}
+              customBtn={()=>btn(id)}
               td={activeJobDetail}
             />
           </Box>
@@ -59,3 +60,15 @@ export default function () {
       </>
   );
 }
+const btn=(id)=>{
+  return (
+  <>
+  <Link to={"/admin/active-job/invoice/"+id}>
+  <AdminButton
+                          name="Create Invoice"
+                        
+                        />
+                        </Link>
+  </>
+  );
+  }

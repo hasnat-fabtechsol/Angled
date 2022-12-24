@@ -1,7 +1,10 @@
 function trimDate(originalData, dateTrimProperty) {
+  console.log(originalData);
+  console.log(dateTrimProperty)
   if (!originalData) return;
   const cloneData = { ...originalData };
   const date = cloneData[dateTrimProperty];
+  console.log(date);
   cloneData[dateTrimProperty] = date.split("T")[0];
   return cloneData;
 }
