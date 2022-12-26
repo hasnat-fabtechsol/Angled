@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import { Outlet, Link, NavLink } from "react-router-dom";
 import AuthContext from '../auth/auth-context';
 
@@ -7,12 +7,17 @@ import './styles/Layout.css'
 const Layout = () => {
   const auth = useContext(AuthContext);
   const [formEnable, setFormEnable] = useState(false);
-  console.log(typeof(auth.userType));
+  const ref = useRef(null);
+  const [height, setHeight] = useState(0);
+  useLayoutEffect(() => {
+    setHeight(ref.current.clientHeight);
+  }, []);
+
 
 return (
 
 <>
-  <nav className="navbar navbar-expand-lg navbar-dark bg-transparent  fixed-top  custom-navbar navbar-flow ">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-transparent  fixed-top  custom-navbar navbar-flow " ref={ref}>
     <div className="container-fluid mx-sm-5 ">
       <Link className="navbar-brand" to="/" >
       <img src={require("../assests/logo.png")} className="img-fluid" style={{ borderRadius: '8px', width: '13rem' }} />
@@ -83,7 +88,10 @@ return (
       </div>
     </div>
   </nav>
+  <div style={{marginTop:height}}>
+
   <Outlet context={{formEnable,setFormEnable}} />
+  </div>
 
   
   <footer class=" text-white p-md-4 p-2">

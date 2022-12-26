@@ -54,7 +54,7 @@ const handlePageChange = (event,value) => {
 return (
 
   <div>
-  <div className="container">
+  <div className="container py-5">
     <div className="row my-5">
       <div className="col-md-6">
         <h5 className="text-primary text-md-start text-center mb-5 mb-md-0">Job Specialty 1</h5>

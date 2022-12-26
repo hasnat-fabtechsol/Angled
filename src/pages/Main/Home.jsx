@@ -26,16 +26,16 @@ function Home(props) {
 
   return (
     <div>
-      <div className="">
+      <div className="position-relative">
         <div
           id="carouselExampleSlidesOnly"
           class="carousel slide"
           data-bs-ride="carousel"
         >
           <div class="carousel-inner">
-            <div class="carousel-item home-poster active">image 1</div>
-            <div class="carousel-item cpr">image 2</div>
-            <div class="carousel-item facebook">image 3</div>
+            <div class="carousel-item home-poster active"></div>
+            <div class="carousel-item cpr"></div>
+            <div class="carousel-item facebook"></div>
           </div>
           <button
             class="carousel-control-prev"
@@ -61,8 +61,7 @@ function Home(props) {
           </button>
         </div>
 
-        <div className="z_index w-100">
-          <Toolbar />
+        <div className="position-absolute w-100 " style={{top:0}}>
           <div className="d-lg-flex justify-content-between  mb-5 align-items-center  px-5">
             <div class="text-center ms-lg-5 ms-sm-3 ms-2">
               <h1 class="font50px text-white mb-4">

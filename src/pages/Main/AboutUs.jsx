@@ -5,29 +5,28 @@ function AboutUs(props) {
     const [text,setText]=useState(false)
 return (
     <div>
-    &lt;&gt;
-    <div className="container-fluid">
+    <div className="container-fluid py-5">
       <div className="row">
         <div className="col">
           <div className="container gap-3">
             <div className="row">
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_1.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_1.png")} className="OurPartner_style" alt="" />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_2.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_2.png")} className="OurPartner_style" alt="" />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_3.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_3.png")} className="OurPartner_style" alt="" />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_4.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_4.png")} className="OurPartner_style" alt="" />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_5.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_5.png")} className="OurPartner_style" alt="" />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src="./OurPartner_6.png" className="OurPartner_style" alt="" />
+                <img src={require("../../assests/ContactUs/OurPartner_6.png")} className="OurPartner_style" alt="" />
               </div>
               {/* <div class="about_background m-3 px-5">
           <img src="./about_background_img.png" class="img-fluid" alt="">

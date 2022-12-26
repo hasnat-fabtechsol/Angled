@@ -41,9 +41,7 @@ export default function Blogs() {
     
   }
   return (
-    <div>
-       <Toolbar/>
-  <Toolbar/>
+    <div className='py-5'>
     <div className="container-fluid">
       <div className="row back_img my-3 mx-0 mx-sm-4">
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">

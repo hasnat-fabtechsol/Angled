@@ -38,9 +38,7 @@ export default function ApplyNow() {
 
   return (
     <div>
-      <Toolbar/>
-      <Toolbar/>
-  <div className="container-fluid">
+  <div className="container-fluid py-5">
     <div className="row back_img my-3 mx-0 mx-sm-4">
       <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">
         <h1 className="Hfs_16">BROWSE JOBS BY <br />SPECIALITY</h1>
