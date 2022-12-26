@@ -1,12 +1,15 @@
 import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
-import { Outlet, Link, NavLink } from "react-router-dom";
+import { isMobile } from 'react-device-detect';
+import { Outlet, Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from '../auth/auth-context';
 
 import './styles/Layout.css'
 
 const Layout = () => {
   const auth = useContext(AuthContext);
+  const navigate=useNavigate()
   const [formEnable, setFormEnable] = useState(false);
+  const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
   useLayoutEffect(() => {
@@ -72,12 +75,22 @@ return (
 
 
 
- <button onClick={()=>setFormEnable(false)} class="web-btn clr-white bg-transparent ">Login</button>
+ <button onClick={()=>{
+  if(isMobile)
+  setOpen(true)
+  navigate('/')
+  setFormEnable(false)
+  
+  }} class="web-btn clr-white bg-transparent ">Login</button>
 
 </div>
 <div className="col-lg-6   text-white">
 
- <button onClick={()=>setFormEnable(true)} class="btn-nav bg-blue clr-white "
+ <button onClick={()=>{
+  if(isMobile)
+  setOpen(true)
+   navigate('/')
+  setFormEnable(true)}} class="btn-nav bg-blue clr-white "
   style={{ background: '#A98C4D' }}>Get Started</button>
 </div>
   </>}
@@ -90,7 +103,7 @@ return (
   </nav>
   <div style={{marginTop:height}}>
 
-  <Outlet context={{formEnable,setFormEnable}} />
+  <Outlet context={{open,setOpen,formEnable,setFormEnable}} />
   </div>
 
   

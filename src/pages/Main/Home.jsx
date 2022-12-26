@@ -13,14 +13,15 @@ import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import AuthContext from "../../auth/auth-context";
-import { AdminButton, SelectOption } from "../../components/mui";
+import { AdminButton, PopupFeedback, SelectOption } from "../../components/mui";
 import colors from "../../config/colors";
 import IsHospital from "../../hooks/IsHospital";
 import useApi from "../../hooks/useApi";
+import {isMobile} from 'react-device-detect';
 import "./styles/Home.css";
 function Home(props) {
   const auth = useContext(AuthContext);
-  const { formEnable, setFormEnable } = useOutletContext();
+  const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
 
   const [speciality, setSpeciality] = useState("Choose Speciality");
 
@@ -128,7 +129,11 @@ function Home(props) {
               </Stack>
             </div>
             <div className="text-center ms-lg-5 ms-sm-3 ms-2">
-              {!formEnable ? (
+              {isMobile?<MobileContent formEnable={formEnable}
+              open={open}
+              setOpen={setOpen}
+                  setFormEnable={setFormEnable}
+                  auth={auth}/>:!formEnable ? (
                 <LogIn
                   formEnable={formEnable}
                   setFormEnable={setFormEnable}
@@ -482,7 +487,7 @@ function Home(props) {
 
 export default Home;
 
-function LogIn({ formEnable, setFormEnable }) {
+function LogIn({setOpen, formEnable, setFormEnable }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { request } = useApi((data) => apiClient.post("/login/", data));
@@ -500,6 +505,8 @@ function LogIn({ formEnable, setFormEnable }) {
     if (result.status != 200) return setError(true);
     const userType = await IsHospital(result.data.token);
     auth.login(result.data.token, userType ? userType : false);
+    if(isMobile)
+    setOpen(false)
     navigate("/");
   }
 
@@ -824,4 +831,34 @@ function SignUp({ formEnable, setFormEnable }) {
       )}
     </Container>
   );
+}
+
+
+function MobileContent({auth,open,setOpen,formEnable, setFormEnable }){
+
+  
+  return(
+
+    <PopupFeedback
+    title="Account"
+    content={!formEnable?
+      <LogIn
+      formEnable={formEnable}
+      setFormEnable={setFormEnable}
+      auth={auth}
+      setOpen={setOpen}
+    />
+   : 
+    <SignUp
+      formEnable={formEnable}
+      setFormEnable={setFormEnable}
+      auth={auth}
+      setOpen={setOpen}
+
+    />}
+    isOpen={open}
+    />
+  
+  )
+
 }
