@@ -12,6 +12,7 @@ let limit=10
 const BlogsDashboard=()=>{
     const [count,setCount]=useState(0)
     const [blogs,setBlogs]=useState()
+    const [loading, setLoading] = useState(false);
     
     const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ const BlogsDashboard=()=>{
       fetchData(Endpoint+offset)
     },[])
     const fetchData = async (endpoint) => {
-    
+      setLoading(true)
      const response= await request(endpoint)
      if(error)
      return console.log("error while retrieve")
@@ -31,6 +32,7 @@ const BlogsDashboard=()=>{
     const afterTrimming = trimDates(response.data.results, "created_at");
    
     afterTrimming && setBlogs(afterTrimming);
+    setLoading(false)
     
     
     }
@@ -79,15 +81,18 @@ const BlogsDashboard=()=>{
       <div className='d-flex gap-3 justify-content-center'>
       <AdminButton onClick={()=>blogDetail(item)}
                               name="Detail"
+                             
                             
                             />
       <AdminButton onClick={()=>blogEdit(item)}
                               name="Edit"
-                            
+                              style={{  backgroundColor: "#b09150",
+                              "&:hover": { backgroundColor: "#c9a55a" }}}
                             />
      
-      <AdminButton className="btn btn-danger" style={{backgroundColor:'red'}} onClick={()=>handleDelete(item.id)}
+      <AdminButton className="btn btn-danger" style={{backgroundColor:'red',"&:hover": { backgroundColor: "#e32636" }}} onClick={()=>handleDelete(item.id)}
                               name="Delete"
+                            
                             
                             />
       </div>
@@ -108,6 +113,7 @@ const BlogsDashboard=()=>{
           <Box>
             <TableMui
               styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+              loading={loading}
               th={{
                 title: "Title",
                     description: "Description",

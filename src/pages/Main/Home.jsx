@@ -4,7 +4,6 @@ import {
   Container,
   Grid,
   TextField,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
@@ -19,15 +18,18 @@ import IsHospital from "../../hooks/IsHospital";
 import useApi from "../../hooks/useApi";
 import {isMobile} from 'react-device-detect';
 import "./styles/Home.css";
+import LoadingOverlay, { LoadingOverlaySmall } from "../../components/mui/LoadingOverlay";
 function Home(props) {
   const auth = useContext(AuthContext);
   const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
+  const [loading,setLoading]=useState(false)
 
   const [speciality, setSpeciality] = useState("Choose Speciality");
 
   return (
     <div>
       <div className="position-relative">
+      <LoadingOverlay open={loading}/>
         <div
           id="carouselExampleSlidesOnly"
           class="carousel slide"
@@ -487,19 +489,19 @@ function Home(props) {
 
 export default Home;
 
-function LogIn({setOpen, formEnable, setFormEnable }) {
+function LogIn({setOpen, formEnable, setFormEnable}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { request } = useApi((data) => apiClient.post("/login/", data));
   const [error, setError] = useState();
-
+  const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+setLoading(true)
     console.log("sending data...................................");
     const result = await request({ username: email, password: password });
     if (result.status != 200) return setError(true);
@@ -507,6 +509,7 @@ function LogIn({setOpen, formEnable, setFormEnable }) {
     auth.login(result.data.token, userType ? userType : false);
     if(isMobile)
     setOpen(false)
+    setLoading(false)
     navigate("/");
   }
 
@@ -590,7 +593,7 @@ function LogIn({setOpen, formEnable, setFormEnable }) {
                 </Grid>
               </Grid>
 
-              <AdminButton
+            { !loading? <AdminButton
                 name="Login"
                 type="submit"
                 size="large"
@@ -602,7 +605,8 @@ function LogIn({setOpen, formEnable, setFormEnable }) {
                   mt: 3,
                   mb: 2,
                 }}
-              />
+              />: <LoadingOverlaySmall open={loading}/>}
+              
               <Grid container justifyContent="space-around">
                 <Grid item>
                   <Button onClick={() => setFormEnable(!formEnable)}>
@@ -625,12 +629,15 @@ function SignUp({ formEnable, setFormEnable }) {
   const [confirmPassword, setConfirmPassword] = useState();
   const [phone, setPhone] = useState();
   const [success, setSuccess] = useState();
+
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const { request } = useApi((data) => apiClient.post("/register/", data));
   const auth = useContext(AuthContext);
   async function handleSubmit(e) {
     e.preventDefault();
     resetErrors();
+    setLoading(true)
     if (password !== confirmPassword) return;
     console.log("sending data...................................");
     const result = await request({
@@ -641,6 +648,7 @@ function SignUp({ formEnable, setFormEnable }) {
       password: password,
     });
     console.log("hello");
+    setLoading(false)
     if (result.status != 200) return setError(true);
     setSuccess(true);
     console.log("Account created succesfully");
@@ -667,6 +675,7 @@ function SignUp({ formEnable, setFormEnable }) {
       className="d-flex align-items-center my-auto"
       style={{ height: 700 }}
     >
+   
       {!auth.isLoggedIn && (
         <Container
           component="main"
@@ -678,6 +687,7 @@ function SignUp({ formEnable, setFormEnable }) {
             borderRadius: 10,
           }}
         >
+        
           <Box
             sx={{
               marginTop: 8,
@@ -691,8 +701,7 @@ function SignUp({ formEnable, setFormEnable }) {
                 component="h1"
                 variant="h5"
                 sx={{ color: colors.primary, fontWeight: "bold" }}
-              >
-                Register Now
+              > Register Now
               </Typography>
               {error ? (
                 <div className={"bg-danger p-1"}>
@@ -802,7 +811,7 @@ function SignUp({ formEnable, setFormEnable }) {
                 </Grid>
               </Grid>
 
-              <AdminButton
+             {!loading? <AdminButton
                 name="Register"
                 type="submit"
                 size="medium"
@@ -814,7 +823,8 @@ function SignUp({ formEnable, setFormEnable }) {
                   mt: 3,
                   mb: 2,
                 }}
-              />
+              />:
+              <LoadingOverlaySmall open={loading}/>}
               <Grid container justifyContent="space-around">
                 <Grid item>
                   <Link

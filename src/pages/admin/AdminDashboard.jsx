@@ -15,7 +15,7 @@ const NewJobs=()=>{
   const [position,setPosition]=useState()
   const [positions,setPositions]=useState([])
   const [count,setCount]=useState(0)
-  
+  const [loading, setLoading] = useState(false);
 
   const apiJobs=useApi((endpoint)=>apiClient.get(endpoint))
   const apiPositions=useApi((endpoint)=>apiClient.get(endpoint))
@@ -29,7 +29,7 @@ const [offset,setOffset]=useState(0)
     fetchPositions()
   },[])
   const fetchNewJobs = async (endpoint) => {
-
+setLoading(true)
    const response= await apiJobs.request(endpoint)
             
    if(apiJobs.error)
@@ -37,6 +37,7 @@ const [offset,setOffset]=useState(0)
    console.log(response.data)
 if(!count)
 setCount(response.data.count)
+setLoading(false)
 
  
   }
@@ -109,6 +110,7 @@ setCount(response.data.count)
       <Box>
         <TableMui
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          loading={loading}
           th={{
               position: "Facility Name",
               location: "Location",
@@ -139,7 +141,7 @@ setCount(response.data.count)
 const CurrentlyWorking=()=>{
 const [count,setCount]=useState(0)
 
-
+const [loading, setLoading] = useState(false);
 const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
 
@@ -148,6 +150,7 @@ useEffect(()=>{
   fetchData(Endpoint+offset)
 },[])
 const fetchData = async (endpoint) => {
+  setLoading(true)
 
  const response= await request(endpoint)
           
@@ -155,7 +158,7 @@ const fetchData = async (endpoint) => {
  return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
-
+setLoading(false)
 
 }
 
@@ -181,11 +184,11 @@ const handlePageChange = (event,value) => {
       <Box>
         <TableMui
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          loading={loading}
           th={{
             position: "Facility Name",
                 location: "Location",
                 unit: "Unit",
-                submitted_by: "Submitted by",
                 shift: "Shift",
                 speciality: "Speciality",
                 profession: "Profession",
