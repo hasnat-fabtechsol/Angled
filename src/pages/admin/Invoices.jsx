@@ -17,6 +17,7 @@ let limit=10
 
 const Invoices=()=>{
   const [count,setCount]=useState(0)
+  const [loading, setLoading] = useState(false);
   
   
   const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
@@ -27,7 +28,8 @@ const Invoices=()=>{
     fetchData(Endpoint+offset)
   },[])
   const fetchData = async (endpoint) => {
-  
+
+  setLoading(true)
    const response= await request(endpoint)
    console.log(response)
             
@@ -35,6 +37,7 @@ const Invoices=()=>{
    return console.log("error while retrieve")
   if(!count)
   setCount(response.data.count)
+  setLoading(false)
   
   
   }
@@ -55,18 +58,17 @@ const Invoices=()=>{
   
       <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
       <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-     Currently Working
+    Invoices
       </Typography>
   
         <Box>
           <TableMui
             styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+            loading={loading}
             th={{
               position: "Facility Name",
                   location: "Location",
                   unit: "Unit",
-                  ending_date: "Starting Date",
-                  ending_date: "Ending Date",
                   shift: "Shift",
                   speciality: "Speciality",
                   profession: "Profession",

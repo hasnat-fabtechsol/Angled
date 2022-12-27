@@ -9,6 +9,7 @@ function trimDate(originalData, dateTrimProperty) {
   return cloneData;
 }
 
+
 const trimDates = (originalData, dateTrimProperty) => {
   if (!originalData) return;
   let cloneData = [...originalData];
@@ -18,5 +19,15 @@ const trimDates = (originalData, dateTrimProperty) => {
   });
   return cloneData;
 };
+const trimDateTimeArray = (originalData, dateTrimProperty) => {
+  if (!originalData) return;
+  let cloneData = [...originalData];
+  cloneData.forEach((singledata) => {
+    let date = singledata[dateTrimProperty];
+    var splitted=date.split("T")
+    singledata[dateTrimProperty] = splitted[0]+" "+splitted[1].split(".")[0];
+  });
+  return cloneData;
+};
 
-export { trimDate, trimDates };
+export { trimDate, trimDates,trimDateTimeArray };

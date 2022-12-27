@@ -51,6 +51,7 @@ const NewJobs=()=>{
   const [position,setPosition]=useState()
   const [positions,setPositions]=useState([])
   const [count,setCount]=useState(0)
+  const [loading, setLoading] = useState(false);
   
 
   const apiJobs=useApi((endpoint)=>apiClient.get(endpoint))
@@ -65,7 +66,7 @@ const [offset,setOffset]=useState(0)
     fetchPositions()
   },[])
   const fetchNewJobs = async (endpoint) => {
-
+    setLoading(true)
    const response= await apiJobs.request(endpoint)
             
 if(response.status!=200)
@@ -73,7 +74,7 @@ return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
 
- 
+setLoading(false)
   }
   const fetchPositions = async () => {
 
@@ -144,6 +145,7 @@ setCount(response.data.count)
       <Box>
         <TableMui
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          loading={loading}
           th={{
               position: "Facility Name",
               location: "Location",
@@ -177,20 +179,21 @@ const [count,setCount]=useState(0)
 
 const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
+const [loading, setLoading] = useState(false);
 
 let Endpoint = `applications/?limit=${limit}&offset=`;
 useEffect(()=>{
   fetchData(Endpoint+offset)
 },[])
 const fetchData = async (endpoint) => {
-
+  setLoading(true)
  const response= await request(endpoint)
           
  if(error)
  return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
-
+setLoading(false)
 
 }
 
@@ -218,6 +221,7 @@ const handlePageChange = (event,value) => {
      <Box>
        <TableMui
          styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+         loading={loading}
          th={{
           candidate_name: "Candidate Name",
           location: "Location",
@@ -257,13 +261,14 @@ const [count,setCount]=useState(0)
 
 const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
+const [loading, setLoading] = useState(false);
 
 let Endpoint = `employments/?limit=${limit}&offset=`;
 useEffect(()=>{
   fetchData(Endpoint+offset)
 },[])
 const fetchData = async (endpoint) => {
-
+  setLoading(true)
  const response= await request(endpoint)
           
  if(error)
@@ -271,7 +276,7 @@ const fetchData = async (endpoint) => {
  console.log(response.data)
 if(!count)
 setCount(response.data.count)
-
+setLoading(false)
 
 }
 
@@ -297,6 +302,7 @@ const handlePageChange = (event,value) => {
       <Box>
         <TableMui
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+          loading={loading}
           th={{
             candidate: "Candidate",
             starting_date: "Starting Date",

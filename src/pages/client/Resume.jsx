@@ -7,6 +7,8 @@ import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import apiClient from '../../api/apiClient';
 import { baseURL } from '../../api/apiClient';
+import { trimDateTimeArray } from '../../components/trimDate';
+import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 let limit=10
 export default function(){
   const [count,setCount]=useState(0)
@@ -14,7 +16,8 @@ export default function(){
 
   const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
-
+const [loading, setLoading] = useState(false);
+const [resumes, setResumes] = useState(null);
   let offsetEndpoint = `&limit=${limit}&offset=`;
   let newJobEndpoint = `resume/?`;
   useEffect(()=>{
@@ -22,14 +25,16 @@ const [offset,setOffset]=useState(0)
     
   },[])
   const fetchNewJobs = async (endpoint) => {
-
+    setLoading(true)
    const response= await request(endpoint)
             
    if(error)
    return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
-
+const afterTrimming = trimDateTimeArray(response.data.results, "created_at");
+afterTrimming && setResumes(afterTrimming);
+setLoading(false)
  
   }
 
@@ -47,7 +52,7 @@ setCount(response.data.count)
   return (
     <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
     <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-   New Jobs
+Resumes
     </Typography>
 
    
@@ -64,17 +69,15 @@ setCount(response.data.count)
                                             <TableCell align="center">Action</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody>
-                                        {data?.map((data, index) => {
-                                            let splitted = data.created_at?.split("T");
+                                  {!loading&&  <TableBody>
+                                        {resumes?.map((data, index) => {
                                             return (
                                                 <TableRow
                                                 key={index}
                                                 // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                     <TableCell component="th" scope="row">
-                                                        <span>{splitted[0]}</span>
-                                                        <span>{splitted[1].split(".")[0]}</span>
+                                                       {data.created_at}
                                                     </TableCell>
                                                     <TableCell align="center">{data.job_post?.position}</TableCell>
                                                     <TableCell align="center">{data.job_post?.location}</TableCell>
@@ -85,14 +88,18 @@ setCount(response.data.count)
                                                         href={`${baseURL}${data.resume_url}`}
                                                         download={`resume-${data.resume?.id}.pdf`} 
                                                         target='_blank'
-                                                        className='btn btn-primary me-3'
+                                                        className='btn text-white me-3'
+                                                        style={{  backgroundColor: "#b09150",
+                                                        "&:hover": { backgroundColor: "#c9a55a" }}}
                                                         >
                                                         Download
                                                     </a>
                                                     <a
                                                         href={`${baseURL}${data.resume_url}`}
                                                         target="_blank"
-                                                        className='btn btn-primary'
+                                                        className='btn text-white'
+                                                        style={{  backgroundColor: "#b09150",
+                                                        "&:hover": { backgroundColor: "#c9a55a" }}}
                                                         >
                                                        View
                                                     </a>
@@ -100,9 +107,10 @@ setCount(response.data.count)
                                                 </TableRow>
                                             );
                                         })}
-                                    </TableBody>
+                                    </TableBody>}
                                 </Table>
                             </TableContainer>
+                           {loading&& <LoadingOverlaySmall open={loading}/>}
    
     </Box>
     <Paginate  count={count} limit={limit} onChange={handlePageChange}/>

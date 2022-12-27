@@ -8,14 +8,17 @@ import apiClient from "../../api/apiClient";
 export default function() {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [activeJobData, setActiveJobData] = useState(true);
   const { id } = useParams();
 
   const fetchJobDetail = async () => {
+    setLoading(true)
     const {
       data: { results },
     } = await apiClient.get(`jobs/${id}/applications/`);
     setActiveJobDetail(results);
+    setLoading(false)
   };
 
   useEffect(() => {
@@ -32,6 +35,7 @@ export default function() {
             </Typography>
             <TableMui
               styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+              loading={loading}
               th={{
                 candidate_name: "Candidate Name",
                 location: "Location",

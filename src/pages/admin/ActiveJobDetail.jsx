@@ -8,10 +8,12 @@ import { AdminButton, PopupFeedback ,TableMui} from "../../components/mui";
 export default function () {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [activeJobData, setActiveJobData] = useState(true);
   const { id } = useParams();
 
   const fetchJobDetail = async () => {
+    setLoading(true)
     const { data } = await apiClient.get(`/jobs/${id}/employements/`);
     const afterTrimming = trimDate(data, "starting_date");
     if (!afterTrimming) {
@@ -19,6 +21,7 @@ export default function () {
       setActiveJobData(false);
     }
     afterTrimming && setActiveJobDetail([afterTrimming]);
+    setLoading(false)
   };
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export default function () {
             </Typography>
             <TableMui
               styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+              loading={loading}
               th={{
                 sr: "No.",
                 starting_date: "Date",

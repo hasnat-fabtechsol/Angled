@@ -17,13 +17,13 @@ export default function(){
   
   const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
   const [offset,setOffset]=useState(0)
-  
+  const [loading, setLoading] = useState(false);
   let Endpoint = `employments/?limit=${limit}&offset=`;
   useEffect(()=>{
     fetchData(Endpoint+offset)
   },[])
   const fetchData = async (endpoint) => {
-  
+    setLoading(true)
    const response= await request(endpoint)
             
    if(error)
@@ -31,7 +31,7 @@ export default function(){
    console.log(response.data)
   if(!count)
   setCount(response.data.count)
-  
+  setLoading(false)
   
   }
   
@@ -53,12 +53,13 @@ export default function(){
       
       <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
       <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-    Active Submissle
+  Reports
       </Typography>
   
        <Box>
          <TableMui
            styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+           loading={loading}
            th={{
             candidate: "Candidate Name",
             starting_date: "Starting Date",

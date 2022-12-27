@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import AdminButton from "./AdminButton";
+import { LoadingOverlaySmall } from "./LoadingOverlay";
 
 export default function TableMui({
   th,
@@ -17,9 +18,10 @@ export default function TableMui({
   btnName,
   btnSize,
   btnStyle,
-  customBtn
+  customBtn,loading
 }) {
   return (
+    <>
     <TableContainer>
       <Table aria-label="simple table">
         <TableHead sx={styleTableThead}>
@@ -37,19 +39,18 @@ export default function TableMui({
                 </TableCell>}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {/* Map the td array of objects */}
+
+  {!loading&&<TableBody>
           {td?.map((row, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              {/* get [array of th object(keys)] to keep sync td with the name of th */}
               {Object.keys(th).map((key, ind) => {
                 return (
                   <TableCell key={ind} align="center">
                     {key === "id" || key === "job_post_id" || key === "job_post" ? (
-                      <Link to={link + row[key]}>
+                      <Link style={{textDecoration:'none'}} to={link + row[key]}>
                         <AdminButton
                           name={btnName}
                           size={btnSize}
@@ -68,8 +69,17 @@ export default function TableMui({
                   </TableCell>}
             </TableRow>
           ))}
-        </TableBody>
+        </TableBody>}
+       
+                 
+              
+          
+             
+        
+ 
       </Table>
     </TableContainer>
+        { loading&&<LoadingOverlaySmall open={loading}/>}
+        </>
   );
 }
