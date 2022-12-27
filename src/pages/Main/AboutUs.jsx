@@ -5,34 +5,84 @@ function AboutUs(props) {
     const [text,setText]=useState(false)
 return (
     <div>
-    <div className="container-fluid py-5">
+      <div className='container-fluid' style={{paddingTop : '4rem'}}>
+      <div className='container'>
+        <div className='row'>
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  {/* <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div> */}
+  
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <div class="carousel-caption">
+        <div className='mb-5'>
+        <h3>The largest and most powerful PRN platform in the industry.  </h3>
+        <p>You have joined one of the area's newest innovative company.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <div class="carousel-caption">
+        <div className='mb-5'>
+        <h3>The largest and most powerful PRN platform in the industry.  </h3>
+        <p>You have joined one of the area's newest innovative company.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <div class="carousel-caption">
+        <div className='mb-5'>
+        <h3>The largest and most powerful PRN platform in the industry.  </h3>
+        <p>You have joined one of the area's newest innovative company.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span><i class="bi bi-chevron-left"></i></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span><i class="bi bi-chevron-right"></i></span>
+  </button>
+</div>
+        </div>
+      </div>
+      </div>
+    <div className="container-fluid" style={{paddingTop : '5rem'}}>
       <div className="row">
         <div className="col">
           <div className="container gap-3">
-            <div className="row">
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_1.png")} className="OurPartner_style" alt="" />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_2.png")} className="OurPartner_style" alt="" />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_3.png")} className="OurPartner_style" alt="" />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_4.png")} className="OurPartner_style" alt="" />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_5.png")} className="OurPartner_style" alt="" />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-                <img src={require("../../assests/ContactUs/OurPartner_6.png")} className="OurPartner_style" alt="" />
-              </div>
-              {/* <div class="about_background m-3 px-5">
-          <img src="./about_background_img.png" class="img-fluid" alt="">
-          <div class="top_left"><h2>The largest and most powerful PRN  platform in the industry.</h2></div>  
-          <div><p>You have joined one of the area’s newest innovative company.</p></div>
-      </div> */}
+            <div className="row table table-responsive">
+              <table className='table-borderless'>
+                <tr className='bottom_border_none'>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_1.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_2.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_3.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_4.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_5.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_6.png")} className="OurPartner_style" alt="" />
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -125,7 +175,7 @@ return (
         </div>
       </div>
     </div>
-    <div className="container-fluid form_bg py-5">
+    <div className="container-fluid form_bg py-5 my-5">
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">

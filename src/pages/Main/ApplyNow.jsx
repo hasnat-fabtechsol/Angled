@@ -55,75 +55,84 @@ export default function ApplyNow() {
       <form className=" col-lg-9 px-sm-0 px-5" onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-sm-6">
+            <label htmlFor="" className='mb-1'>candidate name</label>
             <input type="text" 
              name="candidate_name"
              value={addNew.candidate_name}
              onChange={handleChange}
-            className="form-control mb-3" placeholder="Candidate Name"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Cell Number</label>
             <input type="number" 
             name="phone"
             value={addNew.phone}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Cell Number"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Email Address</label>
             <input type="text"
             name="email"
             value={addNew.email}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Email Address"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Bill Rate</label>
             <input type="number" 
             name="bill_rate"
             value={addNew.bill_rate}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Bill Rate" />
+            className="form-control mb-3" placeholder="" />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Social Security Number</label>
             <input type="number"
             name="social_security_number"
             value={addNew.social_security_number}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Social Security Number"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Driver License or State ID</label>
             <input type="text"
             name="driver_license"
             value={addNew.driver_license}
             onChange={handleChange}
-            className="form-control mb-3" maxlength="8" placeholder="Driver License or State ID"  />
+            className="form-control mb-3" maxlength="8" placeholder=""  />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Professional License Verification</label>
             <input type="text"
             name="professional_license_verification"
             value={addNew.professional_license_verification}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Professional License Verification"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Compliance Per Agency</label>
             <input type="text"
             name="compliance_per_agency"
             value={addNew.compliance_per_agency}
             onChange={handleChange}
-            className="form-control mb-3" placeholder="Compliance Per Agency"  />
+            className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
+          <label htmlFor="" className='mb-1'>Submittal Per Agency</label>
             <input type="text" 
             name="submitals_per_agency"
             value={addNew.submitals_per_agency}
             onChange={handleChange}
-             className="form-control" placeholder="Submittal Per Agency"  />
+             className="form-control" placeholder=""  />
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Send message</button>

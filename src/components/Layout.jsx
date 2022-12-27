@@ -23,11 +23,11 @@ return (
   <nav className="navbar navbar-expand-lg navbar-dark bg-transparent  fixed-top  custom-navbar navbar-flow " ref={ref}>
     <div className="container-fluid mx-sm-5 ">
       <Link className="navbar-brand" to="/" >
-      <img src={require("../assests/logo.png")} className="img-fluid" style={{ borderRadius: '8px', width: '13rem' }} />
+      <img src={require("../assests/logo.png")} className="img-fluid logo_img_size"/>
       </Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
+        <span className=""><i class="bi bi-list"></i></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarColor01">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -111,7 +111,7 @@ return (
     <div class=" container">
       <div className='row'>
         <div className='col d-flex justify-content-between'>
-          <div><img src={require("../assests/logo.png")} className="img-fluid"/></div>
+          <div><img src={require("../assests/logo.png")} className="img-fluid logo_img_size"/></div>
           <div><button className='foot_button_color px-4 py-2' type='button'>Sign Up</button></div>
         </div>
       </div>
@@ -149,8 +149,8 @@ return (
           <div class="col-sm-6  my-auto gx-0 style-none">
             <form>
               <div class="d-flex">
-                <input class="form-control email_color" type="email" name="" placeholder="Email" required/>
-                <button class=" email_color pe-2" type="submit" value="Submit"><img src={require("../assests/send.png")} className="img-fluid"/></button>
+                <input class="form-control email_color email_width" type="email" name="" placeholder="Email" required/>
+                <button class="btn email_color" type="submit" value="Submit"><img src={require("../assests/send.png")} className="img-fluid"/></button>
               </div>
             </form>
             <div class="d-flex mt-4">

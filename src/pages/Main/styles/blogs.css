@@ -9,6 +9,14 @@
 	   color: white;
        border-radius: 15px;
 }
+.text_hidden{
+                        font-size: 12px;
+                          overflow: hidden;
+                          white-space: nowrap;
+                          text-overflow: ellipsis;
+                          width: 200px;
+                          font-weight: 400;
+}
 .Contact_btn{
     border-style: none;
     background-color: #A8CF45;

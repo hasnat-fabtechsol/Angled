@@ -23,8 +23,26 @@
     top: 10px;
     left: 16px;
   } */
+  /* slider */
+  .carousel-caption {
+    position: absolute !important;
+    right: 15% !important;
+    bottom: 5.25rem !important;
+    left: 7% !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+    color: #fff !important;
+    text-align: start !important;
+}
+/* slider end */
   .test{
     border: 2px solid red;
+  }
+  .bottom_border_none{
+    border-style: none !important;
+  }
+  .bottom_border_none td{
+    border-style: none !important;
   }
   .OurPartner_style{
     width: 90px;

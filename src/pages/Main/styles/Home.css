@@ -22,10 +22,10 @@
     background-position:center;
     position: relative;
 }
-.z_index{
+/* .z_index{
   position: absolute;
   top: 0;
-}
+} */
 .bi-arrow-right-circle{
   font-size: 20px;
 }
@@ -39,8 +39,11 @@
     background-position:center;
     position: relative;
 }
+.shadow_style{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .shadow_style:hover{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .icon_height{
     height: 60px;
@@ -129,7 +132,7 @@ font-size: 14px;
   }
   /* Screen larger than 600px? 2 column */
   @media (min-width: 320px) {
-    .cards { grid-template-columns: repeat(1, 1fr); }
+    .cards { grid-template-columns: repeat(2, 1fr); }
   }
   /* Screen larger than 600px? 2 column */
   @media (min-width: 480px) {
@@ -164,33 +167,104 @@ font-size: 14px;
           font-size: 14px;
         }
    }
-
-@media (max-width: 400px) {
-   .font50px{
-    font-size: 0.875rem !important;
-
-   }
-  }
-  @media (max-width: 991px) {
+   @media (max-width: 576px) {
+    .font50px{
+      margin-top: 30px;
+    }
     .home-poster{
-      min-height:200vh;
+      min-height:36vh;
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
       background-size: cover;
       background-position:center;
       position: relative;
   }
   .cpr{
-    min-height: 200vh;
+    min-height: 36vh;
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
       background-size: cover;
       background-position:center;
       position: relative;
   }
   .facebook{
-    min-height: 200vh;
+    min-height: 36vh;
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
       background-size: cover;
       background-position:center;
       position: relative;
   }
+
+   }
+@media (max-width: 400px) {
+  .job_fs_size{
+    font-size: 10px;
+  }
+   .font50px{
+    margin-top: 30px;
+    font-size: 0.875rem !important;
+   }
+   .cards {
+    max-width: 1400px;
+    display: grid;
+    grid-gap: 1rem;
+  }
+   .home-poster{
+    min-height:36vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
+.cpr{
+  min-height: 36vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
+.facebook{
+  min-height: 36vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+    background-size: cover;
+    background-position:center;
+    position: relative;
+}
+.image_style{
+  height: 20px;
+  width: 20px;
+}
+  }
+  @media (max-width: 320px) {
+    .job_fs_size{
+      font-size: 10px;
+    }
+    .cards {
+      max-width: 1400px;
+      display: grid;
+      grid-gap: 1rem;
+    }
+    .home-poster{
+     min-height:36vh;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//background.png);
+     background-size: cover;
+     background-position:center;
+     position: relative;
+ }
+ .cpr{
+   min-height: 36vh;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+     background-size: cover;
+     background-position:center;
+     position: relative;
+ }
+ .facebook{
+   min-height: 36vh;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assests/Home//cpr.png);
+     background-size: cover;
+     background-position:center;
+     position: relative;
+ }
+ .image_style{
+   height: 20px;
+   width: 20px;
+ }
    }

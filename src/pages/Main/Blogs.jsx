@@ -56,20 +56,19 @@ export default function Blogs() {
         {blogs.map(item=>(
  <div className="col-lg-4 col-md-6 mb-4"  onClick={()=>blogDetail(item)}>
  <div className="card">
-   <img className="card-img-top" src={item.image} alt="Card image" style={{width: '100%'}} />
+   <img className="card-img-top" src={item.image} alt="Card image" style={{width: '100%', height: '16rem'}} />
    <div className="card-body">
-     <div className="d-flex">
-       <div className="blog_profile_img">
-         <img src={require("../../assests/Blogs/blog_img.png")}  className="img-fluid rounded-circle h-100 w-100" alt="" />
-       </div>
-       <div className="my-auto mx-2">
-         <h6 className="mb-0">{item.author}</h6>
-       </div>
-       <div className="my-auto">
-         <p className="mb-0">{item.created_at}</p>
-       </div>
+     <div className="d-flex mb-2">
+      <h5 className="card-title">{item.title}</h5>
+      <div className='ms-1' style={{fontSize: '10px'}}>
+        <div className="my-auto mx-2">
+          <div className='text_hidden'><h6 className="mb-0">{item.author}</h6></div>
+        </div>
+        <div className="my-auto ms-2">
+          <p className="mb-0">{item.created_at}</p>
+        </div>
+      </div>
      </div>
-     <h5 className="card-title">{item.title}</h5>
      <div id="section">
        <div className="article">
          <p className="mb-0 fs_12">{item.description}</p>

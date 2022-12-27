@@ -87,7 +87,7 @@ return (
       %20(KPS)!5e0!3m2!1sen!2s!4v1662722146640!5m2!1sen!2s" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
       </div>
     </div>
-    <div className="row mb-4">
+    <div className="row mb-2 mt-5">
       <div className="col-lg-6 col-md-8 text-center text-md-start">
         <p className="fs_18 text-primary">LET'S TALK US</p>
         <h5>Drop A Message</h5>
@@ -95,7 +95,7 @@ return (
           luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
       </div>
     </div>
-    <div className="row">
+    <div className="row mb-5">
       <div className="col-md-4 d-flex justify-content-center justify-content-md-start ">
         <div className=" d-flex">
           <div>

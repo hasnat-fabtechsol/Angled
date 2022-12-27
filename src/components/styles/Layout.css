@@ -8,6 +8,10 @@
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 }
+.logo_img_size{
+  border-radius: 8px;
+  width: 13rem;
+}
 .style-none a{
     text-decoration: none;
     color: black;
@@ -17,6 +21,9 @@
     /* background-color: #111D32; */
     border-style: none;
     color: black;
+  }
+  .email_width{
+    width: 60% !important;
   }
   .text-upper_case{
     font-size: 12px;
@@ -34,5 +41,13 @@
 }
 .nav-color{
   color: #a8cf45;
+}
+@media (max-width: 576px) {
+  .email_width{
+    width: 100% !important;
+  }
+  .logo_img_size{
+    width: 10rem;
+  }
 }
 

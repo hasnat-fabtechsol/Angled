@@ -65,7 +65,7 @@ function Home(props) {
         <div className="position-absolute w-100 " style={{top:0}}>
           <div className="d-lg-flex justify-content-between  mb-5 align-items-center  px-5">
             <div class="text-center ms-lg-5 ms-sm-3 ms-2">
-              <h1 class="font50px text-white mb-4">
+              <h1 class="font50px text-white mb-4 mt-sm-0 ">
                 BROWSE JOBS BY <br />
                 SPECIALITY{" "}
               </h1>
@@ -162,7 +162,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 1</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 1</h6>
                 </div>
               </div>
               <div class="card ">
@@ -171,7 +171,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 2</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 2</h6>
                 </div>
               </div>
               <div class="card ">
@@ -180,7 +180,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 3</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 3</h6>
                 </div>
               </div>
               <div class="card ">
@@ -189,7 +189,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 4</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 4</h6>
                 </div>
               </div>
               <div class="card ">
@@ -198,7 +198,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 5</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 5</h6>
                 </div>
               </div>
               <div class="card ">
@@ -207,7 +207,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 6</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 6</h6>
                 </div>
               </div>
               <div class="card ">
@@ -216,7 +216,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 7</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 7</h6>
                 </div>
               </div>
               <div class="card ">
@@ -225,7 +225,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 8</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 8</h6>
                 </div>
               </div>
               <div class="card ">
@@ -234,7 +234,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 9</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 9</h6>
                 </div>
               </div>
               <div class="card ">
@@ -243,7 +243,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 10</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 10</h6>
                 </div>
               </div>
               <div class="card ">
@@ -252,7 +252,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 11</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 11</h6>
                 </div>
               </div>
               <div class="card ">
@@ -261,7 +261,7 @@ function Home(props) {
                     className="image_style"
                     src={require("../../assests/Home/speciality.png")}
                   />
-                  <h6 class="my-auto ms-2">Job speciality 12</h6>
+                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 12</h6>
                 </div>
               </div>
             </div>
@@ -376,7 +376,7 @@ function Home(props) {
                 text commonly used to demonstrate the visual form of a document
                 or a typeface without relying on meaningful content.
               </p>
-              <button className="btn btn-primary" type="button">
+              <button className="btn btn-primary mb-md-0 mb-4" type="button">
                 Get Started{" "}
               </button>
             </div>
