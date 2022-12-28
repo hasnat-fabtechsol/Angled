@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
+import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import './styles/Jobs.css'
@@ -17,7 +18,7 @@ function Jobs(props) {
 
 const [count,setCount]=useState(0)
 
-
+const [loading, setLoading] = useState(false);
 const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
 
@@ -27,14 +28,14 @@ useEffect(()=>{
   console.log("called")
 },[])
 const fetchData = async (endpoint) => {
-
+setLoading(true)
  const response= await request(endpoint)
           
 if(error)
 return console.log("error while retrieve")
 if(!count)
 setCount(response.data.count)
-
+setLoading(false)
 
 }
 
@@ -85,7 +86,7 @@ return (
                 
               </tr>
             </thead>
-            <tbody>
+           {!loading&& <tbody>
               {data.map(item=>(
 
 <tr className=" py-2" id="table-color">
@@ -103,8 +104,10 @@ return (
               ))}
         
            
-            </tbody></table>
-
+            </tbody>}
+            
+            </table>
+{loading&&<LoadingOverlaySmall open={loading}/>}
             <Paginate count={count} limit={limit} onChange={handlePageChange}/>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import apiClient from '../../api/apiClient'
+import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay'
 import { trimDates } from '../../components/trimDate'
 import useApi from '../../hooks/useApi'
 import './styles/blogs.css'
@@ -15,13 +16,14 @@ export default function Blogs() {
   
   const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
   const [offset,setOffset]=useState(0)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   let Endpoint = `blogs/?limit=${limit}&offset=`;
   useEffect(()=>{
     fetchData(Endpoint+offset)
   },[])
   const fetchData = async (endpoint) => {
-  
+  setLoading(true)
    const response= await request(endpoint)
    if(error)
    return console.log("error while retrieve")
@@ -31,6 +33,7 @@ export default function Blogs() {
  
   afterTrimming && setBlogs(afterTrimming);
   console.log(afterTrimming);
+  setLoading(false)
   
   }
 
@@ -52,8 +55,10 @@ export default function Blogs() {
       </div>
     </div>
     <div className="container">
-      <div className="row">
-        {blogs.map(item=>(
+     <div className="row">
+    <LoadingOverlaySmall  open={loading}/>
+     {
+       !loading&&blogs.map(item=>(
  <div className="col-lg-4 col-md-6 mb-4"  onClick={()=>blogDetail(item)}>
  <div className="card">
    <img className="card-img-top" src={item.image} alt="Card image" style={{width: '100%', height: '16rem'}} />
@@ -81,69 +86,9 @@ export default function Blogs() {
        
         </div>
         ))}
-        {/* <div className="col-lg-4 col-md-6 mb-4">
-          <div className="card">
-            <img className="card-img-top" src={require("../../assests/Blogs/blog_img.png")} alt="Card image" style={{width: '100%'}} />
-            <div className="card-body">
-              <div className="d-flex">
-                <div className="blog_profile_img">
-                  <img src={require("../../assests/Blogs/blog_img.png")} className="img-fluid rounded-circle h-100 w-100" alt="" />
-                </div>
-                <div className="my-auto mx-2">
-                  <h6 className="mb-0">Ashley Tran</h6>
-                </div>
-                <div className="my-auto">
-                  <p className="mb-0">September 14, 2022</p>
-                </div>
-              </div>
-              <h5 className="card-title">5 Ways to Become a Successful Travel Nurse</h5>
-              <div id="section">
-                <div className="article">
-                  <p className="mb-0 fs_12">Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                  <p className=" fs_12 moretext" style={{display: 'none'}}>Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                </div>
-                <button type="button" className="btn btn-link moreless-button">Read more</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4">
-          <div className="card">
-            <img className="card-img-top" src={require("../../assests/Blogs/blog_img.png")} alt="Card image" style={{width: '100%'}} />
-            <div className="card-body">
-              <div className="d-flex">
-                <div className="blog_profile_img">
-                  <img src={require("../../assests/Blogs/blog_img.png")} className="img-fluid rounded-circle h-100 w-100" alt="" />
-                </div>
-                <div className="my-auto mx-2">
-                  <h6 className="mb-0">Ashley Tran</h6>
-                </div>
-                <div className="my-auto">
-                  <p className="mb-0">September 14, 2022</p>
-                </div>
-              </div>
-              <h5 className="card-title">5 Ways to Become a Successful Travel Nurse</h5>
-              <div id="section">
-                <div className="article">
-                  <p className="mb-0 fs_12">Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                  <p className=" fs_12 moretext" style={{display: 'none'}}>Whether you’re a seasoned travel nurse or brand new to the 
-                    field, you might be looking for a few ways you can thrive as a travel nurse. 
-                    Inside this article we dive into five different.</p>
-                </div>
-                <button type="button" className="btn btn-link moreless-button">Read more</button>
-              </div>
-            </div>
-          </div>
-        </div> */}
+
       </div>
     </div>
-    {/* same_javascrept_in_about_us_and_this_page */}
   </div>
   
   )

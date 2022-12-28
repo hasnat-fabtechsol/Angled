@@ -78,8 +78,14 @@ return (
  <button onClick={()=>{
   if(isMobile)
   setOpen(true)
+  else
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
   navigate('/')
   setFormEnable(false)
+  
   
   }} class="web-btn clr-white bg-transparent ">Login</button>
 
@@ -89,8 +95,14 @@ return (
  <button onClick={()=>{
   if(isMobile)
   setOpen(true)
+  else
+  window.scrollTo({
+   top: 0,
+   behavior: 'smooth',
+ });
    navigate('/')
-  setFormEnable(true)}} class="btn-nav bg-blue clr-white "
+  setFormEnable(true)
+ }} class="btn-nav bg-blue clr-white "
   style={{ background: '#A98C4D' }}>Get Started</button>
 </div>
   </>}
