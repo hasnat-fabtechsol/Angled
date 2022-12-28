@@ -54,9 +54,14 @@ return (
   <div className='container-fluid mb-5' style={{paddingTop : '2rem'}}>
     <div className='row'>
       <div className='col text-center'>
-      <video className='' width="95%" height="350" controls  style={{borderRadius : '15px', border :'1px solid black'}} >
+      <video className='' width="95%" height="350" autoPlay muted  style={{borderRadius : '15px', border :'1px solid black'}} >
       <source src={require("../../assests/Blogs/video.mp4")} type="video/mp4"/>
      </video>
+     <div class="overlay">
+        <h2>Contact Us</h2>
+        <button className='btn Apply'>Sign in to Apply</button>
+        <button className='btn playbtn'><img src={require("../../assests/Blogs/play-circle.png")} /></button>
+    </div>
       </div>
     </div>
   </div>

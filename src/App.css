@@ -208,12 +208,12 @@ button {
 }
 .overlay {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  top: 175px;
+  /* bottom: 0; */
+  left: 70px;
   z-index: 2;
-  background-color: #797979;
-  opacity: 0.4;
+  /* background-color: #797979; */
+  /* opacity: 0.4; */
 }
 .flex-center {
   display: flex;
