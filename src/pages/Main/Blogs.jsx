@@ -63,9 +63,9 @@ export default function Blogs() {
  <div className="card">
    <img className="card-img-top" src={item.image} alt="Card image" style={{width: '100%', height: '16rem'}} />
    <div className="card-body">
-     <div className="d-flex mb-2">
+     <div className="d-flex justify-content-between mb-2">
       <h5 className="card-title">{item.title}</h5>
-      <div className='ms-1 d-flex justify-content-between w-100' style={{fontSize: '13px'}}>
+      <div className='ms-1' style={{fontSize: '13px'}}>
         <div className="my-auto mx-2">
           <div className='text_hidden'><h6 className="mb-0">{item.author}</h6></div>
         </div>
