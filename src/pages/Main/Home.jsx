@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import AuthContext from "../../auth/auth-context";
-import { AdminButton, PopupFeedback, SelectOption } from "../../components/mui";
+import { AdminButton,Popup, SelectOption } from "../../components/mui";
 import colors from "../../config/colors";
 import IsHospital from "../../hooks/IsHospital";
 import useApi from "../../hooks/useApi";
@@ -137,17 +137,28 @@ function Home(props) {
               setOpen={setOpen}
                   setFormEnable={setFormEnable}
                   auth={auth}/>:!formEnable ? (
+                    <Container
+                    maxWidth="xs"
+                    className="d-flex align-items-center my-auto"
+                    style={{ height: 700 }}
+                  >
                 <LogIn
                   formEnable={formEnable}
                   setFormEnable={setFormEnable}
                   auth={auth}
                 />
+                </Container>
               ) : (
+                <Container
+      maxWidth="xs"
+      className="d-flex align-items-center my-auto"
+      style={{ height: 700 }}>
                 <SignUp
                   formEnable={formEnable}
                   setFormEnable={setFormEnable}
                   auth={auth}
                 />
+                </Container>
               )}
             </div>
           </div>
@@ -539,24 +550,20 @@ setLoading(true)
   }
 
   return (
-    <Container
-      maxWidth="xs"
-      className="d-flex align-items-center my-auto"
-      style={{ height: 700 }}
-    >
+    <div>
       {!auth.isLoggedIn && (
         <Container
           component="main"
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            paddingBottom: 60,
+            paddingBottom:isMobile?10:60,
             borderRadius: 10,
           }}
         >
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: isMobile?0:8,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -634,7 +641,7 @@ setLoading(true)
           </Box>
         </Container>
       )}
-    </Container>
+    </div>
   );
 }
 function SignUp({ formEnable, setFormEnable }) {
@@ -721,27 +728,23 @@ function checkEmpty(){
     setConfirmPassword("");
   }
   return (
-    <Container
-      maxWidth="xs"
-      className="d-flex align-items-center my-auto"
-      style={{ height: 700 }}
-    >
+    <>
    
       {!auth.isLoggedIn && (
         <Container
           component="main"
-          maxWidth="xs"
+          
           style={{
             backgroundColor: "white",
             justifyContent: "center",
-            paddingBottom: 30,
+            paddingBottom:isMobile?10:30,
             borderRadius: 10,
           }}
         >
         
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: isMobile?0:8,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -882,7 +885,7 @@ function checkEmpty(){
           </Box>
         </Container>
       )}
-    </Container>
+    </>
   );
 }
 
@@ -892,7 +895,7 @@ function MobileContent({auth,open,setOpen,formEnable, setFormEnable }){
   
   return(
 
-    <PopupFeedback
+    <Popup
     title="Account"
     content={!formEnable?
       <LogIn
