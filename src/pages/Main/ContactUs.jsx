@@ -51,7 +51,16 @@ setContactUs({...contactUs,[name]:value})
   }
 return (
 <div>
-  <div className="container-fluid py-5">
+  <div className='container-fluid mb-5' style={{paddingTop : '2rem'}}>
+    <div className='row'>
+      <div className='col text-center'>
+      <video className='' width="95%" height="350" controls  style={{borderRadius : '15px', border :'1px solid black'}} >
+      <source src={require("../../assests/Blogs/video.mp4")} type="video/mp4"/>
+     </video>
+      </div>
+    </div>
+  </div>
+  {/* <div className="container-fluid py-5">
     <div className="row back_img my-3 mx-0 mx-sm-4">
       <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">
         <h1 className="Hfs_16">Contact Us</h1>
@@ -59,7 +68,7 @@ return (
         <img  src={require("../../assests/Blogs/play-circle.png")} alt="" className="play_img ms-3" />
       </div>
     </div>
-  </div>
+  </div> */}
   <div className="container-fluid">
       <div className="row">
         <div className="col">
