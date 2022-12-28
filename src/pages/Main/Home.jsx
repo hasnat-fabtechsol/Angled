@@ -19,6 +19,7 @@ import useApi from "../../hooks/useApi";
 import {isMobile} from 'react-device-detect';
 import "./styles/Home.css";
 import LoadingOverlay, { LoadingOverlaySmall } from "../../components/mui/LoadingOverlay";
+import Joi from "joi-browser";
 function Home(props) {
   const auth = useContext(AuthContext);
   const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
@@ -489,11 +490,20 @@ function Home(props) {
 
 export default Home;
 
+
+const validateData = (user) => {
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+  });
+
+  const val = schema.validate(user);
+  if (val.error) return val.error.message;
+};
 function LogIn({setOpen, formEnable, setFormEnable}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { request } = useApi((data) => apiClient.post("/login/", data));
-  const [error, setError] = useState();
+  const [message, setMessage] = useState({text:"",color:""});
   const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
 
@@ -501,15 +511,22 @@ function LogIn({setOpen, formEnable, setFormEnable}) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    resetErrors()
+    if(validateData({email:email}))
+    return setMessage({text:"Not A Valid Email Please Enter a Valid Email",color:"danger"})
+    if(password.length<6)
+    return setMessage({text:"Password should be atleast 6 characters",color:"danger"})
+  
 setLoading(true)
     console.log("sending data...................................");
     const result = await request({ username: email, password: password });
-    if (result.status != 200) return setError(true);
+    setLoading(false)
+    if (result.status != 200) return setMessage({text:"Email or Password is Incorrect",color:"danger"});
     const userType = await IsHospital(result.data.token);
     auth.login(result.data.token, userType ? userType : false);
     if(isMobile)
     setOpen(false)
-    setLoading(false)
+   
     navigate("/");
   }
 
@@ -517,8 +534,8 @@ setLoading(true)
     navigate("/forget-password");
   }
   function resetErrors() {
-    setError(false);
-    console.log("hello");
+      setMessage({text:"",color:""})
+    
   }
 
   return (
@@ -553,11 +570,10 @@ setLoading(true)
               >
                 Login Now
               </Typography>
-              {error && (
-                <div className={"bg-danger p-1"}>
-                  <span>Invalid Email or Password</span>
-                </div>
-              )}
+              {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
+                  <span>{message.text}</span>
+                </div>}
+              
             </Box>
             <Box
               component="form"
@@ -622,24 +638,55 @@ setLoading(true)
   );
 }
 function SignUp({ formEnable, setFormEnable }) {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [phone, setPhone] = useState();
-  const [success, setSuccess] = useState();
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [message, setMessage] = useState({text:"",color:""});
+
   const { request } = useApi((data) => apiClient.post("/register/", data));
   const auth = useContext(AuthContext);
+function checkEmpty(){
+
+  if(!firstName){
+    setMessage({text:"firstName is Required",color:"danger"})
+    return true
+  }
+  if(!lastName){
+    setMessage({text:"lastName is Required",color:"danger"})
+    return true
+  }
+  if(!phone){
+    setMessage({text:"phone is Required",color:"danger"})
+    return true
+  }
+  if(!email){
+    setMessage({text:"Email is Required",color:"danger"})
+    return true
+  }
+  return false
+
+  
+}
   async function handleSubmit(e) {
     e.preventDefault();
     resetErrors();
+    console.log(checkEmpty())
+    if(checkEmpty())
+    return
+    if(validateData({email:email}))
+  return setMessage({text:"Not A Valid Email Please Enter a Valid Email",color:"danger"})
+
+  if(password!=confirmPassword)
+  return setMessage({text:"Password doesn't match please enter again",color:"danger"})
+  if(password.length<6)
+  return setMessage({text:"Password should be atleast 6 characters",color:"danger"})
+
     setLoading(true)
     if (password !== confirmPassword) return;
-    console.log("sending data...................................");
     const result = await request({
       first_name: firstName,
       last_name: lastName,
@@ -649,17 +696,21 @@ function SignUp({ formEnable, setFormEnable }) {
     });
     console.log("hello");
     setLoading(false)
-    if (result.status != 200) return setError(true);
-    setSuccess(true);
+    if (result.status != 200)
+    {
+      if(result.data.email[0].search('email already exists')!=-1)
+      return  setMessage({text:"Email Already Exist Please use different email",color:"danger"});
+      else
+      return  setMessage({text:"Error Occured while creating Account try again",color:"danger"});
+    }
+    setMessage({text:"Successfully Added",color:"success"})
     console.log("Account created succesfully");
     emptyForm();
     console.log(result.data);
   }
 
   function resetErrors() {
-    setError(false);
-    setSuccess(false);
-    console.log("hello");
+    setMessage({text:"",color:""})
   }
   function emptyForm() {
     setFirstName("");
@@ -703,17 +754,9 @@ function SignUp({ formEnable, setFormEnable }) {
                 sx={{ color: colors.primary, fontWeight: "bold" }}
               > Register Now
               </Typography>
-              {error ? (
-                <div className={"bg-danger p-1"}>
-                  <span>Invalid Email or Password</span>
-                </div>
-              ) : (
-                success && (
-                  <div className={"bg-success p-1"}>
-                    <span>Account Created Successfully Login Now</span>
-                  </div>
-                )
-              )}
+              {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
+                  <span>{message.text}</span>
+                </div>}
             </Box>
             <Box
               component="form"
