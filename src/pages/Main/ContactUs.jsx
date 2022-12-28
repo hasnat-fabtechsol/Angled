@@ -51,7 +51,16 @@ setContactUs({...contactUs,[name]:value})
   }
 return (
 <div>
-  <div className="container-fluid py-5">
+  <div className='container-fluid mb-5' style={{paddingTop : '2rem'}}>
+    <div className='row'>
+      <div className='col text-center'>
+      <video className='' width="95%" height="350" controls  style={{borderRadius : '15px', border :'1px solid black'}} >
+      <source src={require("../../assests/Blogs/video.mp4")} type="video/mp4"/>
+     </video>
+      </div>
+    </div>
+  </div>
+  {/* <div className="container-fluid py-5">
     <div className="row back_img my-3 mx-0 mx-sm-4">
       <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">
         <h1 className="Hfs_16">Contact Us</h1>
@@ -59,40 +68,39 @@ return (
         <img  src={require("../../assests/Blogs/play-circle.png")} alt="" className="play_img ms-3" />
       </div>
     </div>
-  </div>
+  </div> */}
   <div className="container-fluid">
-    <div className="row">
-      <div className="col">
-        <div className="container gap-3">
-          <div className="row">
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img  src={require("../../assests/ContactUs/OurPartner_1.png")} className="OurPartner_style" alt="" />
+      <div className="row">
+        <div className="col">
+          <div className="container gap-3">
+            <div className="row table table-responsive">
+              <table className='table-borderless'>
+                <tr className='bottom_border_none'>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_1.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_2.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_3.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_4.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_5.png")} className="OurPartner_style" alt="" />
+                  </td>
+                  <td>
+                  <img src={require("../../assests/ContactUs/OurPartner_6.png")} className="OurPartner_style" alt="" />
+                  </td>
+                </tr>
+              </table>
             </div>
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img src={require("../../assests/ContactUs/OurPartner_2.png")} className="OurPartner_style" alt="" />
-            </div>
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img src={require("../../assests/ContactUs/OurPartner_3.png")} className="OurPartner_style" alt="" />
-            </div>
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img src={require("../../assests/ContactUs/OurPartner_4.png")} className="OurPartner_style" alt="" />
-            </div>
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img src={require("../../assests/ContactUs/OurPartner_5.png")} className="OurPartner_style" alt="" />
-            </div>
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 text-sm-start text-center mt-4">
-              <img src={require("../../assests/ContactUs/OurPartner_6.png")} className="OurPartner_style" alt="" />
-            </div>
-            {/* <div class="about_background m-3 px-5">
-          <img src="./about_background_img.png" class="img-fluid" alt="">
-          <div class="top_left"><h2>The largest and most powerful PRN  platform in the industry.</h2></div>  
-          <div><p>You have joined one of the area’s newest innovative company.</p></div>
-      </div> */}
           </div>
         </div>
       </div>
     </div>
-  </div>
   <div className="container my-5">
     <div className="row pb-5">
       <div className="col-md-9 text-center text-md-start WHY_JOIN_ANGLED">

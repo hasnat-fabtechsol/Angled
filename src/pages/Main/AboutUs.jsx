@@ -18,27 +18,27 @@ return (
   
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <img src={require("../../assests/Home/background.png")} class="d-block carosal_img"/>
       <div class="carousel-caption">
-        <div className='mb-5'>
+        <div className='mb-5 h3_fs'>
         <h3>The largest and most powerful PRN platform in the industry.  </h3>
         <p>You have joined one of the area's newest innovative company.</p>
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <img src={require("../../assests/Home/background.png")} class="d-block carosal_img"/>
       <div class="carousel-caption">
-        <div className='mb-5'>
+        <div className='mb-5 h3_fs'>
         <h3>The largest and most powerful PRN platform in the industry.  </h3>
         <p>You have joined one of the area's newest innovative company.</p>
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <img src={require("../../assests/Home/background.png")} class="d-block" style={{width : '100%', height : '20rem', borderRadius : '20px'}}/>
+      <img src={require("../../assests/Home/background.png")} class="d-block carosal_img"/>
       <div class="carousel-caption">
-        <div className='mb-5'>
+        <div className='mb-5 h3_fs'>
         <h3>The largest and most powerful PRN platform in the industry.  </h3>
         <p>You have joined one of the area's newest innovative company.</p>
         </div>
