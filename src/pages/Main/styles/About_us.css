@@ -31,8 +31,8 @@
   }
   .carousel-caption {
     position: absolute !important;
-    right: 15% !important;
-    bottom: 8.25rem !important;
+    right: 38% !important;
+    bottom: 5.25rem !important;
     left: 7% !important;
     padding-top: 1.25rem !important;
     padding-bottom: 1.25rem !important;
@@ -129,6 +129,17 @@
 
 
   @media (max-width: 991px) {
+    .carousel-caption {
+      position: absolute !important;
+      right: 9% !important;
+      bottom: 7.25rem !important;
+      left: 10% !important;
+      padding-top: 1.25rem !important;
+      padding-bottom: 1.25rem !important;
+      color: #fff !important;
+      text-align: start !important;
+      font-size: 12px;
+  }
     .img_width{
         width: 100%;
       }

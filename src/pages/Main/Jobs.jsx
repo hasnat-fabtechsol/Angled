@@ -55,6 +55,50 @@ const handlePageChange = (event,value) => {
 return (
 
   <div>
+    <div className='container-fluid' style={{paddingTop : '4rem'}}>
+        <div className='container'>
+          <div className='row'>
+            <div id="demo" class="carousel slide gx-0" data-bs-ride="carousel">
+              <div class="carousel-inner" style={{borderRadius:'10px'}}>
+                <div class="carousel-item carosal_img active">
+                  <img src={require("../../assests/Home/background.png")} class="d-block img-fluid"/>
+                  <div class="carousel-caption">
+                    <div className='mb-5 h3_fs'>
+                    <h3>The largest and most powerful PRN platform in the industry.  </h3>
+                    <p>You have joined one of the area's newest innovative company.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item carosal_img rounded-3">
+                  <img src={require("../../assests/Home/background.png")} class="d-block img-fluid"/>
+                  <div class="carousel-caption">
+                    <div className='mb-5 h3_fs'>
+                    <h3>The largest and most powerful PRN platform in the industry.  </h3>
+                    <p>You have joined one of the area's newest innovative company.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item carosal_img">
+                  <img src={require("../../assests/Home/background.png")} class="d-block img-fluid"/>
+                  <div class="carousel-caption">
+                    <div className='mb-5 h3_fs'>
+                    <h3>The largest and most powerful PRN platform in the industry.  </h3>
+                    <p>You have joined one of the area's newest innovative company.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span className='d-sm-block d-none'><i class="bi bi-chevron-left"></i></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span className='d-sm-block d-none'><i class="bi bi-chevron-right"></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
   <div className="container py-5">
     <div className="row my-5">
       <div className="col-md-6">
