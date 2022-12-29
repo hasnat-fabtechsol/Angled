@@ -44,11 +44,8 @@ export default function () {
                 email: "Email Address",
                 // skills: "Skills",
                 location: "Location",
-                id: "Action",
               }}
               td={activeJobDetail}
-              link={"/adm/new-job/assign/"}
-              btnName="Assign"
             />
           </Box>
         ) : (

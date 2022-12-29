@@ -20,17 +20,62 @@ import {isMobile} from 'react-device-detect';
 import "./styles/Home.css";
 import LoadingOverlay, { LoadingOverlaySmall } from "../../components/mui/LoadingOverlay";
 import Joi from "joi-browser";
+import Paginate from "../../components/Paginate";
+import { useEffect } from "react";
+let limit=12
 function Home(props) {
   const auth = useContext(AuthContext);
+  const navigate=useNavigate()
   const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
   const [loading,setLoading]=useState(false)
 
-  const [speciality, setSpeciality] = useState("Choose Speciality");
+  const [speciality, setSpeciality] = useState("");
+
+  const [count,setCount]=useState(0)
+  
+
+  const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
+const [offset,setOffset]=useState(0)
+const [loadingSpeciality, setLoadingSpeciality] = useState(false);
+  let offsetEndpoint = `&limit=${limit}&offset=`;
+  let newJobEndpoint = `specialities/?`;
+  useEffect(()=>{
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+offset)
+    
+  },[])
+  const fetchNewJobs = async (endpoint) => {
+    setLoadingSpeciality(true)
+   const response= await request(endpoint)
+            
+   if(error)
+   return console.log("error while retrieve")
+if(!count)
+setCount(response.data.count)
+setLoadingSpeciality(false)
+ 
+  }
+
+ 
+
+  const handlePageChange = (event,value) => {
+    
+   value=((value - 1) * limit)
+    fetchNewJobs(newJobEndpoint+offsetEndpoint+value)
+    setOffset(value)
+      
+  
+  };
+
+  const jobsBySpeciality=()=>{
+   
+
+    navigate('/jobs',{state:speciality});
+      
+    }
 
   return (
     <div>
       <div className="position-relative">
-      <LoadingOverlay open={loading}/>
         <div
           id="carouselExampleSlidesOnly"
           class="carousel slide"
@@ -77,59 +122,21 @@ function Home(props) {
                 text <br />
                 commonly used to demonstrate the visual form of a document or a{" "}
               </h1>
+              <div
+                    maxWidth="xs"
+                    className="d-flex gap-3 justify-content-center">
+                <div>
 
-              <Stack
-                spacing={2}
-                direction="row"
-                sx={{ justifyContent: "center" }}
-              >
-                <div class="dropdown">
-                  <a
-                    class="btn btn-secondary dropdown-toggle"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {speciality}
-                  </a>
-
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li>
-                      <button
-                        class="dropdown-item"
-                        onClick={() => setSpeciality("Doctore")}
-                      >
-                        Doctor
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        class="dropdown-item"
-                        onClick={() => setSpeciality("Nurse")}
-                      >
-                        Nurse
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        class="dropdown-item"
-                        onClick={() => setSpeciality("Dentist")}
-                      >
-                        Dentist
-                      </button>
-                    </li>
-                  </ul>
+                <input type="email" class="form-control" placeholder="Speciality"  aria-describedby="emailHelp"/>
                 </div>
-                <Link
+                <Button
                   class="web-btn bg-green clr-white py-2"
                   style={{ textDecoration: "none" }}
-                  to="/jobs"
+                 onClick={jobsBySpeciality}
                 >
                   <span>Lets Go</span>
-                </Link>
-              </Stack>
+                </Button>
+              </div>
             </div>
             <div className="text-center ms-lg-5 ms-sm-3 ms-2">
               {isMobile?<MobileContent formEnable={formEnable}
@@ -170,115 +177,22 @@ function Home(props) {
             <h2 className="text-primary">All Jobs Available</h2>
             <p>All Jobs Available with respect to specialty</p>
             <div class="cards text-primary">
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 1</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 2</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 3</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 4</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 5</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 6</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 7</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 8</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 9</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 10</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 11</h6>
-                </div>
-              </div>
-              <div class="card ">
-                <div class="d-flex py-4 px-2">
-                  <img
-                    className="image_style"
-                    src={require("../../assests/Home/speciality.png")}
-                  />
-                  <h6 class="my-auto ms-2 job_fs_size">Job speciality 12</h6>
-                </div>
-              </div>
+              {data.map(item=>(
+  <div class="card " onClick={()=> navigate('/jobs',{state:item.speciality})}>
+  <div class="d-flex py-4 px-2">
+    <img
+      className="image_style"
+      src={require("../../assests/Home/speciality.png")}
+    />
+    <h6 class="my-auto ms-2 job_fs_size">{item.speciality}</h6>
+  </div>
+</div>
+              ))}
+            
             </div>
+            {loadingSpeciality&& <LoadingOverlaySmall open={loadingSpeciality}/>}
+   
+   <Paginate  count={count} limit={limit} onChange={handlePageChange}/>
           </div>
         </div>
 
@@ -502,14 +416,6 @@ function Home(props) {
 export default Home;
 
 
-const validateData = (user) => {
-  const schema = Joi.object({
-    email: Joi.string().email().required(),
-  });
-
-  const val = schema.validate(user);
-  if (val.error) return val.error.message;
-};
 function LogIn({setOpen, formEnable, setFormEnable}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -523,8 +429,6 @@ function LogIn({setOpen, formEnable, setFormEnable}) {
   async function handleSubmit(e) {
     e.preventDefault();
     resetErrors()
-    if(validateData({email:email}))
-    return setMessage({text:"Not A Valid Email Please Enter a Valid Email",color:"danger"})
     if(password.length<6)
     return setMessage({text:"Password should be atleast 6 characters",color:"danger"})
   
@@ -584,7 +488,6 @@ setLoading(true)
             </Box>
             <Box
               component="form"
-              noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >
@@ -656,37 +559,11 @@ function SignUp({ formEnable, setFormEnable }) {
 
   const { request } = useApi((data) => apiClient.post("/register/", data));
   const auth = useContext(AuthContext);
-function checkEmpty(){
 
-  if(!firstName){
-    setMessage({text:"firstName is Required",color:"danger"})
-    return true
-  }
-  if(!lastName){
-    setMessage({text:"lastName is Required",color:"danger"})
-    return true
-  }
-  if(!phone){
-    setMessage({text:"phone is Required",color:"danger"})
-    return true
-  }
-  if(!email){
-    setMessage({text:"Email is Required",color:"danger"})
-    return true
-  }
-  return false
-
-  
-}
   async function handleSubmit(e) {
     e.preventDefault();
     resetErrors();
-    console.log(checkEmpty())
-    if(checkEmpty())
-    return
-    if(validateData({email:email}))
-  return setMessage({text:"Not A Valid Email Please Enter a Valid Email",color:"danger"})
-
+ 
   if(password!=confirmPassword)
   return setMessage({text:"Password doesn't match please enter again",color:"danger"})
   if(password.length<6)
@@ -763,7 +640,7 @@ function checkEmpty(){
             </Box>
             <Box
               component="form"
-              noValidate
+              id="myForm"
               onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >

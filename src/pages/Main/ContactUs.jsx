@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
 import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 import './styles/Contact_Us.css'
-import * as yup from 'yup';
-import { isValidEmail } from '../../services/validator';
-import Joi from "joi-browser";
-import { func } from 'joi';
+// import * as yup from 'yup';
+// import { isValidEmail } from '../../services/validator';
+// import Joi from "joi-browser";
+// import { func } from 'joi';
 
-const validateCOntactUs = (user) => {
-  const schema = Joi.object({
-    email: Joi.string().email().required(),
-  });
+// const validateCOntactUs = (user) => {
+//   const schema = Joi.object({
+//     email: Joi.string().email().required(),
+//   });
 
-  const val = schema.validate(user);
-  if (val.error) return val.error.message;
-};
+//   const val = schema.validate(user);
+//   if (val.error) return val.error.message;
+// };
 
 function ContactUs(props) {
 const emptyFields={
@@ -36,13 +36,11 @@ setContactUs({...contactUs,[name]:value})
   const handleSubmit=async(e)=>{
     e.preventDefault()
     resetErrors()
-  if(validateCOntactUs({email:contactUs.email}))
-  return setMessage({text:"Not A Valid Email Please Enter a Valid Email",color:"danger"})
     setLoading(true)
     const response= await apiClient.post('/contact_us/',contactUs)
     setLoading(false)
     if(response.status!=201)
-    return console.log("error")
+    return setMessage({text:"Error occured while Submiting Data try again",color:"danger"})
     setMessage({text:"Successfully Added",color:"success"})
   }
 
@@ -119,30 +117,30 @@ return (
         <form  onSubmit={handleSubmit}>
         <div className="row">
             <div className="col mb-4">
-              <input type="text" className="form-control" placeholder="Enter Title" name="title"  
+              <input type="text" className="form-control" placeholder="Enter Title" name="title"  required
               onChange={(e)=>handleChange('title',e.target.value)} onFocus={resetErrors} />
             </div>
           </div>
           <div className="row">
             <div className="col-sm-6 mb-4">
-              <input type="text" className="form-control" placeholder="Enter First Namel" name="firstname" 
+              <input type="text" className="form-control" placeholder="Enter First Namel" name="firstname"  required
               onChange={(e)=>handleChange('first_name',e.target.value)} onFocus={resetErrors}/>
             </div>
             <div className="col-sm-6 mb-4">
-              <input type="text" className="form-control" placeholder="Enter Lastname" name="lastname" 
+              <input type="text" className="form-control" placeholder="Enter Lastname" name="lastname"  required
                onChange={(e)=>handleChange('last_name',e.target.value)} onFocus={resetErrors}/>
             </div>
           </div>
           <div className="row">
             <div className="col mb-4">
-              <input type="text" className="form-control" placeholder="Enter email" name="email" 
+              <input type="text" className="form-control" placeholder="Enter email" name="email"  required
                onChange={(e)=>handleChange('email',e.target.value)} onFocus={resetErrors}/>
             </div>
           </div>
        
           <div className="row">
             <div className="col mb-4">
-              <textarea className="form-control" rows={5} id="comment" name="text" defaultValue={""} 
+              <textarea className="form-control" rows={5} id="comment" name="text" defaultValue={""}   required
                onChange={(e)=>handleChange('comment',e.target.value)} onFocus={resetErrors}/>
             </div>
           </div>

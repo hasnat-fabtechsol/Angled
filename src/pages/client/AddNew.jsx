@@ -3,6 +3,7 @@ import { Box, TextField, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import { AdminButton, PopupFeedback } from "../../components/mui";
+import { LoadingOverlaySmall } from "../../components/mui/LoadingOverlay";
 
 
 export default function AddNew() {
@@ -20,10 +21,10 @@ export default function AddNew() {
     submitals_per_agency: "",
   };
   const [addNew, setAddNew] = useState(emptyFields);
+  const [message, setMessage] = useState({text:"",color:""});
   const [disabledButton, setDisabledButton] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
-    disabledButton && setDisabledButton(false);
     const { name, value } = event.target;
     setAddNew({ ...addNew, [name]: value });
   };
@@ -31,25 +32,36 @@ export default function AddNew() {
   const [open, setOpen] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    !disabledButton && setDisabledButton(true);
-  
+    resetErrors()
+  setLoading(true)
     const response = await apiClient.post("/applications/", addNew);
+    setLoading(false)
     if (response.status === 201) {
-      setDisabledButton(false);
       setOpen(true);
       setAddNew(emptyFields);
+      setMessage({text:"Successfully applied to Job post",color:"success"})
     }
+    else
+    return setMessage({text:"Failed to Apply Please try again",color:"danger"})
+ 
   };
+  function resetErrors(){
+    setMessage({text:"",color:""})
+  }
 
 
   return (
    <Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <form className="" onSubmit={handleSubmit}>
+          {message.text&& <div className={`bg-${message.color} p-1 m-2`}>
+                  <span>{message.text}</span>
+                </div>}
             <Stack
               direction={{ xs: "column", sm: "row" }}
               sx={{ gap: "15px", marginBottom: "25px" }}
             >
+               
               <TextField
                 required
                 type="text"
@@ -58,6 +70,7 @@ export default function AddNew() {
                 value={addNew.candidate_name}
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 sx={{ width: { xs: "100%", sm: "280px" } }}
               />
               <TextField
@@ -69,6 +82,7 @@ export default function AddNew() {
                 label="Cell No"
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 sx={{ width: { xs: "100%", sm: "280px" } }}
               />
             </Stack>
@@ -80,6 +94,7 @@ export default function AddNew() {
               label="Email"
               id="outlined-name"
               onChange={handleChange}
+              onFocus={resetErrors}
               fullWidth
               sx={{ marginBottom: "25px" }}
             />
@@ -96,6 +111,7 @@ export default function AddNew() {
                 label="Social Security Number"
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 sx={{ width: { xs: "100%", sm: "280px" } }}
               />
               <TextField
@@ -107,6 +123,7 @@ export default function AddNew() {
                 label="Driver License or ID"
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 sx={{ width: { xs: "100%", sm: "280px" } }}
               />
             </Stack>
@@ -121,6 +138,7 @@ export default function AddNew() {
                 label="Bill Rate"
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 type="number"
                 // InputProps={{ inputProps: { min: 0, max: 10 } }}
                 sx={{ width: { xs: "100%" } }}
@@ -133,6 +151,7 @@ export default function AddNew() {
               label="Compliance Per Agency"
               id="outlined-name"
               onChange={handleChange}
+              onFocus={resetErrors}
               fullWidth
               sx={{ marginBottom: "25px" }}
             />
@@ -143,6 +162,7 @@ export default function AddNew() {
               label="Submittals Per Agency"
               id="outlined-name"
               onChange={handleChange}
+              onFocus={resetErrors}
               fullWidth
               sx={{ marginBottom: "25px" }}
             />
@@ -150,7 +170,7 @@ export default function AddNew() {
               direction="column"
               sx={{ gap: "15px", marginBottom: "25px" }}
             >
-              <AdminButton
+           {!loading?   <AdminButton
                 name="Submit"
                 type="submit"
                 disabled={disabledButton}
@@ -160,7 +180,7 @@ export default function AddNew() {
                   "&:hover": { backgroundColor: "#002370" },
                   whiteSpace: "nowrap",
                 }}
-              />
+              />: <LoadingOverlaySmall open={loading}/>}
             </Stack>
           </form>
         </Box>

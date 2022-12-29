@@ -1,6 +1,7 @@
 import { Toolbar } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { useLocation, useParams } from "react-router-dom";
 
 
@@ -31,7 +32,7 @@ console.log(blog);
           <p className="mb-0">{blog.created_at}</p>
         </div>
       </div>
- <img  src={blog.image} alt="Card image" style={{width: '30%'}} />
+ <img  src={blog.image} alt="Card image" style={{width: isMobile?'100%':'30%'}} />
 
  <div style={{marginTop:40}}>
  <div dangerouslySetInnerHTML={{ __html: blog.content}} />

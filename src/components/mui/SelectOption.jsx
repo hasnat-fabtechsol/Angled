@@ -11,6 +11,7 @@ const SelectOption = ({
   size,
   selectCss,
   labelStyle,
+  onFocus
 }) => {
   return (
     <FormControl size={size} sx={style} >
@@ -24,6 +25,7 @@ const SelectOption = ({
         onChange={onChange}
         sx={selectCss}
         required
+        onFocus={onFocus}
         // MenuProps={{
         //   disableScrollLock: true,
         // }}

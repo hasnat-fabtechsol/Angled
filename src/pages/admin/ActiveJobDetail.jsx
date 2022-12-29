@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Toolbar, Typography,Paper } from "@mui/material";
 import { trimDate } from "../../components/trimDate";
 import apiClient from "../../api/apiClient";
-import { AdminButton, PopupFeedback ,TableMui} from "../../components/mui";
+import { AdminButton, PopupFeedback ,TableMui,PopupWithButton} from "../../components/mui";
+import DateField from "../../components/mui/DateField";
 
 export default function () {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
@@ -45,7 +46,7 @@ export default function () {
                 email: "Email Address",
                 location: "Location",
               }}
-              customBtn={()=>btn(id)}
+              customBtn={()=>CustomBtn(id)}
               td={activeJobDetail}
             />
           </Box>
@@ -64,15 +65,49 @@ export default function () {
       </>
   );
 }
-const btn=(id)=>{
+function CustomBtn(id){
+  const [open, setOpen] = useState(false);
+  const [dateValue, setDateValue] = useState("");
+  const [message, setMessage] = useState({text:"",color:""});
+  let navigate = useNavigate();
+  const assignClick = () => {
+    if (!dateValue) return;
+    const data = {
+      ending_date: dateValue,
+    };
+    apiClient.put(`/jobs/${id}/employements/`, data).then((resp) => {
+      resp.status === 200 && navigate("/admin/dashboard");
+      setMessage({text:"Failed to create Invoice Please try again",color:"danger"})
+    });
+  };
+
+  const cancelClick = () => {
+   setOpen(false)
+  };
+
+  const dateChange = (e) => {
+    setDateValue(e.target.value);
+  };
   return (
   <>
-  <Link to={"/admin/active-job/invoice/"+id}>
   <AdminButton
                           name="Create Invoice"
-                        
+                          onClick={()=>setOpen(true)}
                         />
-                        </Link>
+ 
+         <PopupWithButton
+            title="Create Invoice"
+            content={<><DateField change={dateChange} />
+              {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
+                  <span>{message.text}</span>
+                </div>}
+            </>}
+            isOpen={open}
+            yesName="Create"
+            yesClick={assignClick}
+            cancelName="Cancel"
+            cancelClick={cancelClick}
+          />
   </>
   );
   }

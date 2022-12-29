@@ -12,6 +12,7 @@ export default function AdminButton({ name,className ,size, style, type, disable
       fullWidth={fullWidth}
       className={className}
       {...otherProps}
+     
     >
       {name}
     </Button>

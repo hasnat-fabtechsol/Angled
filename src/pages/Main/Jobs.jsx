@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
 import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 import Paginate from '../../components/Paginate';
@@ -14,18 +14,18 @@ const fields=['position','location','unit','shift','speciality','profession']
 let limit=10
 
 function Jobs(props) {
-
+  const location = useLocation();
 
 const [count,setCount]=useState(0)
 
 const [loading, setLoading] = useState(false);
 const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
+const [speciality,setSpeciality]=useState(location.state?location.state:"")
 const [offset,setOffset]=useState(0)
 
-let Endpoint = `posts/?limit=${limit}&offset=`;
+let Endpoint = `posts/?speciality=${speciality}&limit=${limit}&offset=`;
 useEffect(()=>{
   fetchData(Endpoint+offset)
-  console.log("called")
 },[])
 const fetchData = async (endpoint) => {
 setLoading(true)
@@ -102,17 +102,24 @@ return (
   <div className="container py-5">
     <div className="row my-5">
       <div className="col-md-6">
-        <h5 className="text-primary text-md-start text-center mb-5 mb-md-0">Job Specialty 1</h5>
+        <h5 className="text-primary text-md-start text-center mb-5 mb-md-0">Job Specialty</h5>
       </div>
       <div className="col-md-6">
         <div className="d-flex justify-content-center justify-content-md-end">
-          <select className="form-select borde_colr w-50">
-            <option>Job Specialty </option>
-            <option>Job Specialty 2</option>
-            <option>Job Specialty 3</option>
-            <option>Job Specialty 4</option>
-          </select>
-          <button type="button" className="letsgo text-white ms-3 px-3">Let's Go <img src="./arrow_back.png" alt="" className="ms-2" style={{height: '10px'}} /></button>
+        <Grid item xs={12}>
+                  <TextField
+                  
+                    required
+                    fullWidth
+                    id="speciality"
+                    label="Speciality"
+                    name="speciality"
+                    autoComplete="speciality"
+                    value={speciality}
+                    onChange={(e) => setSpeciality(e.target.value)}
+                  />
+                </Grid>
+          <button type="button" className="letsgo text-white ms-3 px-3" onClick={()=>{setOffset(0);fetchData(Endpoint)}}>Let's Go <img src="./arrow_back.png" alt="" className="ms-2" style={{height: '10px'}} /></button>
         </div>
       </div>
     </div>

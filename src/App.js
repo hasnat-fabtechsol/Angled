@@ -35,7 +35,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="test" element={<BlogEdit />} />
         <Route path='/' element={<Layout/>}>
 
           <Route index element={<Home />} />

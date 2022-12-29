@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
+import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 import './styles/job_apply_now.css'
 
 export default function ApplyNow() {
@@ -21,7 +22,8 @@ export default function ApplyNow() {
     submitals_per_agency: "",
   };
   const [addNew, setAddNew] = useState(emptyFields);
-
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({text:"",color:""});
   const handleChange = (event) => {
     const { name, value } = event.target;
     setAddNew({ ...addNew, [name]: value });
@@ -29,11 +31,15 @@ export default function ApplyNow() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+  setLoading(true)
     const response = await apiClient.post("/applications/", addNew);
-    if (response.status === 201) {
+    setLoading(false)
+    if(response.status!=201)
+    return setMessage({text:"Error occured while Submiting Data try again",color:"danger"})
+    setMessage({text:"Successfully Added",color:"success"})
+ 
       setAddNew(emptyFields);
-    }
+ 
   };
 
   return (
@@ -95,6 +101,7 @@ export default function ApplyNow() {
              name="candidate_name"
              value={addNew.candidate_name}
              onChange={handleChange}
+             required
             className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
@@ -103,16 +110,18 @@ export default function ApplyNow() {
             name="phone"
             value={addNew.phone}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder=""  />
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
           <label htmlFor="" className='mb-1'>Email Address</label>
-            <input type="text"
+            <input type="email"
             name="email"
             value={addNew.email}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
@@ -121,6 +130,7 @@ export default function ApplyNow() {
             name="bill_rate"
             value={addNew.bill_rate}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder="" />
           </div>
         </div>
@@ -131,6 +141,7 @@ export default function ApplyNow() {
             name="social_security_number"
             value={addNew.social_security_number}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
@@ -139,6 +150,7 @@ export default function ApplyNow() {
             name="driver_license"
             value={addNew.driver_license}
             onChange={handleChange}
+            required
             className="form-control mb-3" maxlength="8" placeholder=""  />
           </div>
         </div>
@@ -149,6 +161,7 @@ export default function ApplyNow() {
             name="professional_license_verification"
             value={addNew.professional_license_verification}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder=""  />
           </div>
         </div>
@@ -159,6 +172,7 @@ export default function ApplyNow() {
             name="compliance_per_agency"
             value={addNew.compliance_per_agency}
             onChange={handleChange}
+            required
             className="form-control mb-3" placeholder=""  />
           </div>
           <div className="col-sm-6">
@@ -167,10 +181,16 @@ export default function ApplyNow() {
             name="submitals_per_agency"
             value={addNew.submitals_per_agency}
             onChange={handleChange}
+            required
              className="form-control" placeholder=""  />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mb-5 mt-sm-0 mt-3">Send message</button>
+        {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
+                  <span>{message.text}</span>
+                </div>}
+        {loading? <LoadingOverlaySmall open={loading}/>:
+        <button type="submit" className="btn btn-primary mb-5 mt-sm-0 mt-3">Send</button>}
+          
       </form>
     </div>
   </div>

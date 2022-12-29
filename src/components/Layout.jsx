@@ -19,9 +19,10 @@ const Layout = () => {
 
 return (
 
+
 <>
   <nav className="navbar navbar-expand-lg navbar-dark bg-transparent  fixed-top  custom-navbar navbar-flow " ref={ref}>
-    <div className="container-fluid mx-sm-5 ">
+    <div className={`container-fluid mx-sm-5 ${auth.userType&&"me-sm-0"}`}>
       <Link className="navbar-brand" to="/" >
       <img src={require("../assests/logo.png")} className="img-fluid logo_img_size"/>
       </Link>
@@ -55,7 +56,7 @@ return (
         <div className="row w-30 me-3">
           
           {auth.isLoggedIn?
-          <><div className={auth.userType?"col-lg-3 mb-3 mb-lg-0 text-white gx-0":"col-lg-6 mb-3 mb-lg-0 text-white gx-0"} >
+          <><div className={`${auth.userType?"col-lg-3":"col-lg-6"} mb-3 mb-lg-0 text-white gx-0`} >
 
 
 
@@ -63,13 +64,13 @@ return (
  
 
 </div>
-<div className={auth.userType?"col-lg-9 mb-3 mb-lg-0 text-white  text-white gx-0":"col-lg-6 mb-3 mb-lg-0 text-white  text-white gx-0"}>
-<div className='d-flex'>
+<div className={`${auth.userType?"col-lg-9":"col-lg-6"} mb-3 mb-lg-0 text-white  text-white gx-0`}>
+<div className={`d-lg-flex justify-content-between   ${auth.userType&&"  gap-2 ps-lg-3"}`}>
 
-{auth.userType&&<Link  to={"/client/dashboard"}> <button  class=" ms-2 btn-nav bg-blue clr-white me-1"
-  style={{ background: '#A98C4D' }}>{"Client"} Dashboard</button> </Link>}
-<Link  to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
-  style={{ background: '#A98C4D' }}>{auth.userType?"Admin":"Client"} Dashboard</button> </Link>
+{auth.userType&&<div><Link  to={"/client/dashboard"}> <button  class=" btn-nav bg-blue clr-white me-1 mb-2"
+  style={{ background: '#A98C4D' }}>{"Client"} Dashboard</button> </Link></div>}
+<div><Link  to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
+  style={{ background: '#A98C4D' }}>{auth.userType?"Admin":"Client"} Dashboard</button> </Link></div>
 </div>
 </div>
 </>:<>

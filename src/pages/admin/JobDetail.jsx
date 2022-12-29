@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Box, Toolbar, Typography, CssBaseline, Paper } from "@mui/material";
 import apiClient from "../../api/apiClient";
-import { PopupFeedback, TableMui } from "../../components/mui";
+import { AdminButton, PopupFeedback, PopupWithButton, TableMui } from "../../components/mui";
 import { trimDates } from "../../components/trimDate";
+import DateField from "../../components/mui/DateField";
 
 export default function () {
   const [activeJobDetail, setActiveJobDetail] = useState([]);
@@ -44,11 +45,9 @@ export default function () {
                 email: "Email Address",
                 // skills: "Skills",
                 location: "Location",
-                id: "Action",
               }}
               td={activeJobDetail}
-              link={"/admin/new-job/assign/"}
-              btnName="Assign"
+              customBtn={(item)=>CustomBtn(item.id)}
             />
           </Box>
         ) : (
@@ -66,3 +65,54 @@ export default function () {
       </>
   );
 }
+
+
+function CustomBtn(id){
+  const [open, setOpen] = useState(false);
+
+  const [dateValue, setDateValue] = useState("");
+  let  navigate=useNavigate()
+  const [message, setMessage] = useState({text:"",color:""});
+
+  const assignClick = () => {
+    if (!dateValue) return;
+    const data = {
+      application: id,
+      starting_date: dateValue,
+    };
+    apiClient.post(`/jobs/${id}/employements/`, data).then((resp) => {
+      resp.status === 201 && navigate("/admin/dashboard");
+      setMessage({text:"Failed to create Invoice Please try again",color:"danger"})
+    });
+  };
+
+  const cancelClick = () => {
+   setOpen(false)
+  };
+
+  const dateChange = (e) => {
+    setDateValue(e.target.value);
+  };
+  return (
+  <>
+  <AdminButton
+                          name="Assign Job"
+                          onClick={()=>setOpen(true)}
+                        />
+ 
+ <PopupWithButton
+            title="ASSIGN JOB"
+            content={<><DateField change={dateChange} />
+              {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
+                  <span>{message.text}</span>
+                </div>}
+            </>}
+            isOpen={open}
+            yesName="Assign"
+            yesClick={assignClick}
+            cancelName="Cancel"
+            cancelClick={cancelClick}
+          />
+  </>
+  );
+  }

@@ -4,6 +4,7 @@ import { AdminButton, PopupFeedback, SelectOption } from "../../components/mui";
 import useApi from "../../hooks/useApi";
 import apiClient from "../../api/apiClient";
 import { useEffect } from "react";
+import { LoadingOverlaySmall } from "../../components/mui/LoadingOverlay";
 
 export default function NewJob() {
   let empyFields = {
@@ -19,12 +20,12 @@ export default function NewJob() {
 
   const [positionType, setPositionType] = useState([]);
   const [shift, setShift] = useState([]);
+  const [message, setMessage] = useState({text:"",color:""});
 
 
 const {request}=useApi((data)=>apiClient.post('/jobs/',data))
 
 
-  const [disabledButton, setDisabledButton] = useState(false);
   useEffect(() => {
     fetchPositionType();
     fetchShift();
@@ -48,29 +49,36 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
 
   const [open, setOpen] = useState(false);
   const [getPositionName, setGetPositionName] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     // !disabledButton && setDisabledButton(true);
     // console.log(newPosition)
+    setLoading(true)
     const result= await request(newPosition)
-    if (!result.data) return
-      setDisabledButton(false);
-      setOpen(true);
+    setLoading(false)
+    if (result.status!=201) return setMessage({text:"Failed to create New Job Please try again",color:"danger"})
+   
+    setMessage({text:"Successfully added new Job post with "+result.data.position,color:"success"})
       setNewPosition(empyFields);
-      setGetPositionName(result.data.position);
-    
-    setGetPositionName(newPosition.position)
-      setOpen(true);
-      setNewPosition(empyFields);
+  
     
   };
+
+  function resetErrors(){
+    setMessage({message:"",color:""})
+  }
 
   return (
   
       <Box   >
         <Box sx={{ display: "flex", justifyContent: "center" }}>
+       
           <form className="" onSubmit={handleSubmit}>
             <h4 style={{ textAlign: "center" }}>New Positions</h4>
+            {message.text&& <div className={`bg-${message.color} p-1 m-2`}>
+                  <span>{message.text}</span>
+                </div>}
             <TextField
               required
               label="Facility Name"
@@ -79,6 +87,7 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
               id="outlined-name"
               onChange={handleChange}
               value={newPosition.position}
+              onFocus={resetErrors}
               fullWidth
               sx={{ marginBottom: "25px" }}
             />
@@ -93,6 +102,7 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                   value={newPosition.position_type}
                   onChange={handleChange}
                   data={positionType}
+                  onFocus={resetErrors}
                   style={{ width: "100%" }}
                 />
               </Box>
@@ -100,10 +110,11 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                 required
                 label="Location"
                 name="location"
-                inputProps={{ maxLength: 10 }}
+                inputProps={{ maxLength: 50 }}
                 id="outlined-name"
                 onChange={handleChange}
                 value={newPosition.location}
+                onFocus={resetErrors}
                 sx={{ width: "290px" }}
               />
             </Stack>
@@ -119,6 +130,7 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                 id="outlined-name"
                 onChange={handleChange}
                 value={newPosition.unit}
+                onFocus={resetErrors}
                 sx={{ width: "290px" }}
               />
               <Box sx={{ width: "290px" }}>
@@ -127,6 +139,7 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                   label="Shift"
                   value={newPosition.shift}
                   onChange={handleChange}
+                  onFocus={resetErrors}
                   data={shift}
                   style={{ width: "100%" }}
                 />
@@ -144,6 +157,7 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                 id="outlined-name"
                 onChange={handleChange}
                 value={newPosition.speciality}
+                onFocus={resetErrors}
                 sx={{ width: "290px" }}
               />
               <TextField
@@ -154,20 +168,20 @@ const {request}=useApi((data)=>apiClient.post('/jobs/',data))
                 id="outlined-name"
                 onChange={handleChange}
                 value={newPosition.profession}
+                onFocus={resetErrors}
                 sx={{ width: "290px" }}
               />
             </Stack>
-            <AdminButton
+          {!loading?  <AdminButton
               name="Submit"
               type="submit"
-              disabled={disabledButton}
               size="medium"
               style={{
                 backgroundColor: "#00184c",
                 "&:hover": { backgroundColor: "#002370" },
                 whiteSpace: "nowrap",
               }}
-            />
+            />: <LoadingOverlaySmall open={loading}/>}
           </form>
         </Box>
         <PopupFeedback

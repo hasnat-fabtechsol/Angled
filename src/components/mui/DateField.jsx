@@ -9,6 +9,7 @@ const DateField = ({ change }) => {
         sx={{ minWidth: { xs: 200, sm: 320 } }}
         name="someDate"
         label="Starting Date"
+        defaultValue={new Date().toISOString().split('T')[0]}
         InputLabelProps={{ shrink: true, required: true }}
         type="date"
         size="large"
