@@ -55,7 +55,7 @@ return (
         <div className="row w-30 me-3">
           
           {auth.isLoggedIn?
-          <><div className="col-lg-6 mb-3 mb-lg-0 text-white ">
+          <><div className={auth.userType?"col-lg-3 mb-3 mb-lg-0 text-white gx-0":"col-lg-6 mb-3 mb-lg-0 text-white gx-0"} >
 
 
 
@@ -63,15 +63,18 @@ return (
  
 
 </div>
-<div className="col-lg-6 mb-3 mb-lg-0 text-white  text-white">
+<div className={auth.userType?"col-lg-9 mb-3 mb-lg-0 text-white  text-white gx-0":"col-lg-6 mb-3 mb-lg-0 text-white  text-white gx-0"}>
+<div className='d-flex'>
 
-
+{auth.userType&&<Link  to={"/client/dashboard"}> <button  class=" ms-2 btn-nav bg-blue clr-white me-1"
+  style={{ background: '#A98C4D' }}>{"Client"} Dashboard</button> </Link>}
 <Link  to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
   style={{ background: '#A98C4D' }}>{auth.userType?"Admin":"Client"} Dashboard</button> </Link>
 </div>
+</div>
 </>:<>
   
-<div className="col-lg-6 mb-3 mb-lg-0 text-white ">
+<div className="col-lg-6 mb-3 mb-lg-0 text-white  gx-0">
 
 
 
@@ -90,7 +93,7 @@ return (
   }} class="web-btn clr-white bg-transparent ">Login</button>
 
 </div>
-<div className="col-lg-6   text-white">
+<div className="col-lg-6   text-white gx-0">
 
  <button onClick={()=>{
   if(isMobile)

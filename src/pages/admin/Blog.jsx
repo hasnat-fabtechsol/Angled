@@ -24,6 +24,7 @@ export default function Blog() {
       
       };
       const [addNew, setAddNew] = useState(emptyFields);
+      const [message, setMessage] = useState({text:"",color:""});
       const [editorState,setEditorState]=useState(EditorState.createEmpty())
 
       const [editorshow,setEditorShow]=useState(false)
@@ -42,8 +43,11 @@ export default function Blog() {
    
       const handleChange = (event) => {
         const { name, value } = event.target;
-        if(event.target.files)
-        setAddNew({ ...addNew, [name]: event.target.files[0] })
+        if(event.target.files){
+          if(event.target.files[0].size>5242880)
+          return setMessage({text:"Image can't be more than 5MB",color:"danger"})
+          setAddNew({ ...addNew, [name]: event.target.files[0] })
+        }
         else
         setAddNew({ ...addNew, [name]: value });
       };
@@ -77,13 +81,40 @@ if(!data){
 
 }
     }
+    function checkEmpty(){
+
+      if(!addNew.title){
+        setMessage({text:"Title is Required",color:"danger"})
+        return true
+      }
+      if(!addNew.description){
+        setMessage({text:"description is Required",color:"danger"})
+        return true
+      }
+      if(!addNew.image){
+        setMessage({text:"Please Select a Image",color:"danger"})
+        return true
+      }
+      return false
+    
+      
+    }
+    function resetErrors() {
+      setMessage({text:"",color:""})
+    }
+    function validateForm(){
+      console.log(checkEmpty())
+      if(checkEmpty())
+      return
+      setEditorShow(!editorshow)
+    }
 
 
   return (
     <div  >
     <div className='d-flex justify-content-between'>
 
-        <AdminButton onClick={()=>setEditorShow(!editorshow)}
+        <AdminButton onClick={validateForm}
                               name={editorshow?"Previous":"Next"}
                             
                             />
@@ -92,7 +123,7 @@ if(!data){
                             
                             />}
     </div>
-                   {!editorshow? <BlogInfo data={data} addNew={addNew} handleChange={handleChange}/>:
+                   {!editorshow? <BlogInfo data={data} addNew={addNew} handleChange={handleChange}  message={message} resetErrors={resetErrors}/>:
         
           
       <div >
@@ -141,11 +172,14 @@ if(!data){
 }
 
 
-const BlogInfo=({data,addNew,handleChange})=>{
+const BlogInfo=({data,addNew,handleChange,message,resetErrors})=>{
 
 
     return (
         <Container maxWidth='sm'>
+           {message.text&& <div className={`bg-${message.color} p-1 m-1 mb-2`}>
+                  <span>{message.text}</span>
+                </div>}
 <form   encType='multipart/form-data'>
 
 
@@ -158,6 +192,7 @@ const BlogInfo=({data,addNew,handleChange})=>{
               label="Title"
               id="outlined-name"
               onChange={handleChange}
+              onFocus={resetErrors}
               fullWidth
               sx={{ marginBottom: "25px" }}
             />
@@ -169,6 +204,7 @@ const BlogInfo=({data,addNew,handleChange})=>{
                 label="Description"
                 id="outlined-name"
                 onChange={handleChange}
+                onFocus={resetErrors}
                 // InputProps={{ inputProps: { min: 0, max: 10 } }}
                 sx={{ width: { xs: "100%" } }}
               />
@@ -184,6 +220,7 @@ const BlogInfo=({data,addNew,handleChange})=>{
     hidden
     name='image'
     onChange={handleChange}
+    onFocus={resetErrors}
   />
 
 </Button>

@@ -18,7 +18,7 @@ const CreateInvoice = () => {
     };
     apiClient.put(`/jobs/${id}/employements/`, data).then((resp) => {
       console.log(resp);
-      resp.status === 201 && navigate("/admin/dashboard");
+      resp.status === 200 && navigate("/admin/dashboard");
     });
   };
 
@@ -46,7 +46,7 @@ const CreateInvoice = () => {
             title="Create Invoice"
             content=<DateField change={dateChange} />
             isOpen={open}
-            yesName="Assign"
+            yesName="Create"
             yesClick={assignClick}
             cancelName="Cancel"
             cancelClick={cancelClick}

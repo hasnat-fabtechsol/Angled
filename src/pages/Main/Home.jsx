@@ -550,7 +550,7 @@ setLoading(true)
   }
 
   return (
-    <div>
+    <>
       {!auth.isLoggedIn && (
         <Container
           component="main"
@@ -641,7 +641,7 @@ setLoading(true)
           </Box>
         </Container>
       )}
-    </div>
+    </>
   );
 }
 function SignUp({ formEnable, setFormEnable }) {
