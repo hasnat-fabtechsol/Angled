@@ -115,28 +115,31 @@ setLoadingSpeciality(false)
             <div class="text-center ms-lg-5 ms-sm-3 ms-2">
               <h1 class="font50px text-white mb-4 mt-sm-0 ">
                 BROWSE JOBS BY <br />
-                SPECIALITY{" "}
+                SPECIALITY
               </h1>
               <h1 class="font25px text-white mb-4">
                 In publishing and graphic design, Lorem ipsum is a placeholder
                 text <br />
                 commonly used to demonstrate the visual form of a document or a{" "}
               </h1>
-              <div
-                    maxWidth="xs"
+             
+              <form  onSubmit={jobsBySpeciality}>
+                 <div  maxWidth="xs"
                     className="d-flex gap-3 justify-content-center">
                 <div>
 
-                <input type="email" class="form-control" placeholder="Speciality"  aria-describedby="emailHelp"/>
+                <input type="text" class="form-control" 
+                value={speciality} onChange={(e)=>setSpeciality(e.target.value)} 
+                placeholder="Speciality"   required />
                 </div>
-                <Button
+                <button
+                type="submit"
                   class="web-btn bg-green clr-white py-2"
                   style={{ textDecoration: "none" }}
-                 onClick={jobsBySpeciality}
-                >
-                  <span>Lets Go</span>
-                </Button>
+                 
+                >Lets Go</button>
               </div>
+              </form>
             </div>
             <div className="text-center ms-lg-5 ms-sm-3 ms-2">
               {isMobile?<MobileContent formEnable={formEnable}
@@ -304,7 +307,25 @@ setLoadingSpeciality(false)
                 text commonly used to demonstrate the visual form of a document
                 or a typeface without relying on meaningful content.
               </p>
-              <button className="btn btn-primary mb-md-0 mb-4" type="button">
+              <button className="btn btn-primary mb-md-0 mb-4" type="button" onClick={()=>{
+                if(auth.isLoggedIn)
+                {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                    return
+                }
+  if(isMobile)
+  setOpen(true)
+  else
+  window.scrollTo({
+   top: 0,
+   behavior: 'smooth',
+ });
+   navigate('/')
+  setFormEnable(true)
+ }}>
                 Get Started{" "}
               </button>
             </div>

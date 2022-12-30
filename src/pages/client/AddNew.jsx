@@ -37,7 +37,7 @@ export default function AddNew() {
     const response = await apiClient.post("/applications/", addNew);
     setLoading(false)
     if (response.status === 201) {
-      setOpen(true);
+      // setOpen(true);
       setAddNew(emptyFields);
       setMessage({text:"Successfully applied to Job post",color:"success"})
     }

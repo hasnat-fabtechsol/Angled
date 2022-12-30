@@ -6,7 +6,7 @@ import {  useState } from 'react';
 import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import apiClient from '../../api/apiClient';
-import { baseURL } from '../../api/apiClient';
+import { mediaURL } from '../../api/apiClient';
 import { trimDateTimeArray } from '../../components/trimDate';
 import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 let limit=10
@@ -83,9 +83,9 @@ Resumes
                                                     <TableCell align="center">{data.job_post?.location}</TableCell>
                                                     <TableCell align="center">{data?.job_post?.shift}</TableCell>
                                                     <TableCell align="center">
-                                                      
-                                                    <a
-                                                        href={`${baseURL}${data.resume_url}`}
+                                                      <div className='d-flex gap-3 justify-content-center'>
+                                                      <a
+                                                        href={`${mediaURL}${data.resume_url}`}
                                                         download={`resume-${data.resume?.id}.pdf`} 
                                                         target='_blank'
                                                         className='btn text-white me-3'
@@ -95,7 +95,7 @@ Resumes
                                                         Download
                                                     </a>
                                                     <a
-                                                        href={`${baseURL}${data.resume_url}`}
+                                                        href={`${mediaURL}${data.resume_url}`}
                                                         target="_blank"
                                                         className='btn text-white'
                                                         style={{  backgroundColor: "#b09150",
@@ -103,6 +103,8 @@ Resumes
                                                         >
                                                        View
                                                     </a>
+                                                      </div>
+                                                   
                                                     </TableCell>
                                                 </TableRow>
                                             );

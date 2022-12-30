@@ -1,16 +1,21 @@
 import { Toolbar } from '@mui/material'
 import React from 'react'
+import { useContext } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { isMobile } from 'react-device-detect'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import apiClient from '../../api/apiClient'
+import AuthContext from '../../auth/auth-context'
 import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay'
+import Paginate from '../../components/Paginate'
 import { trimDates } from '../../components/trimDate'
 import useApi from '../../hooks/useApi'
 import './styles/blogs.css'
-let limit=10
+let limit=6
 export default function Blogs() {
-
+  const auth = useContext(AuthContext);
+  const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
   const [count,setCount]=useState(0)
   const [blogs,setBlogs]=useState([])
   
@@ -36,6 +41,15 @@ export default function Blogs() {
   setLoading(false)
   
   }
+  const handlePageChange = (event,value) => {
+      
+    value=((value - 1) * limit)
+    fetchData(Endpoint+value)
+    setOffset(value)
+      
+  
+  
+  }
 
   const blogDetail=(item)=>{
    
@@ -49,7 +63,20 @@ export default function Blogs() {
       <div className="row back_img my-3 mx-0 mx-sm-4">
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">
           <h1 className="Hfs_16">Our Blogs</h1>
-          <button type="button" className="px-4 py-2 mt-3 Contact_btn">Sign in to Apply</button>
+          
+          {!auth.isLoggedIn&&<button type="button" 
+        onClick={()=>{
+          if(isMobile)
+          setOpen(true)
+          else
+          window.scrollTo({
+           top: 0,
+           behavior: 'smooth',
+         });
+           navigate('/')
+          setFormEnable(true)
+         }}
+        className="px-4 py-2 mt-3 Contact_btn" >Sign in to Apply</button>}
           <img  src={require("../../assests/Blogs/play-circle.png")} alt="" className="play_img ms-3" />
         </div>
       </div>
@@ -86,7 +113,7 @@ export default function Blogs() {
        
         </div>
         ))}
-
+  <Paginate count={count} limit={limit} onChange={handlePageChange}/>
       </div>
     </div>
   </div>

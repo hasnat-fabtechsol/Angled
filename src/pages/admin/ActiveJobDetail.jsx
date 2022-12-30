@@ -67,7 +67,8 @@ export default function () {
 }
 function CustomBtn(id){
   const [open, setOpen] = useState(false);
-  const [dateValue, setDateValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [dateValue, setDateValue] = useState(new Date().toISOString().split('T')[0]);
   const [message, setMessage] = useState({text:"",color:""});
   let navigate = useNavigate();
   const assignClick = () => {
@@ -75,7 +76,9 @@ function CustomBtn(id){
     const data = {
       ending_date: dateValue,
     };
+    setLoading(true)
     apiClient.put(`/jobs/${id}/employements/`, data).then((resp) => {
+      setLoading(false)
       resp.status === 200 && navigate("/admin/dashboard");
       setMessage({text:"Failed to create Invoice Please try again",color:"danger"})
     });
@@ -92,17 +95,22 @@ function CustomBtn(id){
   <>
   <AdminButton
                           name="Create Invoice"
+                          style={{whiteSpace:'nowrap',backgroundColor: "#b09150",
+                          "&:hover": { backgroundColor: "#c9a55a" }}}
+                          btnSize="small"
+                         
                           onClick={()=>setOpen(true)}
                         />
  
          <PopupWithButton
             title="Create Invoice"
-            content={<><DateField change={dateChange} />
+            content={<><DateField value={dateValue} change={dateChange} />
               {message.text&& <div className={`bg-${message.color} p-1 m-1`}>
                   <span>{message.text}</span>
                 </div>}
             </>}
             isOpen={open}
+            loading={loading}
             yesName="Create"
             yesClick={assignClick}
             cancelName="Cancel"

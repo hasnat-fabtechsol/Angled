@@ -8,12 +8,14 @@ import draftToHtml from 'draftjs-to-html';
 import { Button, TextField } from '@mui/material';
 import { Container, Stack } from '@mui/system';
 import apiClient from '../../api/apiClient';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import LoadingOverlay from '../../components/mui/LoadingOverlay';
 
 export default function Blog() {
   
     const location = useLocation();
+    const navigate=useNavigate()
     const { id } = useParams();
     let emptyFields = {
         title: "",
@@ -24,7 +26,9 @@ export default function Blog() {
       
       };
       const [addNew, setAddNew] = useState(emptyFields);
+      const [loading, setLoading] = useState(false);
       const [message, setMessage] = useState({text:"",color:""});
+      const [submitMsg, setSubmitMsg] = useState({text:"",color:""});
       const [editorState,setEditorState]=useState(EditorState.createEmpty())
 
       const [editorshow,setEditorShow]=useState(false)
@@ -69,15 +73,20 @@ export default function Blog() {
         formdata.append('contentJson',JSON.stringify(convertToRaw(editorState.getCurrentContent())))
 
 if(!data){
+  setLoading(true)
     const response = await apiClient.post("/blogs/", formdata);
-    if(response.status==201)
-    alert('Created successfully')
-     console.log(response.data);
+    setLoading(false)
+    if(response.status!==201) return setSubmitMsg({text:"Error occured while Submiting Data try again",color:"danger"})
+    setSubmitMsg({text:"Successfully Added New Blog",color:"success"})
+    setTimeout(()=>navigate(-1),2000)
 }else
 {
+  setLoading(true)
     const response = await apiClient.put(`blog/${id}/`, formdata);
-   if(response.status==200)
-   alert('Updated successfully')
+    setLoading(false)
+   if(response.status!==200) return setSubmitMsg({text:"Error occured while Submiting Data try again",color:"danger"})
+   setSubmitMsg({text:"Successfully Updated Blog",color:"success"})
+   setTimeout(()=>navigate(-1),2000)
 
 }
     }
@@ -91,6 +100,7 @@ if(!data){
         setMessage({text:"description is Required",color:"danger"})
         return true
       }
+      if(data.image)return false
       if(!addNew.image){
         setMessage({text:"Please Select a Image",color:"danger"})
         return true
@@ -112,12 +122,16 @@ if(!data){
 
   return (
     <div  >
+     {loading&& <LoadingOverlay open={loading}/>}
     <div className='d-flex justify-content-between'>
 
         <AdminButton onClick={validateForm}
                               name={editorshow?"Previous":"Next"}
                             
                             />
+                             {submitMsg.text&& <div className={`bg-${submitMsg.color} p-1 m-1`}>
+                  <span>{submitMsg.text}</span>
+                </div>}
                             {editorshow&& <AdminButton onClick={handleSubmit}
                               name={"Submit"}
                             

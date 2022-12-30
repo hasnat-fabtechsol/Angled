@@ -33,7 +33,7 @@ function App() {
  
     
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route path='/' element={<Layout/>}>
 
@@ -90,7 +90,7 @@ function App() {
           <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+ 
   );
 }
 

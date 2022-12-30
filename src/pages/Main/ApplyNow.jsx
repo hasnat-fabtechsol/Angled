@@ -32,7 +32,7 @@ export default function ApplyNow() {
   const handleSubmit = async (event) => {
     event.preventDefault();
   setLoading(true)
-    const response = await apiClient.post("/applications/", addNew);
+    const response = await apiClient.post("/resume/", addNew);
     setLoading(false)
     if(response.status!=201)
     return setMessage({text:"Error occured while Submiting Data try again",color:"danger"})

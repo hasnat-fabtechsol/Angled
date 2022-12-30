@@ -6,6 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Slide from "@mui/material/Slide";
+import { LoadingOverlaySmall } from "./LoadingOverlay";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -20,6 +21,7 @@ export default function PopupFeedback({
   yesClick,
   cancelName,
   cancelClick,
+  loading
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -43,10 +45,10 @@ export default function PopupFeedback({
           {content}
         </DialogContent>
         <DialogActions>
-          <Button onClick={cancelClick}>{cancelName}</Button>
+        {loading?<LoadingOverlaySmall open={loading}/>:<>  <Button onClick={cancelClick}>{cancelName}</Button>
           <Button type="submit" onClick={yesClick}>
             {yesName}
-          </Button>
+          </Button></>}
         </DialogActions>
       </Dialog>
     </div>

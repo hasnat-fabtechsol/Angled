@@ -67,9 +67,9 @@ return (
 <div className={`${auth.userType?"col-lg-9":"col-lg-6"} mb-3 mb-lg-0 text-white  text-white gx-0`}>
 <div className={`d-lg-flex justify-content-between   ${auth.userType&&"  gap-2 ps-lg-3"}`}>
 
-{auth.userType&&<div><Link  to={"/client/dashboard"}> <button  class=" btn-nav bg-blue clr-white me-1 mb-2"
+{auth.userType&&<div><Link target="_blank" to={"/client/dashboard"}> <button  class=" btn-nav bg-blue clr-white me-1 mb-2"
   style={{ background: '#A98C4D' }}>{"Client"} Dashboard</button> </Link></div>}
-<div><Link  to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
+<div><Link target="_blank" to={auth.userType?"/admin/dashboard":"/client/dashboard"}> <button  class="btn-nav bg-blue clr-white"
   style={{ background: '#A98C4D' }}>{auth.userType?"Admin":"Client"} Dashboard</button> </Link></div>
 </div>
 </div>
@@ -128,7 +128,19 @@ return (
       <div className='row'>
         <div className='col d-flex justify-content-between'>
           <div><img src={require("../assests/logo.png")} className="img-fluid logo_img_size"/></div>
-          <div><button className='foot_button_color px-4 py-2' type='button'>Sign Up</button></div>
+          <div>
+           {!auth.isLoggedIn&& <button className='foot_button_color px-4 py-2' type='button' onClick={()=>{
+  if(isMobile)
+  setOpen(true)
+  else
+  window.scrollTo({
+   top: 0,
+   behavior: 'smooth',
+ });
+   navigate('/')
+  setFormEnable(true)
+ }}>Sign Up</button>}
+ </div>
         </div>
       </div>
     <hr className='text-dark'></hr>

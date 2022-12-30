@@ -3,6 +3,7 @@ import axios from 'axios'
 
 
 const baseURL = "http://34.229.12.119:83/api/";
+const mediaURL = "http://34.229.12.119:83/";
 
 const apiClient= create({
     baseURL:baseURL
@@ -31,4 +32,4 @@ const apiClient= create({
 
   export default apiClient
 
-  export {baseURL} 
+  export {baseURL,mediaURL} 

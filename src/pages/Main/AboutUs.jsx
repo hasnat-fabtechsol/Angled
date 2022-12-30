@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles/About_us.css'
 function AboutUs(props) { 
     const [text,setText]=useState(false)
+   const navigate=useNavigate()
 return (
     <div>
       <div className='container-fluid' style={{paddingTop : '4rem'}}>
@@ -125,7 +127,9 @@ return (
           <h2>WHY JOIN ANGLED INC</h2>
           <p>To be trusted as the most devoted place to provide quality healthcare and financial solutions.</p>
         </div>
-        <div className="col-md-3 text-center text-md-start my-auto pb-5"><button className="px-5 py-2 btn btn-outline-primary">Join</button></div>
+        <div className="col-md-3 text-center text-md-start my-auto pb-5"><button 
+        onClick={()=>navigate('/jobs')}
+        className="px-5 py-2 btn btn-outline-primary">Join</button></div>
       </div>
     </div>
     <div className="container-fluid bg_sky div_posetion">
@@ -152,7 +156,9 @@ return (
               <h4 className="position_h4 w-100">SIMPLICITY</h4>
             </div>
           </div>
-          <div className="text-center btn_posetion"><button type="button" className="btn btn-primary px-5">Join Now</button></div>
+          <div className="text-center btn_posetion"><button type="button"
+          onClick={()=>navigate('/jobs')}
+          className="btn btn-primary px-5">Join Now</button></div>
         </div>
       </div>
     </div>
@@ -163,49 +169,12 @@ return (
             <p>Got more questions? Find answers to frequently asked questions on our FAQs</p>
           </div>
           <div className="col-12 pt-3">
-            <button type="button" className="btn btn-primary px-5">Contact</button>
+            <button type="button" className="btn btn-primary px-5" onClick={()=>navigate('/contact-us')}>Contact</button>
           </div>
         </div>
       </div>
     </div>
-    <div className="container-fluid form_bg py-5 my-5">
-      <div className="container">
-        <div className="row">
-          <div className="col-12 text-center">
-            <h5>USE Angled INC TO FIND JOBS TO FILL SHIFTS AT YOUR FACILITY</h5>
-            <p>Get your facility started with Angled INC</p>
-          </div>
-          <div className="col-12">
-            <div className="row justify-content-center">
-              <form className="col-12 col-md-8 col-lg-5">
-                <div className="row">
-                  <div className="col-sm-6">
-                    <input type="text" className="form-control  mb-3" placeholder="Name" name="name" />
-                  </div>
-                  <div className="col-sm-6">
-                    <input type="tel" className="form-control mb-3" placeholder="Phone" name="phone" />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-6">
-                    <input type="text" className="form-control mb-3" placeholder="Enter email" name="email" />
-                  </div>
-                  <div className="col-sm-6">
-                    <input type="text" className="form-control mb-3" placeholder="Enter email" name="email" />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <textarea className="form-control mb-3" rows={4} placeholder="message" id="comment" name="text" defaultValue={""} />
-                  </div>
-                </div>
-                <button type="submit" className="btn btn_parit w-100">Send message</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 );
 }

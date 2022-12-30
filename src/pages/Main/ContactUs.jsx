@@ -1,8 +1,11 @@
 import { Toolbar } from '@mui/material';
 import React from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import apiClient from '../../api/apiClient';
+import AuthContext from '../../auth/auth-context';
 import { LoadingOverlaySmall } from '../../components/mui/LoadingOverlay';
 import './styles/Contact_Us.css'
 // import * as yup from 'yup';
@@ -27,6 +30,10 @@ title:'',
 email:'',
 comment:'',
 }
+
+const navigate=useNavigate()
+const auth = useContext(AuthContext);
+const { formEnable, setFormEnable,open,setOpen } = useOutletContext();
   const [contactUs,setContactUs]=useState(emptyFields)
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({text:"",color:""});
@@ -67,7 +74,19 @@ return (
     <div className="row back_img my-3 mx-0 mx-sm-4">
       <div className="col-12 col-sm-10 col-md-8 col-lg-6 pt-3 ps-sm-5 my-auto">
         <h1 className="Hfs_16">Contact Us</h1>
-        <button type="button" className="px-4 py-2 mt-3 Contact_btn">Sign in to Apply</button>
+        {!auth.isLoggedIn&&<button type="button" 
+        onClick={()=>{
+          if(isMobile)
+          setOpen(true)
+          else
+          window.scrollTo({
+           top: 0,
+           behavior: 'smooth',
+         });
+           navigate('/')
+          setFormEnable(true)
+         }}
+        className="px-4 py-2 mt-3 Contact_btn" >Sign in to Apply</button>}
         <img  src={require("../../assests/Blogs/play-circle.png")} alt="" className="play_img ms-3" />
       </div>
     </div>
@@ -110,7 +129,9 @@ return (
         <h2>WHY JOIN ANGLED INC</h2>
         <p>To be trusted as the most devoted place to provide quality healthcare and financial solutions.</p>
       </div>
-      <div className="col-md-3 text-center text-md-start my-auto pb-5"><button className="px-5 py-2 btn btn-outline-primary">Join</button></div>
+      <div className="col-md-3 text-center text-md-start my-auto pb-5"><button 
+      onClick={()=>navigate('/jobs')}
+      className="px-5 py-2 btn btn-outline-primary">Join</button></div>
     </div>
     <div className="row">
       <div className="col-md-6 ">
@@ -123,7 +144,7 @@ return (
           </div>
           <div className="row">
             <div className="col-sm-6 mb-4">
-              <input type="text" className="form-control" placeholder="Enter First Namel" name="firstname"  required
+              <input type="text" className="form-control" placeholder="Enter Firstname" name="firstname"  required
               onChange={(e)=>handleChange('first_name',e.target.value)} onFocus={resetErrors}/>
             </div>
             <div className="col-sm-6 mb-4">
