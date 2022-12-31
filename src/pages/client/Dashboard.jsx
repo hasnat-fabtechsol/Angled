@@ -3,10 +3,11 @@ import { Box, Stack } from '@mui/system';
 import React, { Children, useEffect, useState } from 'react';
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {TableMui, SelectOption } from "../../components/mui";
+import {TableMui, SelectOption, AdminButton } from "../../components/mui";
 import Paginate from '../../components/Paginate';
 import useApi from '../../hooks/useApi';
 import apiClient from '../../api/apiClient';
+import { useNavigate } from 'react-router-dom';
 
 let limit=10
 
@@ -208,7 +209,22 @@ const handlePageChange = (event,value) => {
 
 
 }
+function CustomBtn(id){
 
+  let  navigate=useNavigate()
+ 
+
+
+
+  return (
+  <AdminButton
+                          name="Detail"
+                          style={{whiteSpace:'nowrap',backgroundColor: "#b09150",
+                          "&:hover": { backgroundColor: "#c9a55a" }}}
+                          onClick={()=>navigate('/client/active-job/'+id)}
+                        />
+  );
+  }
 
   return (
 
@@ -235,9 +251,9 @@ const handlePageChange = (event,value) => {
           bill_rate: "Bill Rate",
           compliance_per_agency: "Compliance Per Agency",
           submitals_per_agency: "Submittal Per Agency",
-          job_post: "Detail",
          }}
          td={data}
+         customBtn={(item)=>CustomBtn(item.job_post)}
          link={"/client/active-job/"}
          btnName="Detail"
          btnSize="small"
@@ -263,7 +279,7 @@ const {data,error,request}=useApi((endpoint)=>apiClient.get(endpoint))
 const [offset,setOffset]=useState(0)
 const [loading, setLoading] = useState(false);
 
-let Endpoint = `employments/?limit=${limit}&offset=`;
+let Endpoint = `employments/?status=A&limit=${limit}&offset=`;
 useEffect(()=>{
   fetchData(Endpoint+offset)
 },[])
@@ -304,6 +320,7 @@ const handlePageChange = (event,value) => {
           styleTableTh={{ fontWeight: "bold", whiteSpace: "nowrap" }}
           loading={loading}
           th={{
+            job_post: "Facility Name",
             candidate: "Candidate",
             starting_date: "Starting Date",
             social_security_number: "Social Security Number",

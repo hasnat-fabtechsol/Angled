@@ -127,7 +127,7 @@ return (
     <div className="row pb-5">
       <div className="col-md-9 text-center text-md-start WHY_JOIN_ANGLED">
         <h2>WHY JOIN ANGLED INC</h2>
-        <p>To be trusted as the most devoted place to provide quality healthcare and financial solutions.</p>
+        <p>Our mission at HHI is to help companies meet their staffing needs. We will provide superior health care.</p>
       </div>
       <div className="col-md-3 text-center text-md-start my-auto pb-5"><button 
       onClick={()=>navigate('/jobs')}
@@ -173,11 +173,8 @@ return (
         </form>
       </div>
       <div className="col-12 col-sm-12 col-md-6 text-md-end">
-        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26929
-      .46160856411!2d74.51489379999997!3d32.46780470000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i
-      768!4f13.1!3m3!1m2!1s0x391ec1c05fd1c62f%3A0x64156e47bdab0b5b!2sKohar%20Public%20School
-      %20(KPS)!5e0!3m2!1sen!2s!4v1662722146640!5m2!1sen!2s" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-      </div>
+        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12437.179911665256!2d-77.0516895!3d38.8027939!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe7cfb8282e5da515!2sAngle%20Incorporated!5e0!3m2!1sen!2s!4v1672476386700!5m2!1sen!2s" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+        </div>
     </div>
     <div className="row mb-2 mt-5">
       <div className="col-lg-6 col-md-8 text-center text-md-start">

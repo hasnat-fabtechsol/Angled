@@ -25,7 +25,6 @@ import CreateInvoice from './pages/admin/CreateInvoice';
 import BlogsDashboard from './pages/admin/BlogsDashboard';
 import BlogDetail from './pages/Main/BlogDetail';
 import Blog from './pages/admin/Blog';
-import BlogEdit from './pages/Main/Editor';
 import InvoiceDetail from './pages/admin/InvoiceDetail';
 
 function App() {

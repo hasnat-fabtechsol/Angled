@@ -49,7 +49,7 @@ export default function TableMui({
               {Object.keys(th).map((key, ind) => {
                 return (
                   <TableCell key={ind} align="center">
-                    {key === "id" || key === "job_post_id" || key === "job_post" ? (
+                    {key === "id" || key === "job_post_id"  ? (
                       <Link style={{textDecoration:'none'}} to={link + row[key]}>
                         <AdminButton
                           name={btnName}

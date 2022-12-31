@@ -148,8 +148,8 @@ return (
       <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 ps-lg-5">
           <p class="text-upper_case mt-2 text-dark">
-            Fabtechsol is a web and mobile app development Company that believes 
-              in making tomorrow’s world a better place. We focus on.
+          We make job finding very easy. We are best job provider company <br/>
+           where any user can apply for different jobs created by our admin.
           </p>
           <div>
             <img src={require("../assests/twetter.png")} className="img-fluid img_size"/>
@@ -184,8 +184,8 @@ return (
             <div class="d-flex mt-4">
               <img src={require("../assests/phone_icon.png")} style={{ height:'40px', width:'40px'}} className="img-fluid"/>
               <div style={{ fontSize: '12px'}} class="ms-2 text-dark">
-                <label for="">+92 318 232 232 3</label>
-                <p>Contacts@storeks.com</p>
+                <label for="">+1 3218 232 232 3</label>
+                <p>Call to Expert</p>
               </div>
             </div>
           </div>

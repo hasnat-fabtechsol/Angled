@@ -118,9 +118,8 @@ setLoadingSpeciality(false)
                 SPECIALITY
               </h1>
               <h1 class="font25px text-white mb-4">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text <br />
-                commonly used to demonstrate the visual form of a document or a{" "}
+              We make job finding very easy. We are best job provider company where any user<br />
+               can apply for different jobs created by our admin.
               </h1>
              
               <form  onSubmit={jobsBySpeciality}>
@@ -243,22 +242,22 @@ setLoadingSpeciality(false)
                       <i class="bi bi-bag-plus-fill bag_style"></i>
                     </div>
                   </div>
-                  <h6 className="my-4">Top Facilities</h6>
+                  <h6 className="my-4">Great Benifits</h6>
                   <div class="row">
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Exclusive Contracts</label>
+                      <label class="fs_10">Competitive Pay</label>
                     </div>
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Nationwide</label>
+                      <label class="fs_10">Referral Bonuses</label>
                     </div>
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Great Locations</label>
+                      <label class="fs_10">Diverse Assignments</label>
                     </div>
                   </div>
                 </div>
@@ -268,22 +267,22 @@ setLoadingSpeciality(false)
                       <i class="bi bi-bag-plus-fill bag_style"></i>
                     </div>
                   </div>
-                  <h6 className="my-4">Top Facilities</h6>
+                  <h6 className="my-4">Mobile App</h6>
                   <div class="row">
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Exclusive Contracts</label>
+                      <label class="fs_10">Search Jobs</label>
                     </div>
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Nationwide</label>
+                      <label class="fs_10">Submit Jobs</label>
                     </div>
                     <div class="col-6 white_space">
                       {" "}
                       <i class="bi bi-dot dot_style"></i>
-                      <label class="fs_10">Great Locations</label>
+                      <label class="fs_10">Get your shift</label>
                     </div>
                   </div>
                 </div>
@@ -296,16 +295,12 @@ setLoadingSpeciality(false)
             <div className="col-md-7 col-12 fs_md_12">
               <h2>About Us</h2>
               <p className>
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text commonly used to demonstrate the visual form of a document
-                or a typeface without relying on meaningful content. In
-                publishing and graphic design, Lorem ipsum is a placeholder text
-                commonly used to demonstrate the visual form of a document or a
-                typeface without relying on meaningful content.<br></br>
-                <br></br>
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text commonly used to demonstrate the visual form of a document
-                or a typeface without relying on meaningful content.
+              We make job finding very easy. We are best job provider company where any user <br/>
+              can apply for different jobs created by our admin. We have agencies working with us <br/>
+               who can apply for their employees. As an admin we choose who we want to assign the <br/>
+               job n the basis of capabilities.<br/>
+                We have jobs for almost every specialty. So that we can engage as many employees as <br/>
+                 we can.
               </p>
               <button className="btn btn-primary mb-md-0 mb-4" type="button" onClick={()=>{
                 if(auth.isLoggedIn)
