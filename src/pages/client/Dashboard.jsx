@@ -231,7 +231,7 @@ function CustomBtn(id){
     
     <Box component={Paper} sx={{ marginBottom: "20px", padding: "20px" }}>
     <Typography variant="h5" sx={{ marginBottom: "10px" }}>
-  Active Submissle
+  Active Submissions
     </Typography>
 
      <Box>

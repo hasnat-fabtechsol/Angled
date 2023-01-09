@@ -65,7 +65,7 @@ export default function TableMui({
                 );
               })}
                  {customBtn&&<TableCell  align="center">
-                   {customBtn(row)}
+                   {customBtn(row,index)}
                   </TableCell>}
             </TableRow>
           ))}

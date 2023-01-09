@@ -86,7 +86,7 @@ if(!data){
     setLoading(false)
    if(response.status!==200) return setSubmitMsg({text:"Error occured while Submiting Data try again",color:"danger"})
    setSubmitMsg({text:"Successfully Updated Blog",color:"success"})
-   setTimeout(()=>navigate(-1),2000)
+   setTimeout(()=>navigate('/admin/blogs'),1000)
 
 }
     }
@@ -100,7 +100,9 @@ if(!data){
         setMessage({text:"description is Required",color:"danger"})
         return true
       }
-      if(data.image)return false
+      if(data)
+      if(data.image)
+      return false
       if(!addNew.image){
         setMessage({text:"Please Select a Image",color:"danger"})
         return true
